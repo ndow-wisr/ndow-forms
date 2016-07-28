@@ -1,50 +1,71 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
+var express = require('express'),
+    bodyParser = require('body-parser'),
+    mongoose = require('mongoose'),
+    app = express();
 
 // APP CONFIG
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
-// TESTING VAR
-var encounters = [
-  {date: "7/1/2016",
-  species: "chipmunk",
-  x: -119.3050,
-  y: 35.3050,
-  location: "Lamoille Canyon",
-  huntUnit: "102",
-  mgmtArea: "10",
-  female: 2,
-  male: 3,
-  young: 0,
-  ageClass: "adult",
-  habitat: "pine forest",
-  observer: "mitch gritts",
-  comments: "hoarding nuts"
-},
-{date: "7/2/2016",
-species: "mountain goat",
-x: -119.3020,
-y: 35.3020,
-location: "Lamoille Canyon",
-huntUnit: "102",
-mgmtArea: "10",
-female: 5,
-male: 2,
-young: 2,
-ageClass: "adult",
-habitat: "pine forest",
-observer: "mitch gritts",
-comments: "grazing"
-}
-]
+// DATABASE CONFIG
+mongoose.connect("mongodb://localhost/occurences");
+
+var encounterSchema = new mongoose.Schema({
+  date: String,
+  species: String,
+  x: Number,
+  y: Number,
+  location: String,
+  huntUnit: String,
+  mgmtArea: String,
+  female: Number,
+  male: Number,
+  young: Number,
+  ageClass: String,
+  habitat: String,
+  observer: String,
+  comments: String
+})
+
+var Encounter = mongoose.model('Encounter', encounterSchema);
+
+// test create database entry
+// Encounter.create(
+//   {
+//     date: "7/28/2016",
+//     species: "mountain goat",
+//     x: -119.1234,
+//     y: 35.1234,
+//     location: "somewhere in America",
+//     huntUnit: "291",
+//     mgmtArea: "29",
+//     female: 5,
+//     male: 2,
+//     young: 3,
+//     ageClass: "neonate",
+//     habitat: "rocky mountain cliffs",
+//     observer: "Mitchell Gritts",
+//     comments: "Jumping around the base of cliffs."
+//   },
+//   function(err, encounter){
+//     if(err){
+//       console.log(err);
+//     } else {
+//       console.log('NEW ENCOUNTER ADDED TO DATABASE');
+//     }
+//   });
 
 // ROUTES
 
-// Index, GET - list all encounters
+// Index, GET - show all encounters
 app.get('/encounters', function(req, res){
-  res.render("encounters", {encounters:encounters});
+  Encounter.find({}, function(err, allEncounters){
+    if(err){
+      console.log(err);
+    } else {
+      res.render("encounters", {encounters:allEncounters});
+    }
+  });
 });
 
 // New, GET - go to form to enter new encounters
@@ -72,8 +93,15 @@ app.post('/encounters', function(req, res){
     observer: req.body.observer,
     comments: req.body.comments
   };
-  encounters.push(newEncounter);
-  res.redirect('/encounters')
+  // create (add) new encounter to the database
+  Encounter.create(newEncounter, function(err, newlyCreated){
+    if(err){
+      console.log(err);
+    } else {
+      // redirect
+      res.redirect('/encounters');
+    }
+  });
 });
 
 
