@@ -12,48 +12,44 @@ mongoose.connect("mongodb://localhost/occurences");
 
 var encounterSchema = new mongoose.Schema({
   date: String,
+  observer: String,
   species: String,
-  x: Number,
-  y: Number,
-  location: String,
-  huntUnit: String,
-  mgmtArea: String,
   female: Number,
   male: Number,
+  adult: Number,
   young: Number,
-  ageClass: String,
-  habitat: String,
-  observer: String,
+  x: Number,
+  y: Number,
+  total: Number,
+  location: String,
   comments: String
 })
 
 var Encounter = mongoose.model('Encounter', encounterSchema);
 
 // test create database entry
-// Encounter.create(
-//   {
-//     date: "7/28/2016",
-//     species: "mountain goat",
-//     x: -119.1234,
-//     y: 35.1234,
-//     location: "somewhere in America",
-//     huntUnit: "291",
-//     mgmtArea: "29",
-//     female: 5,
-//     male: 2,
-//     young: 3,
-//     ageClass: "neonate",
-//     habitat: "rocky mountain cliffs",
-//     observer: "Mitchell Gritts",
-//     comments: "Jumping around the base of cliffs."
-//   },
-//   function(err, encounter){
-//     if(err){
-//       console.log(err);
-//     } else {
-//       console.log('NEW ENCOUNTER ADDED TO DATABASE');
-//     }
-//   });
+Encounter.create(
+  {
+    date: "7/28/2016",
+    species: "mountain goat",
+    x: -119.1234,
+    y: 35.1234,
+    location: "somewhere in America",
+    female: 5,
+    male: 2,
+    young: 3,
+    adult: 4,
+    total: 7,
+    observer: "Mitchell Gritts",
+    comments: "Jumping around the base of cliffs."
+  },
+  function(err, encounter){
+    if(err){
+      console.log(err);
+    } else {
+      console.log('NEW ENCOUNTER ADDED TO DATABASE');
+    }
+  });
 
 // ROUTES
 
@@ -79,18 +75,16 @@ app.post('/encounters', function(req, res){
   var newEncounter =
   {
     date: req.body.date,
+    observer: req.body.observer,
     species: req.body.species,
+    female: req.body.female,
+    male: req.body.male,
+    adult: req.body.adult,
+    young: req.body.young,
+    total: req.body.total,
     x: req.body.x,
     y: req.body.y,
     location: req.body.location,
-    huntUnit: req.body.huntUnit,
-    mgmtArea: req.body.mgmtArea,
-    female: req.body.female,
-    male: req.body.male,
-    young: req.body.young,
-    ageClass: req.body.ageClass,
-    habitat: req.body.habitat,
-    observer: req.body.observer,
     comments: req.body.comments
   };
   // create (add) new encounter to the database

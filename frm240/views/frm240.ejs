@@ -4,9 +4,11 @@
 		<meta charset = "utf-8" />
 		<title>NDOW 240</title>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.css" />
+ 		<script src="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.js"></script>
 	</head>
 
-	<body>
+	<body onload="geoFindMe()">
 		<nav class="navbar navbar-default">
 	    <div class="container-fluid">
 	        <div class="navbar-header">
@@ -25,73 +27,107 @@
     	<div class="row">
 				<h2 class="col-sm-6 col-sm-offset-3" style="text-align: center;">Nevada Department of Wildlife</h2>
 				<h3 class="col-sm-6 col-sm-offset-3" style="text-align: center;">Wildlife Sight Record - Form 240</h3>
-        <div class="col-sm-6 col-sm-offset-3">
+        <div class="col-sm-8 col-sm-offset-2">
 					<hr>
-            <form action="/encounters" method="POST">
+            <form action="/encounters" method="POST" name="encForm">
+
 							<div class="form-group">
 									<label for="date">Date</label>
 									<input class="form-control" type="date" placeholder="encounter date" name="date">
 							</div>
-								<div class="form-group">
-										<label for="species">Species</label>
-                    <input class="form-control" type="text" placeholder="species" name="species">
-                </div>
-								<div class="form-group">
-										<label for="x">Longitude</label>
-                    <input class="form-control" type="number" step="0.0001" placeholder="-119.5050" name="x">
-                </div>
-								<div class="form-group">
-										<label for="y">Latitude</label>
-                    <input class="form-control" type="number" step="0.0001" placeholder="35.5050" name="y">
-                </div>
-                <div class="form-group">
-										<label for="location">Location</label>
-                    <input class="form-control" type="text" placeholder="location" name="location">
-                </div>
-                <div class="form-group">
-										<label for="Hunt Unit">Hunt Unit</label>
-                    <input class="form-control" type="text" placeholder="Hunt Unit" name="huntUnit">
-                </div>
-								<div class="form-group">
-										<label for="mgmtArea">Management Area</label>
-                    <input class="form-control" type="text" placeholder="Management Area" name="mgmtArea">
-                </div>
-								<div class="form-group">
-										<label for="female">No. Female</label>
-                    <input class="form-control" type="number" placeholder="number of females" name="female">
-                </div>
-								<div class="form-group">
-										<label for="male">No. Male</label>
-                    <input class="form-control" type="number" placeholder="number of males" name="male">
-                </div>
-								<div class="form-group">
-										<label for="young">No. Young</label>
-                    <input class="form-control" type="number" placeholder="number of young" name="young">
-                </div>
-								<div class="form-group">
-										<label for="ageClass">Age Class</label>
-                    <input class="form-control" type="text" placeholder="age class" name="ageClass">
-                </div>
-								<div class="form-group">
-										<label for="habitat">Habitat</label>
-                    <input class="form-control" type="text" placeholder="habitat type" name="habitat">
-                </div>
-								<div class="form-group">
-										<label for="observer">Observer</label>
-                    <input class="form-control" type="text" placeholder="observed by" name="observer">
-                </div>
-								<div class="form-group">
-										<label for="comments">Comments</label>
-                    <input class="form-control" type="text" placeholder="comments" name="comments">
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-lg btn-primary btn-block" style="margin-top: 35px;">Submit</button>
-                </div>
+							<div class="form-group">
+									<label for="observer">Observer</label>
+									<input class="form-control" type="text" placeholder="observed by" name="observer">
+							</div>
+							<div class="form-group">
+									<label for="species">Species</label>
+                  <input class="form-control" type="text" placeholder="species" name="species">
+              </div>
+							<div class="form-group">
+									<label for="female">No. Female</label>
+                  <input class="form-control" type="number" placeholder="number of females" name="female">
+              </div>
+							<div class="form-group">
+									<label for="male">No. Male</label>
+                  <input class="form-control" type="number" placeholder="number of males" name="male">
+              </div>
+							<div class="form-group">
+									<label for="adult">No. Adult</label>
+                  <input class="form-control" type="number" placeholder="number of adults" name="adult">
+              </div>
+							<div class="form-group">
+									<label for="young">No. Young</label>
+                  <input class="form-control" type="number" placeholder="number of young" name="young">
+              </div>
+							<div class="form-group">
+									<label for="total">Total</label>
+                  <input class="form-control" type="number" placeholder="total number of animals" name="total">
+              </div>
+							<div class="row">
+								<div class="col-md-6" id="loc-module">
+									<div class="form-group">
+											<label for="x">Longitude</label>
+		                  <input class="form-control" type="number" step="0.0001" placeholder="-119.5050" name="x">
+		              </div>
+									<div class="form-group">
+											<label for="y">Latitude</label>
+		                  <input class="form-control" type="number" step="0.0001" placeholder="35.5050" name="y">
+		              </div>
+		              <div class="form-group">
+											<label for="location">Location</label>
+		                  <input class="form-control" type="text" placeholder="location" name="location">
+		              </div>
+									<div class="form-group">
+											<label for="comments">Comments</label>
+		                  <input class="form-control" type="text" placeholder="comments" name="comments" style="height: 150px">
+		              </div>
+								</div>
+								<div class="col-md-6" id="loc-map" style="border-radius: 5px; height: 400px;">
+								</div>
+							</div>
+
+							<div class="form-group">
+              	<button type="button" class="btn btn-lg btn-success btn-block" style="margin-top: 10px;" onclick="geoFindMe()">Reset Coordinates</button>
+              </div>
+              <div class="form-group">
+                  <button class="btn btn-lg btn-primary btn-block" style="margin-top: 10px;">Submit</button>
+              </div>
+
             </form>
             <a href="/encounters">Go Back</a>
         </div>
     	</div>
 		</div>
+
+		<script>
+			function geoFindMe() {
+
+				if (!navigator.geolocation){
+					output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+					return;
+				}
+
+				function success(position) {
+					var latitude  = position.coords.latitude.toFixed(4);
+					var longitude = position.coords.longitude.toFixed(4);
+					document.forms["encForm"]["x"].value = longitude;
+					document.forms["encForm"]["y"].value = latitude;
+
+					var mymap = L.map('loc-map').setView([latitude, longitude], 13);
+					var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+					attribution: 'Tiles &copy; Esri'
+				}).addTo(mymap);
+					var marker = L.marker([latitude, longitude]).addTo(mymap);
+					document.getElementByID("loc-map").innerHTML = mymap;
+				};
+
+				function error() {
+					output.innerHTML = "Unable to retrieve your location";
+				};
+
+				navigator.geolocation.getCurrentPosition(success, error);
+			}
+		</script>
 
 	</body>
 </html>
