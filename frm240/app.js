@@ -28,28 +28,28 @@ var encounterSchema = new mongoose.Schema({
 var Encounter = mongoose.model('Encounter', encounterSchema);
 
 // test create database entry
-Encounter.create(
-  {
-    date: "7/28/2016",
-    species: "mountain goat",
-    x: -119.1234,
-    y: 35.1234,
-    location: "somewhere in America",
-    female: 5,
-    male: 2,
-    young: 3,
-    adult: 4,
-    total: 7,
-    observer: "Mitchell Gritts",
-    comments: "Jumping around the base of cliffs."
-  },
-  function(err, encounter){
-    if(err){
-      console.log(err);
-    } else {
-      console.log('NEW ENCOUNTER ADDED TO DATABASE');
-    }
-  });
+// Encounter.create(
+//   {
+//     date: "7/28/2016",
+//     species: "mountain goat",
+//     x: -119.1234,
+//     y: 35.1234,
+//     location: "somewhere in America",
+//     female: 5,
+//     male: 2,
+//     young: 3,
+//     adult: 4,
+//     total: 7,
+//     observer: "Mitchell Gritts",
+//     comments: "Jumping around the base of cliffs."
+//   },
+//   function(err, encounter){
+//     if(err){
+//       console.log(err);
+//     } else {
+//       console.log('NEW ENCOUNTER ADDED TO DATABASE');
+//     }
+//   });
 
 // ROUTES
 
