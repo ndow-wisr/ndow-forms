@@ -53,7 +53,12 @@ var Encounter = mongoose.model('Encounter', encounterSchema);
 
 // ROUTES
 
-// Index, GET - show all encounters
+// home route '/'
+app.get('/', function(req, res){
+  res.render('index');
+});
+
+// Index, GET - show all encounters, only for frm240
 app.get('/encounters', function(req, res){
   Encounter.find({}, function(err, allEncounters){
     if(err){
@@ -87,6 +92,7 @@ app.post('/encounters', function(req, res){
     location: req.body.location,
     comments: req.body.comments
   };
+
   // create (add) new encounter to the database
   Encounter.create(newEncounter, function(err, newlyCreated){
     if(err){
@@ -97,8 +103,6 @@ app.post('/encounters', function(req, res){
     }
   });
 });
-
-
 
 // LISTEN, SERVER
 app.listen(3000, function(){

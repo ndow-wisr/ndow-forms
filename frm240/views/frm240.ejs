@@ -4,24 +4,10 @@
 		<meta charset = "utf-8" />
 		<title>NDOW 240</title>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.css" />
- 		<script src="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.js"></script>
 	</head>
-
 	<body onload="geoFindMe()">
-		<nav class="navbar navbar-default">
-	    <div class="container-fluid">
-	        <div class="navbar-header">
-	            <a class="navbar-brand" href="/">NDOW Forms</a>
-	        </div>
-	        <div class="collapse navbar-collapse">
-	            <ul class="nav navbar-nav navbar-right">
-	                <li><a href="/">login</a></li>
-	                <li><a href="/">Sign Up</a></li>
-	            </ul>
-	        </div>
-	    </div>
-		</nav>
+
+		<% include ./partials/navigation %>
 
 		<div class="container" class="col-sm-12">
     	<div class="row">
@@ -33,7 +19,7 @@
 
 							<div class="form-group">
 									<label for="date">Date</label>
-									<input class="form-control" type="date" placeholder="encounter date" name="date">
+									<input class="form-control" type="date" placeholder="yyyy-mm-dd" name="date">
 							</div>
 							<div class="form-group">
 									<label for="observer">Observer</label>
@@ -63,29 +49,22 @@
 									<label for="total">Total</label>
                   <input class="form-control" type="number" placeholder="total number of animals" name="total">
               </div>
-							<div class="row">
-								<div class="col-md-6" id="loc-module">
-									<div class="form-group">
-											<label for="x">Longitude</label>
-		                  <input class="form-control" type="number" step="0.0001" placeholder="-119.5050" name="x">
-		              </div>
-									<div class="form-group">
-											<label for="y">Latitude</label>
-		                  <input class="form-control" type="number" step="0.0001" placeholder="35.5050" name="y">
-		              </div>
-		              <div class="form-group">
-											<label for="location">Location</label>
-		                  <input class="form-control" type="text" placeholder="location" name="location">
-		              </div>
-									<div class="form-group">
-											<label for="comments">Comments</label>
-		                  <input class="form-control" type="text" placeholder="comments" name="comments" style="height: 150px">
-		              </div>
-								</div>
-								<div class="col-md-6" id="loc-map" style="border-radius: 5px; height: 400px;">
-								</div>
+							<div class="form-group">
+									<label for="x">Longitude</label>
+									<input class="form-control" type="number" step="0.0001" placeholder="-119.5050" name="x">
 							</div>
-
+							<div class="form-group">
+									<label for="y">Latitude</label>
+									<input class="form-control" type="number" step="0.0001" placeholder="35.5050" name="y">
+							</div>
+							<div class="form-group">
+									<label for="location">Location</label>
+									<input class="form-control" type="text" placeholder="location" name="location">
+							</div>
+							<div class="form-group">
+									<label for="comments">Comments</label>
+									<textarea name="comments" class="form-control" cols="40"></textarea>
+							</div>
 							<div class="form-group">
               	<button type="button" class="btn btn-lg btn-success btn-block" style="margin-top: 10px;" onclick="geoFindMe()">Reset Coordinates</button>
               </div>
@@ -103,7 +82,7 @@
 			function geoFindMe() {
 
 				if (!navigator.geolocation){
-					output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+					alert("<p>Geolocation is not supported by your browser</p>");
 					return;
 				}
 
@@ -112,17 +91,10 @@
 					var longitude = position.coords.longitude.toFixed(4)	;
 					document.forms["encForm"]["x"].value = longitude;
 					document.forms["encForm"]["y"].value = latitude;
-
-					var mymap = L.map('loc-map').setView([latitude, longitude], 13);
-					var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-					attribution: 'Tiles &copy; Esri'
-				}).addTo(mymap);
-					var marker = L.marker([latitude, longitude]).addTo(mymap);
-					document.getElementByID("loc-map").innerHTML = mymap;
 				};
 
 				function error() {
-					output.innerHTML = "Unable to retrieve your location";
+					alert("Unable to retrieve your location");
 				};
 
 				navigator.geolocation.getCurrentPosition(success, error);
