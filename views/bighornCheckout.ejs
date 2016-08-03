@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+		<meta charset = "utf-8" />
+		<title>NDOW 240</title>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	</head>
+	<body onload="geoFindMe()">
+
+		<% include ./partials/navigation %>
+
+    <div class="container" class="col-sm-12">
+    	<div class="row">
+				<h2 class="col-sm-6 col-sm-offset-3" style="text-align: center;">Nevada Department of Wildlife</h2>
+				<h3 class="col-sm-6 col-sm-offset-3" style="text-align: center;">Bighorn Sheep Harvest Check In - Form 336</h3>
+        <div class="col-sm-8 col-sm-offset-2">
+					<hr>
+            <form action="#" method="POST" name="bighornCheckout">
+							<div class="form-group">
+							    <label for="year">Year</label>
+							    <input class="form-control" type="number" placeholder="yyyy" name="year">
+							</div>
+							<div class="form-group">
+							    <label for="species">Subspecies</label>
+							    <input class="form-control" type="text" placeholder="Nelson bhs" name="species">
+							</div>
+							<div class="form-group">
+							    <label for="unit">Kill Unit</label>
+							    <input class="form-control" type="text" placeholder="213" name="unit">
+							</div>
+							<div class="form-group">
+							    <label for="hunter">Hunter Name</label>
+							    <input class="form-control" type="text" placeholder="John Doe" name="hunter">
+							</div>
+							<div class="form-group">
+							    <label for="tagNumber">Tag Number</label>
+							    <input class="form-control" type="Number" placeholder="555555" name="tagNumber">
+							</div>
+							<div class="form-group">
+							    <label for="city">City of Residence</label>
+							    <input class="form-control" type="text" placeholder="Las Vegas" name="city">
+							</div>
+							<div class="form-group">
+							    <label for="killDate">Date of Kill</label>
+							    <input class="form-control" type="date" placeholder="mm/dd/yyyy" name="killDate">
+							</div>
+							<div class="form-group">
+							    <label for="daysHunted">Days Hunted</label>
+							    <input class="form-control" type="number" placeholder="3" name="daysHunted">
+							</div>
+							<div class="form-group">
+							    <label for="sex">Sex</label>
+							    <input class="form-control" type="text" placeholder="Male" name="sex">
+							</div>
+							<div class="form-group">
+							    <label for="age">Age</label>
+							    <input class="form-control" type="number" placeholder="4" name="age">
+							</div>
+							<div class="form-group">
+							    <label for="killLocation">Location of Kill</label>
+							    <input class="form-control" type="text" placeholder="Donnelly Peak" name="killLocation">
+							</div>
+							<div class="form-group">
+							    <label for="plugNumber">Plug Number</label>
+							    <input class="form-control" type="text" placeholder="14-xxxx" name="plugNumber">
+							</div>
+              <div class="form-group">
+                  <button class="btn btn-lg btn-primary btn-block disabled" style="margin-top: 10px;">Submit</button>
+              </div>
+
+            </form>
+            <a href="/">Go Back</a>
+        </div>
+    	</div>
+		</div>
+  </body>
+</html>

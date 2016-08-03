@@ -1,11 +1,12 @@
-var express = require('express'),
-    bodyParser = require('body-parser'),
-    mongoose = require('mongoose'),
-    app = express();
+var express     = require('express'),
+    bodyParser  = require('body-parser'),
+    mongoose    = require('mongoose'),
+    app         = express();
 
 // APP CONFIG
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
+app.use(express.static("public"));
 
 // DATABASE CONFIG
 mongoose.connect("mongodb://localhost/occurences");
@@ -72,6 +73,10 @@ app.get('/encounters', function(req, res){
 // New, GET - go to form to enter new encounters
 app.get('/encounters/new', function(req, res){
   res.render('frm240');
+});
+// New, GET - go to form to enter bighorn checking
+app.get('/bighorncheckin/new', function(req, res){
+  res.render('bighornCheckout');
 });
 
 // Create, POST - create new encounter, then redirect to /encounters
