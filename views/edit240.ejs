@@ -5,7 +5,7 @@
 		<title>NDOW 240</title>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	</head>
-	<body onload="geoFindMe()">
+	<body>
 
 		<% include ./partials/navigation %>
 
@@ -15,61 +15,61 @@
 				<h3 class="col-sm-6 col-sm-offset-3" style="text-align: center;">Wildlife Sight Record - Form 240</h3>
         <div class="col-sm-8 col-sm-offset-2">
 					<hr>
-            <form action="/encounters" method="POST" name="encForm">
+            <form action="/encounters/<%= encounter._id %>?_method=PUT" method="POST" name="encForm">
 
 							<div class="form-group">
 									<label for="date">Date</label>
-									<input class="form-control" type="date" placeholder="yyyy-mm-dd" name="encounter[date]">
+									<input class="form-control" type="date" name="encounter[date]" value="<%= encounter.date %>">
 							</div>
 							<div class="form-group">
 									<label for="observer">Observer</label>
-									<input class="form-control" type="text" placeholder="observed by" name="encounter[observer]">
+									<input class="form-control" type="text" name="encounter[observer]" value="<%= encounter.observer %>">
 							</div>
 							<div class="form-group">
 									<label for="species">Species</label>
-                  <input class="form-control" type="text" placeholder="species" name="encounter[species]">
+                  <input class="form-control" type="text" name="encounter[species]" value="<%= encounter.species %>">
               </div>
 							<div class="form-group">
 									<label for="female">No. Female</label>
-                  <input class="form-control" type="number" placeholder="number of females" name="encounter[female]">
+                  <input class="form-control" type="number" name="encounter[female]" value="<%= encounter.female %>">
               </div>
 							<div class="form-group">
 									<label for="male">No. Male</label>
-                  <input class="form-control" type="number" placeholder="number of males" name="encounter[male]">
+                  <input class="form-control" type="number" name="encounter[male]" value="<%= encounter.male %>">
               </div>
 							<div class="form-group">
 									<label for="adult">No. Adult</label>
-                  <input class="form-control" type="number" placeholder="number of adults" name="encounter[adult]">
+                  <input class="form-control" type="number" name="encounter[adult]" value="<%= encounter.adult %>">
               </div>
 							<div class="form-group">
 									<label for="young">No. Young</label>
-                  <input class="form-control" type="number" placeholder="number of young" name="encounter[young]">
+                  <input class="form-control" type="number" name="encounter[young]" value="<%= encounter.young %>">
               </div>
 							<div class="form-group">
 									<label for="total">Total</label>
-                  <input class="form-control" type="number" placeholder="total number of animals" name="encounter[total]">
+                  <input class="form-control" type="number" name="encounter[total]" value="<%= encounter.total %>">
               </div>
 							<div class="form-group">
 									<label for="x">Longitude</label>
-									<input class="form-control" type="number" step="0.0001" placeholder="-119.5050" name="encounter[x]">
+									<input class="form-control" type="number" step="0.0001" name="encounter[x]" value="<%= encounter.x %>">
 							</div>
 							<div class="form-group">
 									<label for="y">Latitude</label>
-									<input class="form-control" type="number" step="0.0001" placeholder="35.5050" name="encounter[y]">
+									<input class="form-control" type="number" step="0.0001" name="encounter[y]" value="<%= encounter.y %>">
 							</div>
 							<div class="form-group">
 									<label for="location">Location</label>
-									<input class="form-control" type="text" placeholder="location" name="encounter[location]">
+									<input class="form-control" type="text" name="encounter[location]" value="<%= encounter.location %>">
 							</div>
 							<div class="form-group">
 									<label for="comments">Comments</label>
-									<textarea name="encounter[comments]" class="form-control" cols="40"></textarea>
+									<textarea name="encounter[comments]" class="form-control" cols="40"><%= encounter.comments %></textarea>
 							</div>
 							<div class="form-group">
               	<button type="button" class="btn btn-lg btn-success btn-block" style="margin-top: 10px;" onclick="geoFindMe()">Reset Coordinates</button>
               </div>
               <div class="form-group">
-                  <button class="btn btn-lg btn-primary btn-block" style="margin-top: 10px;">Submit</button>
+                  <button class="btn btn-lg btn-primary btn-block" style="margin-top: 10px;">Save Record</button>
               </div>
 
             </form>

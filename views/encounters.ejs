@@ -24,7 +24,9 @@
     <div class("row text-center")>
       <% encounters.forEach(function(encounter){ %>
             <div class="col-xs-10 col-xs-offset-1" style="border: black solid 1px; margin-top: 5px; margin-bottom: 5px; border-radius: 5px;">
-              <h2><%= encounter.species %> - <%= encounter.date %></h2>
+							<a href="/encounters/<%= encounter._id %>">
+              	<h2><%= encounter.species %> - <%= encounter.date %></h2>
+							</a>
 							<ul class="list-inline">
 								<li><%= encounter.location %></li>
 								<li><strong>Coordinates: </strong><%= encounter.x %>, <%= encounter.y %></li>

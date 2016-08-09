@@ -1,12 +1,14 @@
-var express     = require('express'),
-    bodyParser  = require('body-parser'),
-    mongoose    = require('mongoose'),
-    app         = express();
+var express         = require('express'),
+    bodyParser      = require('body-parser'),
+    mongoose        = require('mongoose'),
+    methodOverride  = require("method-override"),
+    app             = express();
 
 // APP CONFIG
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(methodOverride("_method"));
 
 // DATABASE CONFIG
 mongoose.connect("mongodb://localhost/occurences");
@@ -81,29 +83,56 @@ app.get('/bighorncheckin/new', function(req, res){
 
 // Create, POST - create new encounter, then redirect to /encounters
 app.post('/encounters', function(req, res){
-  // get data from form
-  var newEncounter =
-  {
-    date: req.body.date,
-    observer: req.body.observer,
-    species: req.body.species,
-    female: req.body.female,
-    male: req.body.male,
-    adult: req.body.adult,
-    young: req.body.young,
-    total: req.body.total,
-    x: req.body.x,
-    y: req.body.y,
-    location: req.body.location,
-    comments: req.body.comments
-  };
-
   // create (add) new encounter to the database
-  Encounter.create(newEncounter, function(err, newlyCreated){
+  Encounter.create(req.body.encounter, function(err, newlyCreated){
     if(err){
       console.log(err);
     } else {
       // redirect
+      res.redirect('/encounters');
+    }
+  });
+});
+
+// Show, GET - go to individual encounter observation
+app.get('/encounters/:id', function(req, res){
+  Encounter.findById(req.params.id, function(err, foundEncounter){
+    if(err){
+      res.redirect('/encounters');
+    } else {
+      res.render('show240', {encounter: foundEncounter});
+    }
+  });
+});
+
+// Edit, GET - show edit form for an encounter
+app.get('/encounters/:id/edit', function(req, res){
+  Encounter.findById(req.params.id, function(err, foundEncounter){
+    if(err){
+      res.redirect('/encounters');
+    } else {
+      res.render('edit240', {encounter: foundEncounter});
+    }
+  });
+});
+
+// Update, PUT - update record, then redirect to the updated record
+app.put('/encounters/:id', function(req, res){
+  Encounter.findByIdAndUpdate(req.params.id, req.body.encounter, function(err, udpateEncounter){
+    if(err){
+      res.redirect('/encounters');
+    } else {
+      res.redirect('/encounters/' + req.params.id);
+    }
+  });
+});
+
+// Destroy, DELETE - delete record then redirect
+app.delete('/encounters/:id', function(req, res){
+  Encounter.findByIdAndRemove(req.params.id, function(err){
+    if(err){
+      res.redirect('/encounters');
+    } else {
       res.redirect('/encounters');
     }
   });
