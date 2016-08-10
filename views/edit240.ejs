@@ -15,6 +15,10 @@
 				<h3 class="col-sm-6 col-sm-offset-3" style="text-align: center;">Wildlife Sight Record - Form 240</h3>
         <div class="col-sm-8 col-sm-offset-2">
 					<hr>
+					<div class="bg-warning">
+						<p class="text-muted" style="padding: 5px 10px;">Use this form to make changes to this record. Click Save Record to save changes. To reset coordinates to current position click Reset Coordinates.</p>
+					</div>
+					<hr>
             <form action="/encounters/<%= encounter._id %>?_method=PUT" method="POST" name="encForm">
 
 							<div class="form-group">
