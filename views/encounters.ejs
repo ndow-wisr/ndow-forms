@@ -4,6 +4,12 @@
 		<meta charset = "utf-8" />
 		<title>NDOW 240</title>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+		<script
+			  src="https://code.jquery.com/jquery-3.1.0.min.js"
+			  integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+			  crossorigin="anonymous"></script>
+		<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
 	</head>
 	<body>
 
@@ -19,32 +25,49 @@
              </p>
          </div>
      </header>
+
+		 <table id="encTable" class="display" cellspacing="0" width="100%">
+		 	<thead>
+				<tr>
+					<th>Species</th>
+					<th>Date</th>
+					<th>Female</th>
+					<th>Male</th>
+					<th>Adult</th>
+					<th>Young</th>
+					<th>Total</th>
+					<th>Location</th>
+					<th>Action</th>
+				</tr>
+		 	</thead>
+			<tbody>
+				<% encounters.forEach(function(encounter){ %>
+					<tr>
+						<td><a href="/encounters/<%= encounter._id %>"><%= encounter.species %></a></td>
+						<td><%= encounter.date %></td>
+						<td><%= encounter.female %></td>
+						<td><%= encounter.male %></td>
+						<td><%= encounter.adult %></td>
+						<td><%= encounter.young %></td>
+						<td><%= encounter.total %></td>
+						<td><%= encounter.location %></td>
+						<td>
+							<form method="POST" action="/encounters/<%= encounter._id %>?_method=DELETE" class="form-inline">
+								<a href="/encounters/<%= encounter._id %>" class="btn btn-primary btn-sm">View</a>
+								<a href="/encounters/<%= encounter._id %>/edit" class="btn btn-warning btn-sm">Edit</a>
+              	<button class="btn btn-sm btn-danger">Delete</button>
+	            </form>
+						</td>
+					</tr>
+				<% }) %>
+			</tbody>
+		 </table>
 	 </div>
 
-    <div class("row text-center")>
-      <% encounters.forEach(function(encounter){ %>
-            <div class="col-xs-10 col-xs-offset-1" style="border: black solid 1px; margin-top: 5px; margin-bottom: 5px; border-radius: 5px;">
-							<a href="/encounters/<%= encounter._id %>">
-              	<h2><%= encounter.species %> - <%= encounter.date %></h2>
-							</a>
-							<ul class="list-inline">
-								<li><%= encounter.location %></li>
-								<li><strong>Coordinates: </strong><%= encounter.x %>, <%= encounter.y %></li>
-							</ul>
-              <h4>Numbers</h4>
-              <ul class="list-inline" id="numbers">
-                <li><strong>Female: </strong><%= encounter.female %></li>
-                <li><strong>Male: </strong><%= encounter.male %></li>
-                <li><strong>Adult: </strong><%= encounter.adult %></li>
-								<li><strong>Young: </strong><%= encounter.young %></li>
-								<li><strong>Total: </strong><%= encounter.total %></li>
-              </ul>
-							<h4>Comments</h4>
-							<p><%= encounter.comments %></p>
-
-            </div>
-      <% }) %>
-    </div>
-
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$('#encTable').dataTable();
+		} );
+		</script>
   </body>
 </html>
