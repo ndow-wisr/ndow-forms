@@ -13,7 +13,7 @@ var indexRoutes = require('./routes/index'),
 mongoose.connect("mongodb://localhost/occurences");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 seedDB();
 
@@ -22,29 +22,6 @@ app.use("/", indexRoutes);
 app.use("/observations", observationRoutes);
 
 
-//
-// // Update, PUT - update record, then redirect to the updated record
-// app.put('/observations/:id', function(req, res){
-//   Encounter.findByIdAndUpdate(req.params.id, req.body.encounter, function(err, udpateEncounter){
-//     if(err){
-//       res.redirect('/observations');
-//     } else {
-//       res.redirect('/observations/' + req.params.id);
-//     }
-//   });
-// });
-//
-// // Destroy, DELETE - delete record then redirect
-// app.delete('/observations/:id', function(req, res){
-//   Encounter.findByIdAndRemove(req.params.id, function(err){
-//     if(err){
-//       res.redirect('/observations');
-//     } else {
-//       res.redirect('/observations');
-//     }
-//   });
-// });
-//
 // // BIGHORN ROUTES ==============================================================
 // // New, GET - go to form to enter bighorn checking
 // app.get('/bighorncheckin/new', function(req, res){
