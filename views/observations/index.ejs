@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>NDOW 240</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+	<script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+	<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+</head>
+
+<body>
+
+	<% include ../partials/navigation %>
+
+		<div class="container">
+			<header class="jumbotron">
+				<div class="container">
+					<h1>Wildlife Observations!</h1>
+					<p>Enter, edit, and view wildlife observations made by NDOW biologists.</p>
+					<p>
+						<a class="btn btn-primary btn-large" href="/observations/new">Add New Observation</a>
+					</p>
+				</div>
+			</header>
+
+			<table id="encTable" class="display" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th>Species</th>
+						<th>Date</th>
+						<th>Female</th>
+						<th>Male</th>
+						<th>Adult</th>
+						<th>Young</th>
+						<th>Total</th>
+						<th>Location</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% observations.forEach(function(observation){ %>
+						<tr>
+							<td>
+								<a href="/observation/<%= observation._id %>">
+									<%= observation.species %>
+								</a>
+							</td>
+							<td>
+								<%= observation.date %>
+							</td>
+							<td>
+								<%= observation.female %>
+							</td>
+							<td>
+								<%= observation.male %>
+							</td>
+							<td>
+								<%= observation.adult %>
+							</td>
+							<td>
+								<%= observation.young %>
+							</td>
+							<td>
+								<%= observation.total %>
+							</td>
+							<td>
+								<%= observation.location %>
+							</td>
+							<td>
+								<form method="POST" action="/observations/<%= observation._id %>?_method=DELETE" class="form-inline">
+									<a href="/observations/<%= observation._id %>" class="btn btn-primary btn-sm">View</a>
+									<a href="/observations/<%= observation._id %>/edit" class="btn btn-warning btn-sm">Edit</a>
+									<button class="btn btn-sm btn-danger">Delete</button>
+								</form>
+							</td>
+						</tr>
+						<% }) %>
+				</tbody>
+			</table>
+			<br>
+			<div id="mapid" style="height: 400px;"></div>
+			<br>
+		</div>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#encTable').dataTable();
+			});
+		</script>
+		<script type="text/javascript">
+			var mymap = L.map('mapid').setView([39.46217, -119.71767], 11);
+			L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+				attribution: 'Tiles &copy; Esri'
+			}).addTo(mymap);
+
+			function onEachFeature(feature, layer) {
+				// does this feature have a property named popupContent?
+				if (feature.properties && feature.properties.popupContent) {
+					layer.bindPopup(feature.properties.popupContent);
+				}
+			}
+
+			var obs = [];
+			<% observations.forEach(function(observation){ %>
+			var ob = {
+				"type": "Feature",
+				"properties": {
+					"name": "<%= observation.species %>",
+					"popupContent": "<%= observation.species %>",
+				},
+				"geometry": {
+					"type": "Point",
+					"coordinates": [<%= observation.x %>, <%= observation.y %>]
+				}
+			};
+			obs.push(ob);
+			<% }) %>
+
+			var geojsonMarkerOptions = {
+				radius: 5,
+				fillColor: "#000080",
+				color: "#000080",
+				weight: 1,
+				opacity: 1,
+				fillOpacity: 0.8
+			};
+
+			L.geoJson(obs, {
+				onEachFeature: onEachFeature,
+				pointToLayer: function(feature, latlng) {
+					return L.circleMarker(latlng, geojsonMarkerOptions);
+				}
+			}).addTo(mymap);
+		</script>
+</body>
+
+</html>
