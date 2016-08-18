@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>NDOW 336</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+	<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+</head>
+
+<body>
+
+	<% include ../partials/navigation %>
+
+		<div class="container">
+			<header class="jumbotron">
+				<div class="container">
+					<h1>Bighorn Harvest Check In</h1>
+					<p>Enter, edit, and view hunter check ins made by NDOW biologists.</p>
+					<p>
+						<a class="btn btn-primary btn-large" href="/observations/new">Add Check In</a>
+					</p>
+				</div>
+			</header>
+
+			<table id="encTable" class="display" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th>Species</th>
+                        <th>Sex</th>
+						<th>Date</th>
+                        <th>Unit</th>
+						<th>Location</th>
+                        <th>BC Score</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% checkins.forEach(function(checkin){ %>
+						<tr>
+							<td>
+								<a href="/checkins/<%= checkin._id %>">
+									<%= checkin.species %>
+								</a>
+							</td>
+							<td>
+								<%= checkin.sex %>
+							</td>
+							<td>
+								<%= checkin.killDate %>
+							</td>
+							<td>
+								<%= checkin.unit %>
+							</td>
+							<td>
+								<%= checkin.killLocation %>
+							</td>
+							<td>
+								<%= checkin.bcScore %>
+							</td>
+							<td>
+								<form method="POST" action="/checkins/<%= checkin._id %>?_method=DELETE" class="form-inline">
+									<a href="/checkins/<%= checkin._id %>" class="btn btn-primary btn-sm">View</a>
+									<a href="/checkins/<%= checkin._id %>/edit" class="btn btn-warning btn-sm">Edit</a>
+									<button class="btn btn-sm btn-danger">Delete</button>
+								</form>
+							</td>
+						</tr>
+						<% }) %>
+				</tbody>
+			</table>
+			<br>
+		</div>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#encTable').dataTable();
+			});
+		</script>
+</body>
+
+</html>

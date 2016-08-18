@@ -7,7 +7,8 @@ var express         = require('express'),
 
 // REQUIRING ROUTES
 var indexRoutes = require('./routes/index'),
-    observationRoutes = require('./routes/observations');
+    observationRoutes = require('./routes/observations'),
+    checkinRoutes = require('./routes/checkins');
 
 // APP CONFIG
 mongoose.connect("mongodb://localhost/occurences");
@@ -20,7 +21,7 @@ seedDB();
 // ROUTES
 app.use("/", indexRoutes);
 app.use("/observations", observationRoutes);
-
+app.use("/checkins", checkinRoutes);
 
 // // BIGHORN ROUTES ==============================================================
 // // New, GET - go to form to enter bighorn checking
