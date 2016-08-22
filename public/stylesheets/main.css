@@ -3,3 +3,14 @@ img.media-object {
     margin-right: 10px;
     margin-left: 10px;
 }
+
+.header-text {
+    font-family: 'Oxygen', sans-serif;
+    color: white;
+    font-weight: 800;
+}
+
+#big-img {
+    height: 600px;
+    background-image: url("../img/rmel.jpg");
+}

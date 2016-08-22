@@ -1,7 +1,7 @@
 {
-  "name": "frm240",
+  "name": "ndow-forms",
   "version": "1.0.0",
-  "description": "wildlife observations form",
+  "description": "misc forms for ndow use",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +12,11 @@
     "body-parser": "^1.15.2",
     "ejs": "^2.5.1",
     "express": "^4.14.0",
+    "express-session": "^1.14.0",
     "method-override": "^2.3.6",
-    "mongoose": "^4.5.7"
+    "mongoose": "^4.5.7",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.0.0"
   }
 }
