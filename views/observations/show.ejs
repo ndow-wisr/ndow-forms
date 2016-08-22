@@ -4,6 +4,7 @@
 		<meta charset = "utf-8" />
 		<title>NDOW 240</title>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/stylesheets/main.css">
 	</head>
 	<body>
 
@@ -11,78 +12,113 @@
 
 		<div class="container" class="col-sm-12">
     	<div class="row">
-				<h2 class="col-sm-6 col-sm-offset-3" style="text-align: center;">Nevada Department of Wildlife</h2>
-				<h3 class="col-sm-6 col-sm-offset-3" style="text-align: center;">Wildlife Sight Record - Form 240</h3>
-        <div class="col-sm-8 col-sm-offset-2">
-					<hr>
-					<div class="bg-info">
-						<p class="text-muted" style="padding: 5px 10px;">Fields on this page are read only. To make changes click the Edit Record button at the bottom. To delete this record from the database click the Delete Record button.</p>
-					</div>
-					<hr>
-            <form action="/observations" method="POST" name="encForm">
-
-							<div class="form-group">
-									<label for="date">Date</label>
-									<input class="form-control" type="date" name="observation[date]" readonly value="<%= observation.date %>">
-							</div>
-							<div class="form-group">
-									<label for="observer">Observer</label>
-									<input class="form-control" type="text" name="observation[observer]" readonly value="<%= observation.observer %>">
-							</div>
-							<div class="form-group">
-									<label for="species">Species</label>
-                  <input class="form-control" type="text" name="observation[species]" readonly value="<%= observation.species %>">
-              </div>
-							<div class="form-group">
-									<label for="female">No. Female</label>
-                  <input class="form-control" type="number" name="observation[female]" readonly value="<%= observation.female %>">
-              </div>
-							<div class="form-group">
-									<label for="male">No. Male</label>
-                  <input class="form-control" type="number" name="observation[male]" readonly value="<%= observation.male %>">
-              </div>
-							<div class="form-group">
-									<label for="adult">No. Adult</label>
-                  <input class="form-control" type="number" name="observation[adult]" readonly value="<%= observation.adult %>">
-              </div>
-							<div class="form-group">
-									<label for="young">No. Young</label>
-                  <input class="form-control" type="number" name="observation[young]" readonly value="<%= observation.young %>">
-              </div>
-							<div class="form-group">
-									<label for="total">Total</label>
-                  <input class="form-control" type="number" name="observation[total]" readonly value="<%= observation.total %>">
-              </div>
-							<div class="form-group">
-									<label for="x">Longitude</label>
-									<input class="form-control" type="number" step="0.0001" name="observation[x]" readonly value="<%= observation.x %>">
-							</div>
-							<div class="form-group">
-									<label for="y">Latitude</label>
-									<input class="form-control" type="number" step="0.0001" name="observation[y]" readonly value="<%= observation.y %>">
-							</div>
-							<div class="form-group">
-									<label for="location">Location</label>
-									<input class="form-control" type="text" name="observation[location]" readonly value="<%= observation.location %>">
-							</div>
-							<div class="form-group">
-									<label for="comments">Comments</label>
-									<textarea name="observation[comments]" class="form-control" cols="40"><%= observation.comments %></textarea>
-							</div>
-              <div class="form-group">
-                  <a href="/observations/<%= observation._id %>/edit" class="btn btn-lg btn-warning btn-block">Edit Record</a>
-              </div>
-            </form>
-            <form method="POST" action="/observations/<%= observation._id %>?_method=DELETE">
-              <div class="form-group">
-                  <button class="btn btn-lg btn-danger btn-block" style="margin-top: 10px;">Delete Record</button>
-              </div>
-
-            </form>
-            <a href="/observations">Go Back</a>
-        </div>
+				<h2 class="col-sm-6 col-sm-offset-3" style="text-align: center;">Wildlife Sight Record - Form 240</h2>
     	</div>
+        <br>
+        <br>
+        <!-- main content panel -->
+        <div class="col-md-8">
+            <div class="row" id="obs-head">
+                <h3><%= observation.species %></h3>
+            </div>
+            <hr>
+            <div class="row" id="obs-table">
+                <h3>Numbers:</h3>
+                <table class="table" id="observation">
+                    <thead>
+                        <tr>
+                            <th>
+                                No. Male
+                            </th>
+                            <th>
+                                No. Female
+                            </th>
+                            <th>
+                                No. Adult
+                            </th>
+                            <th>
+                                No. Young
+                            </th>
+                            <th>
+                                Total
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td>
+                            <%= observation.male %>
+                        </td>
+                        <td>
+                            <%= observation.female %>
+                        </td>
+                        <td>
+                            <%= observation.adult %>
+                        </td>
+                        <td>
+                            <%= observation.young %>
+                        </td>
+                        <td>
+                            <%= observation.total %>
+                        </td>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" id="obs-comments">
+                <h3>Comments:</h3>
+                <p>
+                    <%= observation.comments %>
+
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </div>
+            <div class="row" id="obs-action-btns">
+                <a class="btn btn-warning" href="/observations/<%= observation._id %>/edit">Edit</a>
+                <form id="delete-form" action="/observations/<%= observation._id %>?_method=DELETE" method="post">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- side panel -->
+        <div class="col-md-4">
+            <div class="list-group">
+                <li class="list-group-item active">Meta-data</li>
+                <li class="list-group-item">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                    <%= observation.date %>
+                </li>
+                <li class="list-group-item">
+                    <span class="glyphicon glyphicon-user"> </span> <%= observation.observer %>
+                </li>
+                <li class="list-group-item">
+                    <span class="glyphicon glyphicon-map-marker"></span> (<%= observation.x %>, <%= observation.y %>)
+                </li>
+                <li class="list-group-item">
+                    <span class="glyphicon glyphicon-map-marker"></span> <%= observation.location %>
+                </li>
+            </div>
+            <!-- map -->
+            <div class="thumbnail" id="obs-map">
+                <img class="img-responsive" src="https://api.mapbox.com/v4/mapbox.outdoors/pin-l+337ab7(<%= observation.x %>,<%= observation.y %>)/<%= observation.x %>,<%= observation.y %>,10/500x500.png?access_token=pk.eyJ1IjoibWdyaXR0cyIsImEiOiJjaXI2d2x0eXkwMHA4ZzdtMzJvb3k2eDBpIn0.wIgrA9uQggw7FwyNGA_4AQ" alt="" />
+            </div>
+        </div>
+        <br>
 		</div>
+        <br>
+        <div class="container well">
+            <a href="#" class="btn btn-primary pull-right">Add Remark</a>
+            <h3>QA/QC Remarks</h3>
+            <hr>
+            <div class="row" id="obs-remark">
+                <div class="col-md-12">
+                    <strong>mitchellgritts (comment.author)</strong>
+                    <span class="pull-right">Aug. 7, 2016 (comment.date)</span>
+                    <p style="padding-left: 10px; padding-top: 10px">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+            </div>
+        </div>
 
 	</body>
 </html>

@@ -14,3 +14,15 @@ img.media-object {
     height: 600px;
     background-image: url("../img/rmel.jpg");
 }
+
+#obs-action-btns {
+    margin-top: 10px;
+}
+
+#delete-form {
+    display: inline;
+}
+
+#obs-map {
+    padding: 0;
+}
