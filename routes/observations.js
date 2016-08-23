@@ -14,13 +14,38 @@ router.get('/', function(req, res){
 });
 
 // new
-router.get('/new', function(req, res){
+router.get('/new', isLoggedIn, function(req, res){
     res.render('observations/new');
 });
 
 // create
 router.post('/', function(req, res){
-    Observation.create(req.body.observation, function(err, newObs){
+    var obs = req.body.observation
+    obs.obsby = {
+        id: req.user._id,
+        username: req.user.username
+    }
+    console.log(obs);
+    // var newObs = {
+    //     req.body.observation,
+    //     // date: req.body.date,
+    //     // species: req.body.species,
+    //     // female: req.body.female,
+    //     // male: req.body.male,
+    //     // adult: req.body.adult,
+    //     // young: req.body.young,
+    //     // x: req.body.x,
+    //     // y: req.body.y,
+    //     // total: req.body.total,
+    //     // location: req.body.location,
+    //     // comments: req.body.comments,
+    //     obsby: {
+    //         id: req.user._id,
+    //         username: req.user.username
+    //     }
+    // }
+
+    Observation.create(obs, function(err, newObs){
         if(err){
             console.log(err);
         } else {
@@ -41,7 +66,7 @@ router.get('/:id', function(req, res){
 });
 
 // edit
-router.get('/:id/edit', function(req, res){
+router.get('/:id/edit', isLoggedIn, function(req, res){
     Observation.findById(req.params.id, function(err, foundObs){
         if(err){
             console.log(err);
@@ -52,7 +77,7 @@ router.get('/:id/edit', function(req, res){
 });
 
 // update
-router.put('/:id', function(req, res){
+router.put('/:id', isLoggedIn, function(req, res){
     Observation.findByIdAndUpdate(req.params.id, req.body.observation, function(err, updObs){
         if(err){
             res.redirect('/observations');
@@ -63,7 +88,7 @@ router.put('/:id', function(req, res){
 });
 
 // destroy
-router.delete('/:id', function(req, res){
+router.delete('/:id', isLoggedIn, function(req, res){
     Observation.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect('/observations');
@@ -72,5 +97,12 @@ router.delete('/:id', function(req, res){
         }
     });
 });
+
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect('/login');
+}
 
 module.exports = router;

@@ -12,7 +12,14 @@ var observationSchema = new mongoose.Schema({
     y: Number,
     total: Number,
     location: String,
-    comments: String
+    comments: String,
+    obsby: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username: String
+    }
 });
 
 module.exports = mongoose.model('Observation', observationSchema);

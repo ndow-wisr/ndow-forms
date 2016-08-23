@@ -35,7 +35,7 @@ router.post('/register', function(req, res){
 
 // show login page
 router.get('/login', function(req, res){
-    res.send('register page');
+    res.render('login');
 });
 
 // handle login logic
@@ -50,5 +50,11 @@ router.get('/logout', function(req, res){
     req.logout();
     res.redirect("/")
 })
+
+isLoggedIn = function(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+}
 
 module.exports = router;
