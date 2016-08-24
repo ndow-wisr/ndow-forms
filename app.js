@@ -4,14 +4,17 @@ var express         = require('express'),
     methodOverride  = require("method-override"),
     passport        = require('passport'),
     LocalStrategy   = require('passport-local'),
-    User            = require('./models/user')
+    Observation     = require('./models/observations')
+    User            = require('./models/user'),
+    Comment         = require('./models/comments'),
     seedDB          = require('./seed_db'),
     app             = express();
 
 // REQUIRING ROUTES
 var indexRoutes = require('./routes/index'),
     observationRoutes = require('./routes/observations'),
-    checkinRoutes = require('./routes/checkins');
+    checkinRoutes = require('./routes/checkins'),
+    commentRoutes = require('./routes/comments');
 
 // APP CONFIG
 mongoose.connect("mongodb://localhost/ndow-forms");
@@ -41,6 +44,7 @@ app.use(function(req, res, next){
 // ROUTES
 app.use("/", indexRoutes);
 app.use("/observations", observationRoutes);
+app.use("/observations/:id/comments", commentRoutes);
 app.use("/checkins", checkinRoutes);
 
 // LISTEN, SERVER

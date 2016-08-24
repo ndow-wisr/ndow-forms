@@ -5,6 +5,8 @@
 		<title>NDOW 240</title>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="/stylesheets/main.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	</head>
 	<body>
 
@@ -13,11 +15,15 @@
 		<div class="container" class="col-sm-12">
     	<div class="row">
 				<h2 class="col-sm-6 col-sm-offset-3" style="text-align: center;">Wildlife Sight Record - Form 240</h2>
+				<div class="pull-right">
+					<a href="/observations">Go Back</a>
+				</div>
     	</div>
         <br>
         <br>
-        <!-- main content panel -->
-        <div class="col-md-8">
+
+		<!-- main content panel -->
+        <div class="col-md-7">
             <h3><%= observation.species %></h3>
             <hr>
             <div class="table-responsive" id="obs-table">
@@ -65,22 +71,29 @@
                 <h3>Comments:</h3>
                 <p>
                     <%= observation.comments %>
-
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
             </div>
-            <div id="obs-action-btns">
-                <a class="btn btn-warning" href="/observations/<%= observation._id %>/edit">Edit</a>
-                <form id="delete-form" action="/observations/<%= observation._id %>?_method=DELETE" method="post">
-                    <button class="btn btn-danger">Delete</button>
-                </form>
+			<!-- obsevation map --> <!-- TODO: use leaflet map -->
+			<div class="thumbnail" id="obs-map">
+                <img class="img-responsive" src="https://api.mapbox.com/v4/mapbox.outdoors/pin-l+337ab7(<%= observation.x %>,<%= observation.y %>)/<%= observation.x %>,<%= observation.y %>,10/730x300.png?access_token=pk.eyJ1IjoibWdyaXR0cyIsImEiOiJjaXI2d2x0eXkwMHA4ZzdtMzJvb3k2eDBpIn0.wIgrA9uQggw7FwyNGA_4AQ" alt="" />
             </div>
-        </div>
+        </div> <!-- ./main content panel -->
 
         <!-- side panel -->
-        <div class="col-md-4">
+        <div class="col-md-5">
+
+			<!-- observation action buttons -->
+			<div id="obs-action-btns" class="pad-bottom">
+				<a class="btn btn-default" href="/observations">Go Back</a>
+				<a class="btn btn-warning" href="/observations/<%= observation._id %>/edit">Edit Observation</a>
+				<form id="delete-form" action="/observations/<%= observation._id %>?_method=DELETE" method="post">
+					<button class="btn btn-danger">Delete Observation</button>
+				</form>
+			</div>
+
+			<!-- observation metadata panel -->
             <div class="list-group">
-                <li class="list-group-item active">Meta-data</li>
+                <li class="list-group-item active">metadata</li>
                 <li class="list-group-item">
                     <span class="glyphicon glyphicon-calendar"></span>
                     <%= observation.date %>
@@ -89,35 +102,66 @@
                     <span class="glyphicon glyphicon-user"> </span> <%= observation.obsby.username %>
                 </li>
                 <li class="list-group-item">
-                    <span class="glyphicon glyphicon-map-marker"></span> (<%= observation.x %>, <%= observation.y %>)
-                </li>
-                <li class="list-group-item">
                     <span class="glyphicon glyphicon-map-marker"></span> <%= observation.location %>
                 </li>
+                <li class="list-group-item">
+                    <span class="glyphicon glyphicon-map-marker"></span> (<%= observation.x %>, <%= observation.y %>)
+                </li>
             </div>
-            <!-- map image from mapbox (classic static API) -->
-            <div class="thumbnail" id="obs-map">
-                <img class="img-responsive" src="https://api.mapbox.com/v4/mapbox.outdoors/pin-l+337ab7(<%= observation.x %>,<%= observation.y %>)/<%= observation.x %>,<%= observation.y %>,10/500x500.png?access_token=pk.eyJ1IjoibWdyaXR0cyIsImEiOiJjaXI2d2x0eXkwMHA4ZzdtMzJvb3k2eDBpIn0.wIgrA9uQggw7FwyNGA_4AQ" alt="" />
-            </div>
+
+			<!-- qa/qc remarks -->
+			<div class="well">
+				<% if(currentUser){ %>
+					<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">Add Remark</button>
+				<% } %>
+				<h3>QA/QC Remarks</h3>
+				<hr>
+				<!-- qa/qc remarks -->
+				<% observation.qaqc.forEach(function(qaqc){ console.log(qaqc)%>
+                    <div class="obs-qaqc">
+						<div class="obs-qaqc-header">
+							<strong><%= qaqc.author.username %></strong>
+	                        <span class="pull-right"><%= qaqc.date.toDateString() %></span>
+						</div>
+						<div class="obs-qaqc-body">
+							<strong>Actions:</strong> <span><%= qaqc.action %></span>
+							<p class="obs-body-text">
+	                            <%= qaqc.text %>
+	                        </p>
+						</div>
+                    </div>
+                <% }) %>
+			</div>
+
         </div>
         <br>
 
-		<!-- qaqc comments/remarks -->
-		<div class="col-sm-12">
-			<div class="well">
-				<a href="#" class="btn btn-primary pull-right">Add Remark</a>
-				<h2>QA/QC Remarks</h2>
-				<hr>
-				<div id="obs-remark">
-					<strong>mitchellgritts (comment.author)</strong>
-                    <span class="pull-right">Aug. 7, 2016 (comment.date)</span>
-                    <p style="padding-left: 10px; padding-top: 10px">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
+		<!-- new comment modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Modal Title</h4>
+					</div>
+					<div class="modal-body">
+						<form class="" action="/observations/<%= observation._id %>/comments" method="post">
+							<div class="form-group">
+								<label for="remark">Remark:</label>
+								<textarea class="form-control" name="remark" placeholder="remark text..."></textarea>
+							</div>
+							<div class="form-group">
+								<label for="qaqc">Action:</label> <!-- TODO: use icons to represent actions (visual grepping) -->
+								<input class="form-control" type="text" name="qaqc" placeholder="qa/qc action to take">
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary btn-block">Save Remark</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
-		</div>
-
+	</div> <!-- ./ content container -->
 	</body>
 </html>

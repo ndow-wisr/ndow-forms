@@ -26,25 +26,6 @@ router.post('/', function(req, res){
         username: req.user.username
     }
     console.log(obs);
-    // var newObs = {
-    //     req.body.observation,
-    //     // date: req.body.date,
-    //     // species: req.body.species,
-    //     // female: req.body.female,
-    //     // male: req.body.male,
-    //     // adult: req.body.adult,
-    //     // young: req.body.young,
-    //     // x: req.body.x,
-    //     // y: req.body.y,
-    //     // total: req.body.total,
-    //     // location: req.body.location,
-    //     // comments: req.body.comments,
-    //     obsby: {
-    //         id: req.user._id,
-    //         username: req.user.username
-    //     }
-    // }
-
     Observation.create(obs, function(err, newObs){
         if(err){
             console.log(err);
@@ -56,7 +37,7 @@ router.post('/', function(req, res){
 
 // show
 router.get('/:id', function(req, res){
-    Observation.findById(req.params.id, function(err, foundObs){
+    Observation.findById(req.params.id).populate('qaqc').exec(function(err, foundObs){
         if(err){
             res.redirect('/observations');
         } else {

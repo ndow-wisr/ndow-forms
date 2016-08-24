@@ -11,8 +11,26 @@ img.media-object {
 }
 
 #big-img {
-    height: 600px;
-    background-image: url("../img/rmel.jpg");
+    height: 500px;
+    background: url("../img/rmel.jpg") no-repeat fixed;
+    background-size: cover;
+}
+
+#obs-jumbo {
+    background-image: url("../img/pika.jpg");
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*-moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";*/
+}
+
+.text-white {
+    color: white;
 }
 
 #obs-action-btns {
@@ -24,5 +42,27 @@ img.media-object {
 }
 
 #obs-map {
+    height: 300px;
     padding: 0;
+    margin-top: 20px;
 }
+
+.pad-bottom {
+    padding-bottom: 10px;
+}
+
+.obs-qaqc-body {
+    padding-left: 15px;
+    padding-top: 5px;
+}
+/*.obs-body-text {
+    padding-top: 5px;
+}*/
+
+/*p.obs-body-text {
+    padding-left: 10px;
+}
+
+.obs-qaqc {
+    padding-bottom: 5px;
+}*/

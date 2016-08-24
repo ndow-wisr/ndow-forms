@@ -7,6 +7,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+	<link rel="stylesheet" href="/stylesheets/main.css">
 	<script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
 	<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
@@ -17,12 +18,14 @@
 	<% include ../partials/navigation %>
 
 		<div class="container">
-			<header class="jumbotron">
-				<div class="container">
-					<h1>Wildlife Observations!</h1>
+			<header class="jumbotron" id="obs-jumbo">
+				<div class="container text-right text-white">
+					<h1>Wildlife Observations</h1>
 					<p>Enter, edit, and view wildlife observations made by NDOW biologists.</p>
 					<p>
-						<a class="btn btn-primary btn-large" href="/observations/new">Add New Observation</a>
+						<% if(currentUser){ %>
+							<a class="btn btn-primary btn-large" href="/observations/new">Add New Observation</a>
+						<%}%>
 					</p>
 				</div>
 			</header>
@@ -73,8 +76,10 @@
 							<td>
 								<form method="POST" action="/observations/<%= observation._id %>?_method=DELETE" class="form-inline">
 									<a href="/observations/<%= observation._id %>" class="btn btn-primary btn-sm">View</a>
-									<a href="/observations/<%= observation._id %>/edit" class="btn btn-warning btn-sm">Edit</a>
-									<button class="btn btn-sm btn-danger">Delete</button>
+									<% if(currentUser){ %>
+										<a href="/observations/<%= observation._id %>/edit" class="btn btn-warning btn-sm">Edit</a>
+										<button class="btn btn-sm btn-danger">Delete</button>
+									<% } %>
 								</form>
 							</td>
 						</tr>

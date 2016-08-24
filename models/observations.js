@@ -19,7 +19,13 @@ var observationSchema = new mongoose.Schema({
             ref: "User"
         },
         username: String
-    }
+    },
+    qaqc: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Comment"
+        }
+    ]
 });
 
 module.exports = mongoose.model('Observation', observationSchema);

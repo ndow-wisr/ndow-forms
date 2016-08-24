@@ -14,7 +14,15 @@ var data = [{
     x: -119.6884,
     y: 39.6289,
     location: "Spanish Springs",
-    comments: "3 PeTr in one trap, so cool."
+    comments: "3 PeTr in one trap, so cool.",
+    qaqc: [
+        ObjectId("57bde52f09ddfb61b986df9e")
+    ],
+    obsby: {
+        id: { ObjectId("57bb7b0dfe17d10baf987111")
+        username : "muleytracker"
+        }
+    }
 }, {
     date: "10/16/2016",
     observer: "Cody McKee",
