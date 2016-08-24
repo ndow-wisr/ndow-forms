@@ -1,98 +1,125 @@
 <!DOCTYPE html>
-<html lang = "en">
-	<head>
-		<meta charset = "utf-8" />
-		<title>NDOW 240</title>
-		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	</head>
-	<body onload="geoFindMe()">
+<html lang="en">
 
-		<% include ../partials/navigation %>
+<head>
+	<meta charset="utf-8" />
+	<title>NDOW 240</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+
+<body onload="geoFindMe()">
+
+	<% include ../partials/navigation %>
 
 		<div class="container" class="col-sm-12">
-    	<div class="row">
+			<div class="row">
 				<h2 class="col-sm-6 col-sm-offset-3" style="text-align: center;">Nevada Department of Wildlife</h2>
 				<h3 class="col-sm-6 col-sm-offset-3" style="text-align: center;">Wildlife Sight Record - Form 240</h3>
-        <div class="col-sm-8 col-sm-offset-2">
+				<div class="col-sm-8 col-sm-offset-2">
 					<hr>
 					<div class="bg-info">
 						<p class="text-muted" style="padding: 5px 10px;">All fields are required. Your current coordinates will be used in the Longitude and Latitude field, you can change them if necessary. To reset the coordinates to your current location, click Reset Coordinates button.</p>
 					</div>
 					<hr>
-            <form action="/observations" method="POST" name="encForm">
+					<form action="/observations" method="POST" name="encForm">
 
-							<div class="form-group">
-									<label for="date">Date</label>
-									<input class="form-control" type="date" placeholder="yyyy-mm-dd" name="observation[date]">
-							</div>
-							<div class="form-group">
+						<div class="form-group">
+							<label for="date">Date</label>
+							<input id="date" class="form-control" type="date" placeholder="mm/dd/yyyy" name="observation[date]">
+						</div>
+						<!-- <div class="form-group">
 									<label for="observer">Observer</label>
 									<input class="form-control" type="text" value="<%= currentUser.username %>" name="observation[observer]">
-							</div>
-							<div class="form-group">
-									<label for="species">Species</label>
-                  <input class="form-control" type="text" placeholder="species" name="observation[species]">
-              </div>
-							<div class="form-group">
-									<label for="female">No. Female</label>
-                  <input class="form-control" type="number" placeholder="number of females" name="observation[female]">
-              </div>
-							<div class="form-group">
-									<label for="male">No. Male</label>
-                  <input class="form-control" type="number" placeholder="number of males" name="observation[male]">
-              </div>
-							<div class="form-group">
-									<label for="adult">No. Adult</label>
-                  <input class="form-control" type="number" placeholder="number of adults" name="observation[adult]">
-              </div>
-							<div class="form-group">
-									<label for="young">No. Young</label>
-                  <input class="form-control" type="number" placeholder="number of young" name="observation[young]">
-              </div>
-							<div class="form-group">
-									<label for="total">Total</label>
-                  <input class="form-control" type="number" placeholder="total number of animals" name="observation[total]">
-              </div>
-							<div class="form-group">
-									<label for="x">Longitude</label>
-									<input class="form-control" type="number" step="0.0001" placeholder="-119.5050" name="observation[x]">
-							</div>
-							<div class="form-group">
-									<label for="y">Latitude</label>
-									<input class="form-control" type="number" step="0.0001" placeholder="35.5050" name="observation[y]">
-							</div>
-							<div class="form-group">
-									<label for="location">Location</label>
-									<input class="form-control" type="text" placeholder="location" name="observation[location]">
-							</div>
-							<div class="form-group">
-									<label for="comments">Comments</label>
-									<textarea name="observation[comments]" class="form-control" cols="40"></textarea>
-							</div>
-							<div class="form-group">
-              	<button type="button" class="btn btn-lg btn-success btn-block" style="margin-top: 10px;" onclick="geoFindMe()">Reset Coordinates</button>
-              </div>
-              <div class="form-group">
-                  <button class="btn btn-lg btn-primary btn-block" style="margin-top: 10px;">Submit</button>
-              </div>
+							</div> -->
+						<div class="form-group">
+							<label for="species">Species</label>
+							<input class="form-control" type="text" placeholder="species" name="observation[species]">
+						</div>
 
-            </form>
-            <a href="/observations">Go Back</a>
-        </div>
-    	</div>
+						<div class="">
+							<div class="form-group col-md-2">
+								<label for="female">No. Female</label>
+								<input class="form-control" type="number" placeholder="number of females" name="observation[female]">
+							</div>
+							<div class="form-group col-md-2">
+								<label for="female">No. Female</label>
+								<input class="form-control" type="number" placeholder="number of females" name="observation[female]">
+							</div>
+							<div class="form-group col-md-2">
+								<label for="female">No. Female</label>
+								<input class="form-control" type="number" placeholder="number of females" name="observation[female]">
+							</div>
+							<div class="form-group col-md-2">
+								<label for="female">No. Female</label>
+								<input class="form-control" type="number" placeholder="number of females" name="observation[female]">
+							</div>
+							<div class="form-group col-md-2">
+								<label for="female">No. Female</label>
+								<input class="form-control" type="number" placeholder="number of females" name="observation[female]">
+							</div>
+						</div>
+
+
+								<hr>
+						<div class="form-group">
+							<label for="female">No. Female</label>
+							<input class="form-control" type="number" placeholder="number of females" name="observation[female]">
+						</div>
+						<div class="form-group">
+							<label for="male">No. Male</label>
+							<input class="form-control" type="number" placeholder="number of males" name="observation[male]">
+						</div>
+						<div class="form-group">
+							<label for="adult">No. Adult</label>
+							<input class="form-control" type="number" placeholder="number of adults" name="observation[adult]">
+						</div>
+						<div class="form-group">
+							<label for="young">No. Young</label>
+							<input class="form-control" type="number" placeholder="number of young" name="observation[young]">
+						</div>
+						<div class="form-group">
+							<label for="total">Total</label>
+							<input class="form-control" type="number" placeholder="total number of animals" name="observation[total]">
+						</div>
+						<div class="form-group">
+							<label for="x">Longitude</label>
+							<input class="form-control" type="number" step="0.0001" placeholder="-119.5050" name="observation[x]">
+						</div>
+						<div class="form-group">
+							<label for="y">Latitude</label>
+							<input class="form-control" type="number" step="0.0001" placeholder="35.5050" name="observation[y]">
+						</div>
+						<div class="form-group">
+							<label for="location">Location</label>
+							<input class="form-control" type="text" placeholder="location" name="observation[location]">
+						</div>
+						<div class="form-group">
+							<label for="comments">Comments</label>
+							<textarea name="observation[comments]" class="form-control" cols="40"></textarea>
+						</div>
+						<div class="form-group">
+							<button type="button" class="btn btn-lg btn-default btn-block" style="margin-top: 10px;" onclick="geoFindMe()">Reset Coordinates</button>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-lg btn-success btn-block" style="margin-top: 10px;">Submit Record</button>
+						</div>
+					</form>
+					<a href="/observations">Go Back</a>
+				</div>
+			</div>
 		</div>
 
 		<script>
 			function geoFindMe() {
-
-				if (!navigator.geolocation){
+				if (!navigator.geolocation) {
 					alert("<p>Geolocation is not supported by your browser</p>");
 					return;
 				}
 
 				function success(position) {
-					var latitude  = position.coords.latitude.toFixed(4);
-					var longitude = position.coords.longitude.toFixed(4)	;
+					var latitude = position.coords.latitude.toFixed(4);
+					var longitude = position.coords.longitude.toFixed(4);
 					document.forms["encForm"]["observation[x]"].value = longitude;
 					document.forms["encForm"]["observation[y]"].value = latitude;
 				};
@@ -100,10 +127,11 @@
 				function error() {
 					alert("Unable to retrieve your location");
 				};
-
 				navigator.geolocation.getCurrentPosition(success, error);
 			}
+			// document.getElementById('date').value = Date();
 		</script>
 
-	</body>
+</body>
+
 </html>
