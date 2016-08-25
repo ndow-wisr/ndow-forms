@@ -56,6 +56,10 @@ img.media-object {
     padding-bottom: 10px;
 }
 
+.pad-lf-sm {
+    padding-left: 10px;
+}
+
 .rm-left-padding{
     padding-left: 0px;
     padding-right: 5px;
@@ -69,14 +73,7 @@ img.media-object {
     padding-left: 15px;
     padding-top: 5px;
 }
-/*.obs-body-text {
-    padding-top: 5px;
-}*/
 
-/*p.obs-body-text {
-    padding-left: 10px;
+.mgn-bottom {
+    margin-bottom: 10px;
 }
-
-.obs-qaqc {
-    padding-bottom: 5px;
-}*/

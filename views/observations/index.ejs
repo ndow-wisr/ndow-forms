@@ -48,8 +48,8 @@
 					<% observations.forEach(function(observation){ %>
 						<tr>
 							<td>
-								<a href="/observation/<%= observation._id %>">
-									<%= observation.species %>
+								<a href="/observations/<%= observation._id %>">
+									<em><%= observation.species %></em>
 								</a>
 							</td>
 							<td>
@@ -97,7 +97,7 @@
 			});
 		</script>
 		<script type="text/javascript">
-			var mymap = L.map('mapid').setView([39.46217, -119.71767], 11);
+			var mymap = L.map('mapid').setView([39.38526, -116.87256], 7);
 			L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 				attribution: 'Tiles &copy; Esri'
 			}).addTo(mymap);
@@ -127,10 +127,10 @@
 
 			var geojsonMarkerOptions = {
 				radius: 5,
-				fillColor: "#000080",
-				color: "#000080",
+				fillColor: "#ffa500",
+				color: "#fff",
 				weight: 1,
-				opacity: 1,
+				opacity: .25,
 				fillOpacity: 0.8
 			};
 

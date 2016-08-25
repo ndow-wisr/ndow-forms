@@ -10,6 +10,7 @@
 		<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
 		<link rel="stylesheet" href="/stylesheets/main.css">
 		<script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+		<script src="https://use.fontawesome.com/fe7800e6cc.js"></script>
 	</head>
 	<body>
 
@@ -83,32 +84,32 @@
         <!-- side panel -->
         <div class="col-md-5">
 
-			<!-- observation action buttons -->
-			<div id="obs-action-btns" class="pad-bottom text-right">
-				<a class="btn btn-primary-inv" href="/observations">Go Back</a>
-				<a class="btn btn-warning" href="/observations/<%= observation._id %>/edit">Edit Observation</a>
-				<form id="delete-form" action="/observations/<%= observation._id %>?_method=DELETE" method="post">
-					<button class="btn btn-danger">Delete Observation</button>
-				</form>
-			</div>
-
 			<!-- observation metadata panel -->
             <div class="list-group">
                 <li class="list-group-item active">metadata</li>
                 <li class="list-group-item">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                    <%= observation.date %>
+                    <i class="fa fa-calendar fa-lg"></i><span class="pad-lf-sm"><%= observation.date %></span>
                 </li>
                 <li class="list-group-item">
-                    <span class="glyphicon glyphicon-user"> </span> <%= observation.obsby.username %>
+					<i class="fa fa-user fa-lg"></i><span class="pad-lf-sm"><%= observation.obsby.username %></span>
                 </li>
                 <li class="list-group-item">
-                    <span class="glyphicon glyphicon-map-marker"></span> <%= observation.location %>
+                    <i class="fa fa-globe fa-lg"></i><span class="pad-lf-sm"><%= observation.location %></span>
                 </li>
                 <li class="list-group-item">
-                    <span class="glyphicon glyphicon-map-marker"></span> (<%= observation.x %>, <%= observation.y %>)
+                    <i class="fa fa-map-marker fa-lg"></i><span class="pad-lf-sm"><%= observation.x %>, <%= observation.y %></span>
                 </li>
             </div>
+
+			<!-- observation action buttons -->
+			<% if(currentUser) { %>
+				<div id="obs-action-btns" class="pad-bottom text-right">
+					<a class="btn btn-warning btn-block mgn-bottom" href="/observations/<%= observation._id %>/edit">Edit Observation</a>
+					<form id="delete-form" action="/observations/<%= observation._id %>?_method=DELETE" method="post">
+						<button class="btn btn-danger btn-block mgn-bottom">Delete Observation</button>
+					</form>
+				</div>
+			<% } %>
 
 			<!-- qa/qc remarks -->
 			<div class="well">
