@@ -5,6 +5,7 @@
 	<meta charset="utf-8" />
 	<title>NDOW 240</title>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<% include ../partials/leaflet %>
 	<link rel="stylesheet" href="/stylesheets/main.css">
 </head>
 
@@ -36,32 +37,6 @@
 							<label for="species">Species</label>
 							<input class="form-control" type="text" placeholder="species" name="observation[species]">
 						</div>
-
-						<div class="">
-							<div class="form-group col-md-2">
-								<label for="female">No. Female</label>
-								<input class="form-control" type="number" placeholder="number of females" name="observation[female]">
-							</div>
-							<div class="form-group col-md-2">
-								<label for="female">No. Female</label>
-								<input class="form-control" type="number" placeholder="number of females" name="observation[female]">
-							</div>
-							<div class="form-group col-md-2">
-								<label for="female">No. Female</label>
-								<input class="form-control" type="number" placeholder="number of females" name="observation[female]">
-							</div>
-							<div class="form-group col-md-2">
-								<label for="female">No. Female</label>
-								<input class="form-control" type="number" placeholder="number of females" name="observation[female]">
-							</div>
-							<div class="form-group col-md-2">
-								<label for="female">No. Female</label>
-								<input class="form-control" type="number" placeholder="number of females" name="observation[female]">
-							</div>
-						</div>
-
-
-								<hr>
 						<div class="form-group">
 							<label for="female">No. Female</label>
 							<input class="form-control" type="number" placeholder="number of females" name="observation[female]">
@@ -82,25 +57,31 @@
 							<label for="total">Total</label>
 							<input class="form-control" type="number" placeholder="total number of animals" name="observation[total]">
 						</div>
-						<div class="form-group">
-							<label for="x">Longitude</label>
-							<input class="form-control" type="number" step="0.0001" placeholder="-119.5050" name="observation[x]">
+						<!-- locations -->
+						<div class="col-md-6 rm-left-padding">
+							<div class="form-group">
+								<label for="x">Longitude</label>
+								<input class="form-control" type="number" step="0.0001" placeholder="-119.5050" name="observation[x]">
+							</div>
+							<div class="form-group">
+								<label for="y">Latitude</label>
+								<input class="form-control" type="number" step="0.0001" placeholder="35.5050" name="observation[y]">
+							</div>
+							<div class="form-group">
+								<label for="location">Location</label>
+								<input class="form-control" type="text" placeholder="location" name="observation[location]">
+							</div>
+							<div class="form-group">
+								<label for="comments">Comments</label>
+								<textarea name="observation[comments]" class="form-control" rows="5"></textarea>
+							</div>
+						</div> <!-- ./ locations -->
+						<!-- location map -->
+						<div class="col-md-6 rm-right-padding">
+								<div id="obs-map" class="img-rounded" style="height: 288px;"></div>
+								<button type="button" class="btn btn-lg btn-default btn-block" style="margin-top: 10px;" onclick="geoFindMe()">Reset Coordinates</button>
 						</div>
-						<div class="form-group">
-							<label for="y">Latitude</label>
-							<input class="form-control" type="number" step="0.0001" placeholder="35.5050" name="observation[y]">
-						</div>
-						<div class="form-group">
-							<label for="location">Location</label>
-							<input class="form-control" type="text" placeholder="location" name="observation[location]">
-						</div>
-						<div class="form-group">
-							<label for="comments">Comments</label>
-							<textarea name="observation[comments]" class="form-control" cols="40"></textarea>
-						</div>
-						<div class="form-group">
-							<button type="button" class="btn btn-lg btn-default btn-block" style="margin-top: 10px;" onclick="geoFindMe()">Reset Coordinates</button>
-						</div>
+
 						<div class="form-group">
 							<button class="btn btn-lg btn-success btn-block" style="margin-top: 10px;">Submit Record</button>
 						</div>
@@ -111,6 +92,22 @@
 		</div>
 
 		<script>
+			var obmap = L.map('obs-map').setView([0, 0], 1);
+			L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+				attribution: 'Tiles &copy; Esri'
+			}).addTo(obmap);
+
+			var popup = L.popup();
+			function onMapClick(e) {
+				document.forms["encForm"]["observation[x]"].value = e.latlng.lng.toFixed(4);
+				document.forms["encForm"]["observation[y]"].value = e.latlng.lat.toFixed(4);
+				popup
+					.setLatLng(e.latlng)
+					.setContent("New Obs Coords: " + e.latlng.toString())
+					.openOn(obmap);
+			}
+			obmap.on('click', onMapClick);
+
 			function geoFindMe() {
 				if (!navigator.geolocation) {
 					alert("<p>Geolocation is not supported by your browser</p>");
@@ -122,6 +119,8 @@
 					var longitude = position.coords.longitude.toFixed(4);
 					document.forms["encForm"]["observation[x]"].value = longitude;
 					document.forms["encForm"]["observation[y]"].value = latitude;
+					obmap.setView([latitude, longitude], 11);
+					var marker = L.marker([latitude, longitude]).addTo(obmap);
 				};
 
 				function error() {

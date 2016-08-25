@@ -56,6 +56,15 @@ img.media-object {
     padding-bottom: 10px;
 }
 
+.rm-left-padding{
+    padding-left: 0px;
+    padding-right: 5px;
+}
+
+.rm-right-padding {
+    padding-right: 0px;
+    padding-left: 5px;
+}
 .obs-qaqc-body {
     padding-left: 15px;
     padding-top: 5px;
