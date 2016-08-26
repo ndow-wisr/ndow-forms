@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+		<meta charset = "utf-8" />
+		<title>NDOW Forms</title>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Oxygen:700" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.3/css/selectize.bootstrap3.min.css" charset="utf-8">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.3/js/standalone/selectize.js" charset="utf-8"></script>
+		<link rel="stylesheet" href="/stylesheets/main.css">
+	</head>
+	<body class="landing-body">
+		<div class="container">
+			<div class="col-sm-6 col-md-offset-3 text-center landing-text">
+				<div class="banner">
+					<h1>NDOW Forms</h1>
+					<h3>Home for online data entry.</h3>
+				</div>
+				<div class="landing-user-action">
+					<a class="btn btn-success" href="/login">LOGIN</a>
+					<a class="btn btn-primary" href="/register">SIGN UP</a>
+				</div>
+				<div class="landing-select">
+					<h2>What Would You Like To Do?</h2>
+					<select class="landing-action" name="action"></select>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			$('.landing-action').selectize({valueField: 'id',
+    labelField: 'name',
+    searchField: ['name'],
+    maxItems: 1,
+    options: [
+        {"id":111,"name":"Jenny"},
+        {"id":394,"name":"Jorge"},
+        {"id":1065,"name":"Jorge Carlson"},
+    ],
+    create: false,
+    render: {
+        option: function(item, escape) {
+            return '<div>'
+            + '<span style="display: block; color: black; font-size: 14px;">ID:'+ escape(item.id) +'</span> '
+            + '<span>Name:' + escape(item.name) + '</span> '
+            + '</div>';
+        }
+    }
+    })
+		</script>
+		<!-- <% include ./partials/navigation %> -->
+
+	<!-- <div class="jumbotron" id="big-img">
+		<div class="container">
+			<div class="col-md-6 col-md-offset-3 text-center">
+				<h2 class="header-text">NDOW Forms</h2>
+				<h3 class="header-text">The department's home for online data entry.</h3>
+				<br>
+				<a class="btn btn-primary" href="/login">LOG-IN</a>
+				<a class="btn btn-success" href="/login">SIGN-UP</a>
+			</div>
+		</div>
+	</div>
+
+    <div class="container">
+		<h2>Data Entry Portals</h2>
+		<p>
+			Each portal has pages for entering, viewing, editing and deleting entries.
+		</p>
+	  <div class="media">
+		  <div class="media-left">
+		  	<a href="/observations">
+				<img class="media-object"  src="https://d2pz2jxkt8wezm.cloudfront.net/public/icons/dest/er-icons-dest-wildlife-dk-23.svg" alt="" />
+			</a>
+			</div>
+			<div class="media-body">
+				<h3 class="media-heading">
+					<a href="/observations">Wildlife Observations</a>
+				</h3>
+				<p>
+					Enter, view, and edit Nevada Wildlife Observations. Similar to the NDOW Form 240. Users are required to sign in before using this form.
+				</p>
+			</div>
+	  </div>
+	  <div class="media">
+		  <div class="media-left">
+			<a href="/checkins">
+				<img class="media-object"  src="img/TanSheepSm.png" alt="" />
+			</a>
+			</div>
+			<div class="media-body">
+				<h3 class="media-heading">
+					<a href="/checkins">Bighorn Harvest Check-In</a>
+				</h3>
+				<p>
+					Enter, view, and edit hunter harvest bighorn sheep check-ins. Similar to the NDOW Form 336. Users are required to sign in before using this form.
+				</p>
+			</div>
+	  </div>
+    </div> -->
+</body>

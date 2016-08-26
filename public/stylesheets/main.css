@@ -1,3 +1,7 @@
+body {
+    padding-top: 50px;
+}
+
 img.media-object {
     width: 100px;
     margin-right: 10px;
@@ -5,9 +9,16 @@ img.media-object {
 }
 
 .header-text {
-    font-family: 'Oxygen', sans-serif;
     color: white;
     font-weight: 800;
+}
+
+.landing-body {
+    background-image: url("../img/rmel.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 #big-img {
@@ -76,4 +87,8 @@ img.media-object {
 
 .mgn-bottom {
     margin-bottom: 10px;
+}
+
+.mgn-top-sm {
+    margin-top: 10px;
 }
