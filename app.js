@@ -7,7 +7,7 @@ var express         = require('express'),
     Observation     = require('./models/observations')
     User            = require('./models/user'),
     Comment         = require('./models/comments'),
-    seedDB          = require('./seed_db'),
+//    seedDB          = require('./seed_db'),
     app             = express();
 
 // REQUIRING ROUTES
@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
-seedDB();
+// seedDB();
 
 // AUTHENTICATION PASSPORT
 app.use(require("express-session")({

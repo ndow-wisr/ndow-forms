@@ -34,31 +34,39 @@
 
 						<div class="form-group">
 							<label for="date">Date</label>
-							<input id="date" class="form-control" type="date" name="observation[date]" data-provide="datepicker">
+							<input id="date" class="form-control" type="text" name="observation[date]" data-provide="datepicker">
 						</div>
-						<!-- <div class="form-group">
-							<label for="species">Species</label>
-							<input class="form-control" type="text" placeholder="species" name="observation[species]">
-						</div> -->
 						<div class="form-group">
 							<label for="female">No. Female</label>
-							<input class="form-control" type="number" placeholder="number of females" name="observation[female]">
+							<input class="form-control" type="number" placeholder="number of females" name="observation[female]" value=0>
 						</div>
 						<div class="form-group">
 							<label for="male">No. Male</label>
-							<input class="form-control" type="number" placeholder="number of males" name="observation[male]">
+							<input class="form-control" type="number" placeholder="number of males" name="observation[male]" value=0>
+						</div>
+						<div class="form-group">
+							<label for="male">Unk Sex</label>
+							<input class="form-control" type="number" placeholder="unknown sex" name="observation[sexunk]" value=0>
 						</div>
 						<div class="form-group">
 							<label for="adult">No. Adult</label>
-							<input class="form-control" type="number" placeholder="number of adults" name="observation[adult]">
+							<input class="form-control ob-sums" type="number" placeholder="number of adults" name="observation[adult]" value=0>
 						</div>
 						<div class="form-group">
 							<label for="young">No. Young</label>
-							<input class="form-control" type="number" placeholder="number of young" name="observation[young]">
+							<input class="form-control ob-sums" type="number" placeholder="number of young" name="observation[young]" value=0>
+						</div>
+						<div class="form-group">
+							<label for="young">Unknown Age</label>
+							<input class="form-control ob-sums" type="number" placeholder="unknown age" name="observation[ageunk]" value=0>
 						</div>
 						<div class="form-group">
 							<label for="total">Total</label>
-							<input class="form-control" type="number" placeholder="total number of animals" name="observation[total]">
+							<input class="form-control" id="ob-total" type="number" placeholder="total number of animals" name="observation[total]" value=0>
+						</div>
+						<div class="form-group">
+							<label for="total">Young Age Class</label>
+							<input class="form-control" type="text" placeholder="yearling" name="observation[youngclass]">
 						</div>
 						<!-- locations -->
 						<div class="col-md-6 rm-left-padding">
@@ -161,6 +169,16 @@
 						}
 					});
 				}
+			});
+		</script>
+		<script type="text/javascript">
+			$('.ob-sums').keyup(function(){
+				var n = 0;
+				$('.ob-sums').each(function(){
+					n += Number($(this).val());
+				});
+
+				$('#ob-total').val(n);
 			});
 		</script>
 

@@ -34,10 +34,10 @@
 						<th>Date</th>
 						<th>Female</th>
 						<th>Male</th>
-						<th>Adult</th>
-						<th>Young</th>
+						<th>Unk</th>
 						<th>Total</th>
 						<th>Location</th>
+						<th>Observer</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -59,16 +59,16 @@
 								<%= observation.male %>
 							</td>
 							<td>
-								<%= observation.adult %>
-							</td>
-							<td>
-								<%= observation.young %>
+								<%= observation.sexunk %>
 							</td>
 							<td>
 								<%= observation.total %>
 							</td>
 							<td>
 								<%= observation.location %>
+							</td>
+							<td>
+								<%= observation.obsby.username %>
 							</td>
 							<td>
 								<form method="POST" action="/observations/<%= observation._id %>?_method=DELETE" class="form-inline">
