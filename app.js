@@ -4,48 +4,65 @@ var express         = require('express'),
     methodOverride  = require("method-override"),
     passport        = require('passport'),
     LocalStrategy   = require('passport-local'),
-    Observation     = require('./models/observations')
-    User            = require('./models/user'),
-    Comment         = require('./models/comments'),
-//    seedDB          = require('./seed_db'),
+    bcrypt          = require('bcrypt-nodejs'),
+    models          = require('./models'),
     app             = express();
 
 // REQUIRING ROUTES
-var indexRoutes = require('./routes/index'),
-    observationRoutes = require('./routes/observations'),
-    checkinRoutes = require('./routes/checkins'),
-    commentRoutes = require('./routes/comments');
+var indexRoutes = require('./routes/index');
 
 // APP CONFIG
-mongoose.connect("mongodb://localhost/ndow-forms");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
+app.use(require('cookie-parser')());
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 // seedDB();
 
 // AUTHENTICATION PASSPORT
-app.use(require("express-session")({
-    secret: "Super secret testing secret",
+app.use(require('express-session')({
+    secret: 'super secret secret key',
     resave: false,
     saveUninitialized: false
 }));
+passport.use(new LocalStrategy(function(username, pass, callback){
+    models.User.findOne({
+        where: {
+            username: username
+        }
+    }).then(function(user, err){
+        if(err){
+            return callback(err)
+        }
+        if(!user){
+            return callback(null, false)
+        }
+        if(!bcrypt.compareSync(pass, user.password)){
+            return callback(null, false)
+        }
+        return callback(null, user)
+    })
+}));
+passport.serializeUser(function(user, callback){
+    callback(null, user.id)
+});
+passport.deserializeUser(function(id, callback){
+    models.User.findById(id).then(function(user){
+        callback(null, user)
+    });
+});
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
     next();
 });
 
-
 // ROUTES
 app.use("/", indexRoutes);
-app.use("/observations", observationRoutes);
-app.use("/observations/:id/comments", commentRoutes);
-app.use("/checkins", checkinRoutes);
+// app.use("/observations", observationRoutes);
+// app.use("/observations/:id/comments", commentRoutes);
+// app.use("/checkins", checkinRoutes);
 
 // LISTEN, SERVER
 app.listen(3000, function(){

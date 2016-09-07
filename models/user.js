@@ -1,16 +1,25 @@
-var mongoose = require('mongoose');
-var passportLocalMongoose = require('passport-local-mongoose');
-
-var UserSchema = new mongoose.Schema({
-    first: String,
-    last: String,
-    email: String,
-    division: String,
-    username: String,
-    permissions: String,
-    password: String,
-});
-
-UserSchema.plugin(passportLocalMongoose);
-
-module.exports = mongoose.model("User", UserSchema);
+'use strict';
+module.exports = function(sequelize, DataTypes) {
+    var User = sequelize.define('User', {
+        username: DataTypes.STRING,
+        first_name: DataTypes.STRING,
+        last_name: DataTypes.STRING,
+        email: DataTypes.STRING,
+        user_role: {
+            type: DataTypes.STRING,
+            defaultValue: 'public'
+        },
+        division: DataTypes.STRING,
+        password: DataTypes.STRING
+    }, {
+        underscored: true,
+        freezeTableName: true,
+        tableName: 'users',
+        classMethods: {
+            associate: function(models) {
+                User.hasMany(models.Observation)
+            }
+        }
+    });
+    return User;
+};

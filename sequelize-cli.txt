@@ -1,0 +1,5 @@
+sequelize model:create --name Species --underscored --attributes 'common_name:string, latin_name:string, t_class:string, t_order:string, t_family:string, t_genus:string, t_species:string, t_subspecies:string'
+
+sequelize model:create --name Observation --underscored --attributes 'date:dateonly, species:string, female:integer, male:integer, sex_unk:integer, adult:integer, young:integer, age_unk:integer, total:integer, young_class:string, geo_x:real, geo_y:real, location:string, comments:text, user_id:integer, species_id:integer'
+
+sequelize model:create --name User --underscored --attributes 'username:string, first_name:string, last_name:string, email:string, user_role:string, division:string, password:string'

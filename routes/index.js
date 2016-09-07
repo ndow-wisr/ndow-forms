@@ -1,55 +1,64 @@
 var express = require('express'),
     router = express.Router(),
     passport = require('passport'),
-    User = require('../models/user');
+    bcrypt = require('bcrypt-nodejs'),
+    models = require('../models');
 
 // show landing page
-router.get('/', function(req, res) {
+router.get('/', function(req, res){
     res.render('index');
 });
 
-// show user register form
+// signup page
 router.get('/register', function(req, res){
     res.render('register');
 });
 
-// handle registration logic
-router.post('/register', function(req, res){
-    var newUser = new User({
-        username: req.body.username,
-        first: req.body.first,
-        last: req.body.last,
-        division: req.body.division,
-        permissions: 'admin'
-    });
-    User.register(newUser, req.body.password, function(err, user){
-        if(err){
-            console.log('err')
-            return res.redirect('register');
-        }
-        passport.authenticate('local')(req, res, function(){
-            res.redirect('/');
-        });
-    });
-});
-
-// show login page
+// signin page
 router.get('/login', function(req, res){
     res.render('login');
 });
 
-// handle login logic
+// LOGIN POST REQUEST
 router.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/'
-}), function(req, res){
+    failureRedirect: '/login',
+    successRedirect: '/'
+}));
+
+// SIGN UP POST REQUEST
+router.post('/register', function(req, res, next){
+    models.User.findOne({
+        where: {
+            username: req.body.username
+        }
+    }).then(function(user){
+        if(!user){
+            models.User.create({
+                first_name: req.body.first,
+                last_name: req.body.last,
+                email: req.body.email,
+                username: req.body.username,
+                division: req.body.division,
+                password: bcrypt.hashSync(req.body.password)
+            }).then(function(user){
+                passport.authenticate('local', {
+                    failureRedirect: '/register',
+                    successRedirect: '/'
+                })(req, res, next)
+            })
+        } else {
+            res.send('user exists')
+        }
+    });
 });
 
-// logout route
+// SIGNOUT
 router.get('/logout', function(req, res){
-    req.logout();
-    res.redirect("/")
-})
+    req.session.destroy();
+    res.redirect('/');
+});
+
+module.exports = router;
 
 isLoggedIn = function(req, res, next){
     if(req.isAuthenticated()){
