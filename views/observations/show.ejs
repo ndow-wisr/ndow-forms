@@ -19,7 +19,9 @@
 
 		<!-- main content panel -->
         <div class="col-md-7">
-            <h2><em><%= observation.Species.species_name %></em> <small><%= observation.Species.common_name %></small></h2>
+			<a href="/species/<%= observation.Species.id %>">
+            	<h2><em><%= observation.Species.species_name %></em> <small><%= observation.Species.common_name %></small></h2>
+			</a>
             <hr>
 			<!-- observation method and life status -->
 			<!-- IDEA: should this go in the metadata? -->

@@ -11,6 +11,7 @@ var express         = require('express'),
 // REQUIRING ROUTES
 var indexRoutes = require('./routes/index');
 var observationRoutes = require('./routes/observations');
+var speciesRoutes = require('./routes/species');
 
 // APP CONFIG
 app.use(bodyParser.urlencoded({extended: true}));
@@ -62,6 +63,7 @@ app.use(function(req, res, next){
 // ROUTES
 app.use("/", indexRoutes);
 app.use("/observations", observationRoutes);
+app.use("/species", speciesRoutes);
 // app.use("/observations/:id/comments", commentRoutes);
 // app.use("/checkins", checkinRoutes);
 
