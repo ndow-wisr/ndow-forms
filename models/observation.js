@@ -16,7 +16,8 @@ module.exports = function(sequelize, DataTypes) {
         location: DataTypes.STRING,
         comments: DataTypes.TEXT,
         user_id: DataTypes.INTEGER,
-        species_id: DataTypes.INTEGER
+        species_id: DataTypes.INTEGER,
+        species_code: DataTypes.INTEGER
     }, {
         underscored: true,
         freezeTableName: true,
@@ -24,6 +25,7 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 Observation.belongsTo(models.User)
+                Observation.belongsTo(models.Species)
             }
         }
     });
