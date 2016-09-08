@@ -21,9 +21,9 @@ router.get('/new', isLoggedIn, function(req, res){
 
 // create
 router.post('/', function(req, res){
+    // get all fields, then add user id to obs for create
     var obs = req.body.observation
     obs.user_id = req.user.id
-    console.log(obs);
 
     models.Observation.create(obs).then(function(){
         res.redirect('/observations');
@@ -37,42 +37,42 @@ router.get('/:id', function(req, res){
             model: models.User
         }]
     }).then(function(observation){
-        console.log(observation);
         res.render('observations/show', {observation: observation});
     });
 });
 
 // edit
 router.get('/:id/edit', isLoggedIn, function(req, res){
-    Observation.findById(req.params.id, function(err, foundObs){
-        if(err){
-            console.log(err);
-        } else {
-            res.render('observations/edit', {observation: foundObs});
-        }
+    models.Observation.findById(req.params.id).then(function(observation){
+        res.render('observations/edit', {observation: observation});
     });
 });
 
 // update
 router.put('/:id', isLoggedIn, function(req, res){
-    Observation.findByIdAndUpdate(req.params.id, req.body.observation, function(err, updObs){
-        if(err){
-            res.redirect('/observations');
-        } else {
-            res.redirect('/observations/' + req.params.id);
-        }
+    models.Observation.update(req.body.observation, {
+        where: {id: req.params.id}
+    }).then(function(){
+        res.redirect('/observations');
     });
 });
 
 // destroy
 router.delete('/:id', isLoggedIn, function(req, res){
-    Observation.findByIdAndRemove(req.params.id, function(err){
-        if(err){
-            res.redirect('/observations');
-        } else {
-            res.redirect('/observations');
+    models.Observation.destroy({
+        where: {
+            id: req.params.id
         }
+    }).then(function(){
+        res.redirect('/observations');
     });
+    // Observation.findByIdAndRemove(req.params.id, function(err){
+    //     if(err){
+    //         res.redirect('/observations');
+    //     } else {
+    //         res.redirect('/observations');
+    //     }
+    // });
 });
 
 function isLoggedIn(req, res, next){

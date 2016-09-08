@@ -114,8 +114,8 @@
 			<!-- observation action buttons -->
 			<% if(currentUser) { %>
 				<div id="obs-action-btns" class="pad-bottom text-right">
-					<a class="btn btn-warning btn-block mgn-bottom" href="/observations/<%= observation._id %>/edit">Edit Observation</a>
-					<form id="delete-form" action="/observations/<%= observation._id %>?_method=DELETE" method="post">
+					<a class="btn btn-warning btn-block mgn-bottom" href="/observations/<%= observation.id %>/edit">Edit Observation</a>
+					<form id="delete-form" action="/observations/<%= observation.id %>?_method=DELETE" method="post">
 						<button class="btn btn-danger btn-block mgn-bottom">Delete Observation</button>
 					</form>
 				</div>
