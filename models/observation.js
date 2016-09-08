@@ -25,7 +25,9 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 Observation.belongsTo(models.User)
-                Observation.belongsTo(models.Species)
+                Observation.belongsTo(models.Species, {
+                    foreignKey: 'species_code'
+                })
             }
         }
     });

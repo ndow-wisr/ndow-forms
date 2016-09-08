@@ -5,11 +5,11 @@ var express = require("express"),
 // index, get, list all observations
 router.get('/', function(req, res){
     models.Observation.findAll({
-        include: [{
-            model: models.User
-        }]
+        include: [
+            {model: models.User},
+            {model: models.Species}
+        ]
     }).then(function(observations){
-        // res.json(observations)
         res.render('observations/index', {observations: observations});
     });
 });
@@ -30,12 +30,13 @@ router.post('/', function(req, res){
     });
 });
 
-// show
+// show, get, view obs for :id
 router.get('/:id', function(req, res){
     models.Observation.findById(req.params.id, {
-        include: [{
-            model: models.User
-        }]
+        include: [
+            {model: models.User},
+            {model: models.Species}
+        ]
     }).then(function(observation){
         res.render('observations/show', {observation: observation});
     });
@@ -66,13 +67,6 @@ router.delete('/:id', isLoggedIn, function(req, res){
     }).then(function(){
         res.redirect('/observations');
     });
-    // Observation.findByIdAndRemove(req.params.id, function(err){
-    //     if(err){
-    //         res.redirect('/observations');
-    //     } else {
-    //         res.redirect('/observations');
-    //     }
-    // });
 });
 
 function isLoggedIn(req, res, next){

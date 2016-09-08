@@ -45,8 +45,8 @@
 					<% observations.forEach(function(observation){ %>
 						<tr>
 							<td>
-								<a href="/observations/<%= observation._id %>">
-									<em><%= observation.species %></em>
+								<a href="/observations/<%= observation.id %>">
+									<em><%= observation.species %></em> - <%= observation.Species.common_name %>
 								</a>
 							</td>
 							<td>
