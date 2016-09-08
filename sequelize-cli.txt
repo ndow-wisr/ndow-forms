@@ -3,3 +3,28 @@ sequelize model:create --name Species --underscored --attributes 'common_name:st
 sequelize model:create --name Observation --underscored --attributes 'date:dateonly, species:string, female:integer, male:integer, sex_unk:integer, adult:integer, young:integer, age_unk:integer, total:integer, young_class:string, geo_x:real, geo_y:real, location:string, comments:text, user_id:integer, species_id:integer'
 
 sequelize model:create --name User --underscored --attributes 'username:string, first_name:string, last_name:string, email:string, user_role:string, division:string, password:string'
+
+
+qaqc remarks
+<div class="well">
+    <% if(currentUser){ %>
+        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">Add Remark</button>
+    <% } %>
+    <h3>QA/QC Remarks</h3>
+    <hr>
+    <!-- qa/qc remarks -->
+    <% observation.qaqc.forEach(function(qaqc){ console.log(qaqc)%>
+        <div class="obs-qaqc">
+            <div class="obs-qaqc-header">
+                <strong><%= qaqc.author.username %></strong>
+                <span class="pull-right"><%= qaqc.date.toDateString() %></span>
+            </div>
+            <div class="obs-qaqc-body">
+                <strong>Actions:</strong> <span><%= qaqc.action %></span>
+                <p class="obs-body-text">
+                    <%= qaqc.text %>
+                </p>
+            </div>
+        </div>
+    <% }) %>
+</div>

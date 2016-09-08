@@ -21,23 +21,36 @@
         <div class="col-md-7">
             <h3><em><%= observation.species %></em></h3>
             <hr>
+			<!-- observation method and life status -->
+			<!-- IDEA: should this go in the metadata? -->
+			<div>
+				<span class="text-muted">Status: Dead</span>
+				<span class="text-muted pull-right">Encounter Method: Observation</span>
+			</div> <!-- end obs method & life status -->
+
             <div class="table-responsive" id="obs-table">
                 <h3>Numbers:</h3>
                 <table class="table" id="observation">
                     <thead>
                         <tr>
                             <th>
-                                No. Male
+                                Male
                             </th>
                             <th>
-                                No. Female
+                                Female
+                            </th>
+							<th>
+								Sex Unk.
+							</th>
+                            <th>
+                                Adult
                             </th>
                             <th>
-                                No. Adult
+                                Young
                             </th>
-                            <th>
-                                No. Young
-                            </th>
+							<th>
+								Age Unk.
+							</th>
                             <th>
                                 Total
                             </th>
@@ -50,12 +63,18 @@
                         <td>
                             <%= observation.female %>
                         </td>
+						<td>
+							<%= observation.sex_unk %>
+						</td>
                         <td>
                             <%= observation.adult %>
                         </td>
                         <td>
                             <%= observation.young %>
                         </td>
+						<td>
+							<%= observation.age_unk %>
+						</td>
                         <td>
                             <%= observation.total %>
                         </td>
@@ -70,7 +89,7 @@
             </div>
 			<!-- obsevation map -->
 			<div id="obs-map" class="img-rounded"></div>
-        </div> <!-- ./main content panel -->
+        </div> <!-- end main content panel -->
 
         <!-- side panel -->
         <div class="col-md-5">
@@ -79,16 +98,16 @@
             <div class="list-group">
                 <li class="list-group-item active">metadata</li>
                 <li class="list-group-item">
-                    <i class="fa fa-calendar fa-lg"></i><span class="pad-lf-sm"><%= observation.date %></span>
+                    <i class="fa fa-calendar fa-lg"></i><span class="pad-lf-sm"><%= observation.date.toDateString() %></span>
                 </li>
                 <li class="list-group-item">
-					<i class="fa fa-user fa-lg"></i><span class="pad-lf-sm"><%= observation.obsby.username %></span>
+					<i class="fa fa-user fa-lg"></i><span class="pad-lf-sm"><%= observation.User.username %></span>
                 </li>
                 <li class="list-group-item">
                     <i class="fa fa-globe fa-lg"></i><span class="pad-lf-sm"><%= observation.location %></span>
                 </li>
                 <li class="list-group-item">
-                    <i class="fa fa-map-marker fa-lg"></i><span class="pad-lf-sm"><%= observation.x %>, <%= observation.y %></span>
+                    <i class="fa fa-map-marker fa-lg"></i><span class="pad-lf-sm"><%= observation.geo_x %>, <%= observation.geo_y %></span>
                 </li>
             </div>
 
@@ -102,29 +121,7 @@
 				</div>
 			<% } %>
 
-			<!-- qa/qc remarks -->
-			<div class="well">
-				<% if(currentUser){ %>
-					<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">Add Remark</button>
-				<% } %>
-				<h3>QA/QC Remarks</h3>
-				<hr>
-				<!-- qa/qc remarks -->
-				<% observation.qaqc.forEach(function(qaqc){ console.log(qaqc)%>
-                    <div class="obs-qaqc">
-						<div class="obs-qaqc-header">
-							<strong><%= qaqc.author.username %></strong>
-	                        <span class="pull-right"><%= qaqc.date.toDateString() %></span>
-						</div>
-						<div class="obs-qaqc-body">
-							<strong>Actions:</strong> <span><%= qaqc.action %></span>
-							<p class="obs-body-text">
-	                            <%= qaqc.text %>
-	                        </p>
-						</div>
-                    </div>
-                <% }) %>
-			</div>
+			<!-- qa/qc remarks --> <!-- TODO: add qaqc remarks with sequelize -->
 
         </div>
         <br>
@@ -156,8 +153,14 @@
 			</div>
 		</div>
 	</div> <!-- ./ content container -->
+	<div class="container text-muted">
+		<small>
+			updated: <%=  observation.updated_at.toISOString().replace(/T/, ' ').replace(/\..+/, '') %> <br>
+			created: <%= observation.created_at.toISOString().replace(/T/, ' ').replace(/\..+/, '') %>
+		</small>
+	</div>
 	<script type="text/javascript">
-		var coords = [<%= observation.y %>, <%= observation.x %>];
+		var coords = [<%= observation.geo_y %>, <%= observation.geo_x %>];
 		var obmap = L.map('obs-map').setView(coords, 11);
 		L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
 			attribution: 'Tiles &copy; Esri'

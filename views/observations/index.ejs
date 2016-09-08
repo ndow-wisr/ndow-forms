@@ -50,7 +50,7 @@
 								</a>
 							</td>
 							<td>
-								<%= observation.date %>
+								<%= observation.date.toDateString() %>
 							</td>
 							<td>
 								<%= observation.female %>
@@ -59,7 +59,7 @@
 								<%= observation.male %>
 							</td>
 							<td>
-								<%= observation.sexunk %>
+								<%= observation.sex_unk %>
 							</td>
 							<td>
 								<%= observation.total %>
@@ -68,13 +68,13 @@
 								<%= observation.location %>
 							</td>
 							<td>
-								<%= observation.obsby.username %>
+								<%= observation.User.username %>
 							</td>
 							<td>
-								<form method="POST" action="/observations/<%= observation._id %>?_method=DELETE" class="form-inline">
-									<a href="/observations/<%= observation._id %>" class="btn btn-primary btn-sm">View</a>
+								<form method="POST" action="/observations/<%= observation.id %>?_method=DELETE" class="form-inline">
+									<a href="/observations/<%= observation.id %>" class="btn btn-primary btn-sm">View</a>
 									<% if(currentUser){ %>
-										<a href="/observations/<%= observation._id %>/edit" class="btn btn-warning btn-sm">Edit</a>
+										<a href="/observations/<%= observation.id %>/edit" class="btn btn-warning btn-sm">Edit</a>
 										<button class="btn btn-sm btn-danger">Delete</button>
 									<% } %>
 								</form>
@@ -116,7 +116,7 @@
 				},
 				"geometry": {
 					"type": "Point",
-					"coordinates": [<%= observation.x %>, <%= observation.y %>]
+					"coordinates": [<%= observation.geo_x %>, <%= observation.geo_y %>]
 				}
 			};
 			obs.push(ob);

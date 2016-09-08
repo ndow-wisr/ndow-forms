@@ -23,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
         tableName: 'observations',
         classMethods: {
             associate: function(models) {
-                // associations can be defined here
+                Observation.belongsTo(models.User)
             }
         }
     });

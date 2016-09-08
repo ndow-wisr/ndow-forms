@@ -1,15 +1,16 @@
 var express = require("express"),
     router = express.Router(),
-    Observation = require("../models/observations");
+    models = require('../models');
 
-// index
+// index, get, list all observations
 router.get('/', function(req, res){
-    Observation.find({}, function(err, allObservations){
-        if(err){
-            console.log(err)
-        } else {
-            res.render('observations/index', {observations: allObservations})
-        }
+    models.Observation.findAll({
+        include: [{
+            model: models.User
+        }]
+    }).then(function(observations){
+        // res.json(observations)
+        res.render('observations/index', {observations: observations});
     });
 });
 
@@ -21,28 +22,23 @@ router.get('/new', isLoggedIn, function(req, res){
 // create
 router.post('/', function(req, res){
     var obs = req.body.observation
-    obs.obsby = {
-        id: req.user._id,
-        username: req.user.username
-    }
+    obs.user_id = req.user.id
     console.log(obs);
-    Observation.create(obs, function(err, newObs){
-        if(err){
-            console.log(err);
-        } else {
-            res.redirect('/observations');
-        }
+
+    models.Observation.create(obs).then(function(){
+        res.redirect('/observations');
     });
 });
 
 // show
 router.get('/:id', function(req, res){
-    Observation.findById(req.params.id).populate('qaqc').exec(function(err, foundObs){
-        if(err){
-            res.redirect('/observations');
-        } else {
-            res.render('observations/show', {observation: foundObs});
-        }
+    models.Observation.findById(req.params.id, {
+        include: [{
+            model: models.User
+        }]
+    }).then(function(observation){
+        console.log(observation);
+        res.render('observations/show', {observation: observation});
     });
 });
 
