@@ -58,7 +58,15 @@ router.get('/logout', function(req, res){
     res.redirect('/');
 });
 
-module.exports = router;
+// LIST ALL SPECIES FOR SEARCH
+router.get('/list-species', function(req, res){
+    models.Species.findAll({
+        attributes: ['id', 'common_name', 'species_name']
+    })
+        .then(function(species){
+            res.json(species);
+        });
+});
 
 isLoggedIn = function(req, res, next){
     if(req.isAuthenticated()){

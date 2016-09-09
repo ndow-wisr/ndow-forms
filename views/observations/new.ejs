@@ -7,6 +7,7 @@
 	<% include ../partials/bootstrap %> <!-- bootstrap & jquery -->
 	<% include ../partials/datepicker %> <!-- datepicker js -->
 	<% include ../partials/selectizejs %> <!-- selectize js -->
+	<% include ../partials/select2 %> <!-- select2 js -->
 	<% include ../partials/leaflet %> <!-- leaflet js -->
 	<link rel="stylesheet" href="/stylesheets/main.css">
 </head>
@@ -87,6 +88,33 @@
 							<div class="form-group">
 								<label for="comments">Comments</label>
 								<textarea name="observation[comments]" class="form-control" rows="5"></textarea>
+							</div>
+
+							<!-- IDEA: additional data field: status, method, source -->
+							<div class="form-group">
+								<label for="observation[status]">Life Status</label>
+								<select class="js-example-basic-single form-control" name="observation[life_status]">
+									<option value="alive">Alive</option>
+									<option value="dead">Dead</option>
+								</select>
+								<script type="text/javascript">
+									$(document).ready(function() {
+										$(".js-example-basic-single").select2();
+									});
+								</script>
+							</div>
+
+							<!-- species select2 box -->
+							<div class="form-group">
+								<label for="species">Select Species (from list)</label>
+								<select class="select-species form-control" name="species"></select>
+								<script type="text/javascript">
+									var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
+
+									$(".select-species").select2({
+										data: data
+									});
+								</script>
 							</div>
 						</div> <!-- ./ locations -->
 						<!-- location map -->
