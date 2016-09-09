@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Nevada Species</title>
+        <% include ../partials/bootstrap %>
+        <% include ../partials/datatables %>
+        <link rel="stylesheet" href="/stylesheets/main.css">
+    </head>
+    <body>
+        <% include ../partials/navigation %>
+
+        <div class="container">
+            <!-- TODO: replace dummy data with database data -->
+            <!-- page content panel -->
+            <div class="page-header">
+                <h1>
+                    <span class="text-uppercase"><%= species.common_name %></span>
+                    <small> - <em>
+                        <%= species.species_name %> <%= species.subspecies %>
+                    </em></small>
+                </h1>
+                <p class="bg-danger text-danger text-center">PLACEHOLDER DATA FOR NOW</p>
+            </div> <!-- end page header -->
+
+            <div class="row">
+
+                <!-- main page content -->
+                <div class="col-md-8">
+                    <!-- species image -->
+                    <div class="thumbnail" style="background-image: url('http://dummyimage.com/600x400'); height: 400px;"></div> <!-- ./ end species image -->
+
+                    <h2>Species Description</h2>
+                    <p>
+                        Bacon ipsum dolor amet pastrami pancetta tri-tip incididunt nisi. Swine sirloin qui et ground round cupidatat ut flank magna filet mignon anim do non. Meatball corned beef leberkas duis ball tip short ribs. In nostrud salami cupim beef adipisicing t-bone pork chop pariatur. Proident incididunt pancetta, pig duis turkey turducken ut aliquip. Pig shankle short ribs turkey bresaola ribeye kielbasa nostrud ullamco aute drumstick meatloaf alcatra consequat commodo. Mollit capicola pork chop shoulder tail pork belly. Leberkas est tempor laborum. T-bone alcatra frankfurter short loin kielbasa ea ut occaecat brisket voluptate cillum salami. Eiusmod anim dolore occaecat.
+                    </p>
+
+                    <h2>Life History</h2>
+                    <p>
+                        Bacon ipsum dolor amet tongue boudin ea, in ad ham hock rump porchetta capicola eiusmod short ribs cupim incididunt. Irure excepteur nulla, venison sirloin laborum do flank minim prosciutto quis tempor. Boudin ut laboris, in chuck landjaeger biltong cillum fatback hamburger pork mollit nulla dolor turducken. Tempor velit excepteur meatball frankfurter shankle nostrud kevin dolore pariatur do pastrami drumstick. Laborum kielbasa mollit in picanha. Irure anim porchetta rump deserunt.
+                    </p>
+
+                </div>
+
+                <!-- sidebar content -->
+                <div class="col-md-4">
+                    <div class="list-group">
+                        <li class="list-group-item active">Quick Look</li>
+                        <li class="list-group-item">
+                            <%= species.eng_class %>
+                        </li>
+                        <li class="list-group-item">
+                            <%= species.eng_subclass %>
+                        </li>
+                        <li class="list-group-item">
+                            <%= species.state_status %>
+                        </li>
+                    </div>
+
+                    <div class="list-group">
+                        <li class="list-group-item active">Species Traits</li>
+                        <li class="list-group-item">
+                            Mass: 20-100lbs (44-225kg)
+                        </li>
+                        <li class="list-group-item">
+                            Life Span: 1.5-10 years
+                        </li>
+                        <li class="list-group-item">
+                            Litter Size: 3-6
+                        </li>
+                    </div>
+
+                    <div class="list-group">
+                        <li class="list-group-item active">Conservation Status</li>
+                        <li class="list-group-item">
+                            IUCN: least concerned
+                        </li>
+                        <li class="list-group-item">
+                            ESA: null
+                        </li>
+                        <li class="list-group-item">
+                            State: <%= species.state_status %>
+                        </li>
+                    </div>
+                </div>
+            </div> <!-- end row -->
+
+            <!-- distribution map -->
+            <div class="row">
+                <h2>Species Distribution</h2>
+                <div class="thumbnail" style="background-image: url('http://badger.uvm.edu/omeka/files/fullsize/40a017a4762eb431b41d2c87864246d5.jpg'); background-position: center center; height: 400px; background-size: 1200px 400px"></div>
+            </div>
+
+            <!-- observation table -->
+            <div class="row">
+                <h2>Species Observations</h2>
+                <div class="table-responsive">
+                    <table class="table" id="observation">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Date
+                                </th>
+                                <th>
+                                    Female
+                                </th>
+    							<th>
+    								Male
+    							</th>
+                                <th>
+                                    Total
+                                </th>
+                                <th>
+                                    Location
+                                </th>
+    							<th>
+    								Observer
+    							</th>
+                                <th>
+    								Source
+    							</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <td>
+                                2016-09-01
+                            </td>
+                            <td>
+                                1
+                            </td>
+    						<td>
+                                1
+    						</td>
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                Somewhere in Nevada
+                            </td>
+    						<td>
+                                Aldo Leopold
+    						</td>
+                            <td>
+                                Observtions
+                            </td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div> <!-- end main content container -->
+    </body>
+</html>

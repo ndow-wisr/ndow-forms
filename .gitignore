@@ -3,4 +3,4 @@
 node_modules
 speciesList.js
 species.json
-species.js
+./species.js
