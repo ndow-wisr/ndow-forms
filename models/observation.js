@@ -11,6 +11,7 @@ module.exports = function(sequelize, DataTypes) {
         age_unk: DataTypes.INTEGER,
         total: DataTypes.INTEGER,
         young_class: DataTypes.STRING,
+        status: DataTypes.STRING,
         geo_x: DataTypes.REAL,
         geo_y: DataTypes.REAL,
         location: DataTypes.STRING,

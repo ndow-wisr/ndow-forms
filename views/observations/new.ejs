@@ -70,6 +70,20 @@
 							<label for="total">Young Age Class</label>
 							<input class="form-control" type="text" placeholder="yearling" name="observation[young_class]">
 						</div>
+
+						<div class="form-group">
+							<label for="observation[status]">Life Status</label>
+							<select class="status-select" name="observation[status]">
+								<option value="alive">Alive</option>
+								<option value="dead">Dead</option>
+							</select>
+							<script type="text/javascript">
+								$('.status-select').selectize({
+									create: true
+								});
+							</script>
+						</div>
+
 						<!-- locations -->
 						<div class="col-md-6 rm-left-padding">
 							<div class="form-group">
@@ -87,20 +101,6 @@
 							<div class="form-group">
 								<label for="comments">Comments</label>
 								<textarea name="observation[comments]" class="form-control" rows="5"></textarea>
-							</div>
-
-							<!-- IDEA: additional data field: status, method, source -->
-							<div class="form-group">
-								<label for="observation[status]">Life Status</label>
-								<select class="js-example-basic-single form-control" name="observation[life_status]">
-									<option value="alive">Alive</option>
-									<option value="dead">Dead</option>
-								</select>
-								<script type="text/javascript">
-									$(document).ready(function() {
-										$(".js-example-basic-single").select2();
-									});
-								</script>
 							</div>
 
 						</div> <!-- ./ locations -->

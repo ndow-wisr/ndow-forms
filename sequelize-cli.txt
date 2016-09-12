@@ -7,6 +7,9 @@ sequelize model:create --name Observation --underscored --attributes 'date:dateo
 CREATE USER TABLE
 sequelize model:create --name User --underscored --attributes 'username:string, first_name:string, last_name:string, email:string, user_role:string, division:string, password:string'
 
+ADD COLUMN TO OBSERVATION TABLE: Status, Source,
+sequelize migration:create --name add-status-observation
+
 MISC
 
 qaqc remarks
