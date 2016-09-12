@@ -45,8 +45,8 @@
 					<% observations.forEach(function(observation){ %>
 						<tr>
 							<td>
-								<a href="/observations/<%= observation.id %>">
-									<em><%= observation.species %></em> - <%= observation.Species.common_name %>
+								<a href="/species/<%= observation.Species.id %>">
+									<em><%= observation.Species.species_name %></em> - <%= observation.Species.common_name %>
 								</a>
 							</td>
 							<td>
@@ -111,8 +111,8 @@
 			var ob = {
 				"type": "Feature",
 				"properties": {
-					"name": "<%= observation.species %>",
-					"popupContent": "<%= observation.species %>",
+					"name": "<%= observation.id %>",
+					"popupContent": "<%= observation.Species.species_name %>",
 				},
 				"geometry": {
 					"type": "Point",

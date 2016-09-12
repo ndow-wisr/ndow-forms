@@ -7,7 +7,6 @@
 	<% include ../partials/bootstrap %> <!-- bootstrap & jquery -->
 	<% include ../partials/datepicker %> <!-- datepicker js -->
 	<% include ../partials/selectizejs %> <!-- selectize js -->
-	<% include ../partials/select2 %> <!-- select2 js -->
 	<% include ../partials/leaflet %> <!-- leaflet js -->
 	<link rel="stylesheet" href="/stylesheets/main.css">
 </head>
@@ -32,7 +31,7 @@
 
 						<div class="form-group">
 							<label for="observation[species]">Species (common name):</label>
-							<select class="species-select" name="observation[species]"></select>
+							<select class="species-select" name="observation[species_code]"></select>
 						</div>
 
 						<div class="form-group">
@@ -104,18 +103,6 @@
 								</script>
 							</div>
 
-							<!-- species select2 box -->
-							<div class="form-group">
-								<label for="species">Select Species (from list)</label>
-								<select class="select-species form-control" name="species"></select>
-								<script type="text/javascript">
-									var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
-
-									$(".select-species").select2({
-										data: data
-									});
-								</script>
-							</div>
 						</div> <!-- ./ locations -->
 						<!-- location map -->
 						<div class="col-md-6 rm-right-padding">
@@ -179,13 +166,19 @@
 		<script type="text/javascript">
 			$('.species-select').selectize({
 				placeholder: 'Select species...',
-				valueField: 'SpeciesName',
-				labelField: 'CommonName',
-				searchField: 'CommonName',
+				valueField: 'id',
+				labelField: 'common_name',
+				searchField: 'common_name',
 				options: [],
+				render: {
+					option: function(item, escape){
+						console.log(item);
+						return '<p><span>' + escape(item.common_name) + '</span> - <span>' + escape(item.species_name) + '</span></p>'
+					}
+				},
 				load: function(query, callback){
 					$.ajax({
-						url: 'https://gist.githubusercontent.com/kissmygritts/725bfeb8108cdbdfde87b8ae2fe35ca3/raw/18f84e1726fde9a71c395439af623b42cdb26b33/species.json',
+						url: 'http://localhost:3000/list-species',
 						type: 'GET',
 						dataType: 'json',
 						data: {
