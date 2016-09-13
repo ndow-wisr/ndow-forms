@@ -37,7 +37,6 @@
 						<th>Unk</th>
 						<th>Total</th>
 						<th>Location</th>
-						<th>Observer</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -66,9 +65,6 @@
 							</td>
 							<td>
 								<%= observation.location %>
-							</td>
-							<td>
-								<%= observation.User.username %>
 							</td>
 							<td>
 								<form method="POST" action="/observations/<%= observation.id %>?_method=DELETE" class="form-inline">
@@ -123,12 +119,12 @@
 			<% }) %>
 
 			var geojsonMarkerOptions = {
-				radius: 5,
-				fillColor: "#ffa500",
+				radius: 4,
+				fillColor: "#b30000",
 				color: "#fff",
 				weight: 1,
-				opacity: .25,
-				fillOpacity: 0.8
+				opacity: 1,
+				fillOpacity: 1
 			};
 
 			L.geoJson(obs, {
