@@ -66,7 +66,6 @@
 									});
 								}
 							});
-
 							</script>
 
 						</div>
@@ -108,14 +107,16 @@
 						</div>
 						<div class="form-group">
 							<label for="observation[status]">Life Status</label>
-							<select class="status-select" name="observation[status]" value="<%= observation.status %>">
+							<select class="status-select" name="observation[status]">
 								<option value="alive">Alive</option>
 								<option value="dead">Dead</option>
 							</select>
 							<script type="text/javascript">
-								$('.status-select').selectize({
+								var $selStatus = $('.status-select').selectize({
 									create: true
 								});
+								var selectize = $selStatus[0].selectize;
+								selectize.setValue("<%= observation.status %>");
 							</script>
 						</div>
 

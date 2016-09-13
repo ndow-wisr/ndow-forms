@@ -12,6 +12,7 @@ module.exports = function(sequelize, DataTypes) {
         total: DataTypes.INTEGER,
         young_class: DataTypes.STRING,
         status: DataTypes.STRING,
+        source: DataTypes.STRING,
         geo_x: DataTypes.REAL,
         geo_y: DataTypes.REAL,
         location: DataTypes.STRING,

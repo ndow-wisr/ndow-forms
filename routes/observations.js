@@ -24,7 +24,7 @@ router.post('/', function(req, res){
     // get all fields, then add user id to obs for create
     var obs = req.body.observation
     obs.user_id = req.user.id
-    obs.source = 'incidental observation app'
+    obs.source = 'incidental obs app'
     console.log(obs);
     models.Observation.create(obs).then(function(){
         res.redirect('/observations');
