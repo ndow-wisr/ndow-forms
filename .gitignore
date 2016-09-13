@@ -5,3 +5,4 @@ speciesList.js
 species.json
 ./species.js
 config/config.json
+dbConTest.js
