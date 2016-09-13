@@ -7,6 +7,7 @@
 	<% include ../partials/bootstrap %> <!-- bootstrap & jquery -->
 	<% include ../partials/datepicker %> <!-- datepicker js -->
 	<% include ../partials/leaflet %> <!-- leaflet js -->
+	<% include ../partials/selectizejs %> <!-- selectize js -->
 	<link rel="stylesheet" href="/stylesheets/main.css">
 </head>
 
@@ -27,12 +28,51 @@
 					<form action="/observations/<%= observation.id %>?_method=PUT" method="POST" name="encForm">
 
 						<div class="form-group">
-							<label for="date">Date</label>
-							<input class="form-control" type="text" name="observation[date]" data-provide="datepicker" value="<%= observation.date.toDateString() %>">
+							<label for="species">Species</label>
+							<select class="form-control species-select" type="text" name="observation[species]"></select>
+
+							<script type="text/javascript">
+							var $select = $('.species-select').selectize({
+								placeholder: 'Select species...',
+								valueField: 'id',
+								labelField: 'common_name',
+								searchField: 'common_name',
+								preload: true,
+								options: [],
+								render: {
+									option: function(item, escape){
+										console.log(item);
+										return '<p><span>' + escape(item.common_name) + '</span> - <span>' + escape(item.species_name) + '</span></p>'
+									}
+								},
+								load: function(query, callback){
+									$.ajax({
+										url: 'http://localhost:3000/list-species',
+										type: 'GET',
+										dataType: 'json',
+										data: {
+											name: query
+										},
+										error: function(){
+											callback();
+										},
+										success: function(res) {
+											callback(res);
+										}
+									}).then(function() {
+										var myThing = $select[0].selectize;
+										var mySpecies = myThing.search("<%= observation.Species.common_name %>").items[0].id;
+										myThing.setValue(mySpecies);
+									});
+								}
+							});
+
+							</script>
+
 						</div>
 						<div class="form-group">
-							<label for="species">Species</label>
-							<input class="form-control" type="text" name="observation[species]" value="<%= observation.species %>">
+							<label for="date">Date</label>
+							<input class="form-control" type="text" name="observation[date]" data-provide="datepicker" value="<%= observation.date.toDateString() %>">
 						</div>
 						<div class="form-group">
 							<label for="female">No. Female</label>
@@ -62,6 +102,23 @@
 							<label for="total">Total</label>
 							<input class="form-control" type="number" name="observation[total]" value="<%= observation.total %>">
 						</div>
+						<div class="form-group">
+							<label for="total">Young Age Class</label>
+							<input class="form-control" type="text" value="<%= observation.young_class %>" name="observation[young_class]">
+						</div>
+						<div class="form-group">
+							<label for="observation[status]">Life Status</label>
+							<select class="status-select" name="observation[status]" value="<%= observation.status %>">
+								<option value="alive">Alive</option>
+								<option value="dead">Dead</option>
+							</select>
+							<script type="text/javascript">
+								$('.status-select').selectize({
+									create: true
+								});
+							</script>
+						</div>
+
 						<!-- locations -->
 						<div class="col-md-6 rm-left-padding">
 							<div class="form-group">

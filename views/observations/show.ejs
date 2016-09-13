@@ -26,9 +26,8 @@
 			<!-- observation method and life status -->
 			<!-- IDEA: should this go in the metadata? -->
 			<div>
-				<!-- TODO: get status and method from db -->
-				<span class="text-muted">Status: Dead</span>
-				<span class="text-muted pull-right">Encounter Method: Observation</span>
+				<span class="text-muted">Status: <%= observation.status %></span>
+				<!-- <span class="text-muted pull-right">Encounter Method: Observation</span> -->
 			</div> <!-- end obs method & life status -->
 
             <div class="table-responsive" id="obs-table">

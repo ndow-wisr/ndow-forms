@@ -45,7 +45,9 @@ router.get('/:id', function(req, res){
 
 // edit
 router.get('/:id/edit', isLoggedIn, function(req, res){
-    models.Observation.findById(req.params.id).then(function(observation){
+    models.Observation.findById(req.params.id, {
+        include: [ {model: models.Species} ]
+    }).then(function(observation){
         res.render('observations/edit', {observation: observation});
     });
 });
