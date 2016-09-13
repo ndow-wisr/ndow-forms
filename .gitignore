@@ -4,3 +4,4 @@ node_modules
 speciesList.js
 species.json
 ./species.js
+./config/config.js
