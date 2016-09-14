@@ -47,7 +47,7 @@
 								},
 								load: function(query, callback){
 									$.ajax({
-										url: 'http://localhost:3000/list-species',
+										url: 'http://' + window.location.host + '/list-species',
 										type: 'GET',
 										dataType: 'json',
 										data: {
