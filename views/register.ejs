@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <title>NDOW Forms</title>
     <% include ./partials/bootstrap %>
+    <% include ./partials/selectizejs %>
     <link rel="stylesheet" href="/stylesheets/main.css">
 </head>
 
@@ -14,6 +15,7 @@
         <div class="col-sm-4 col-sm-offset-4">
             <form action="/register" method="post">
                 <h2>Create an account</h2>
+                <p>All fields are required</p>
                 <div class="form-group">
                     <label for="first">First Name</label>
                     <input class="form-control" type="text" name="first" placeholder="Aldo">
@@ -29,7 +31,15 @@
                 <div class="form-group">
                     <!-- TODO: make this a drop down -->
                     <label for="division">Division</label>
-                    <input class="form-control" type="text" name="division" placeholder="Game">
+                    <select class="sel-division" name="division">
+                        <option></option>
+                        <option value="coned">ConEd</option>
+                        <option value="diversity">Diversity</option>
+                        <option value="fisheries">Fisheries</option>
+                        <option value="game">Game</option>
+                        <option value="habitat">Habitat</option>
+                        <option value="other">Other</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="username">username</label>
@@ -43,5 +53,11 @@
                 <a href="/login" class="btn btn-default btn-block">Go To Login</a>
             </form>
         </div>
+        <script type="text/javascript">
+            $('.sel-division').selectize({
+                create: false,
+                placeholder: "Select a division"
+            });
+        </script>
 </body>
 </html>

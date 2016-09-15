@@ -26,15 +26,11 @@
 					</div>
 					<hr>
 					<form action="/observations" method="POST" name="encForm">
-						<!-- TODO: add life status -->
-						<!-- TODO: add encounter method -->
-
 						<div class="form-group">
 							<label for="observation[species]">Species (common name):</label>
 							<select class="species-select" name="observation[species_code]" required></select>
 							<span class="help-block">Start typing the species name, then select the species from the drop down list.</span>
 						</div>
-
 						<div class="form-group">
 							<label for="date">Date</label>
 							<input id="date" class="form-control" type="text" name="observation[date]" data-provide="datepicker" required>
@@ -96,7 +92,6 @@
 								});
 							</script>
 						</div>
-
 						<!-- locations -->
 						<div class="col-md-6 rm-left-padding">
 							<h3>Location</h3>

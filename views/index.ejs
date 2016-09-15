@@ -13,10 +13,12 @@
 		<div class="container">
 			<div class="col-md-6 col-md-offset-3 text-center">
 				<h2 class="header-text">NDOW Forms</h2>
-				<h3 class="header-text">The department's home for online data entry.</h3>
+				<h3 class="header-text">The department's home for online data entry</h3>
 				<br>
-				<a class="btn btn-primary" href="/login">LOG-IN</a>
-				<a class="btn btn-success" href="/login">SIGN-UP</a>
+				<% if(!currentUser){ %>
+					<a class="btn btn-primary" href="/login">LOG-IN</a>
+					<a class="btn btn-success" href="/register">SIGN-UP</a>
+				<% } %>
 			</div>
 		</div>
 	</div>
