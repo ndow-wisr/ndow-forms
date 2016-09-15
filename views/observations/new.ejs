@@ -32,43 +32,54 @@
 						<div class="form-group">
 							<label for="observation[species]">Species (common name):</label>
 							<select class="species-select" name="observation[species_code]" required></select>
+							<span class="help-block">Start typing the species name, then select the species from the drop down list.</span>
 						</div>
 
 						<div class="form-group">
 							<label for="date">Date</label>
 							<input id="date" class="form-control" type="text" name="observation[date]" data-provide="datepicker" required>
+							<span class="help-block">Pick a date from the date picker popup that appears above.</span>
+						</div>
+						<h3>Counts</h3>
+						<div class="form-group">
+							<label for="female">Number of Females</label>
+							<input class="form-control" type="number" name="observation[female]" value=0 min=0 step=1>
+							<span class="help-block">Number of females seen during the observation.</span>
 						</div>
 						<div class="form-group">
-							<label for="female">No. Female</label>
-							<input class="form-control" type="number" placeholder="number of females" name="observation[female]" value=0>
+							<label for="male">Number of Males</label>
+							<input class="form-control" type="number" name="observation[male]" value=0 min=0 step=1>
+							<span class="help-block">Number of males seen during the observation.</span>
 						</div>
 						<div class="form-group">
-							<label for="male">No. Male</label>
-							<input class="form-control" type="number" placeholder="number of males" name="observation[male]" value=0>
+							<label for="male">Number of Unknown Sex</label>
+							<input class="form-control" type="number" name="observation[sex_unk]" value=0 min=0 step=1>
+							<span class="help-block">Number of animals seen where the sex cannot be identified during the observation.</span>
 						</div>
 						<div class="form-group">
-							<label for="male">Unk Sex</label>
-							<input class="form-control" type="number" placeholder="unknown sex" name="observation[sex_unk]" value=0>
+							<label for="adult">Number of Adults</label>
+							<input class="form-control ob-sums" type="number" name="observation[adult]" value=0 min=0 step=1>
+							<span class="help-block">Number of adults seen during the observation.</span>
 						</div>
 						<div class="form-group">
-							<label for="adult">No. Adult</label>
-							<input class="form-control ob-sums" type="number" placeholder="number of adults" name="observation[adult]" value=0>
+							<label for="young">Number of Young</label>
+							<input class="form-control ob-sums" type="number" name="observation[young]" value=0 min=0 step=1>
+							<span class="help-block">Number of young seen during the observation.</span>
 						</div>
 						<div class="form-group">
-							<label for="young">No. Young</label>
-							<input class="form-control ob-sums" type="number" placeholder="number of young" name="observation[young]" value=0>
+							<label for="young">Number of Unknown Age</label>
+							<input class="form-control ob-sums" type="number" name="observation[age_unk]" value=0 min=0 step=1>
+							<span class="help-block">Number of animals seen where the age cannot be identified during the observation.</span>
 						</div>
 						<div class="form-group">
-							<label for="young">Unknown Age</label>
-							<input class="form-control ob-sums" type="number" placeholder="unknown age" name="observation[age_unk]" value=0>
-						</div>
-						<div class="form-group">
-							<label for="total">Total</label>
-							<input class="form-control" id="ob-total" type="number" placeholder="total number of animals" name="observation[total]" value=0 readonly>
+							<label for="total">Total Number of Animals</label>
+							<input class="form-control" id="ob-total" type="number" name="observation[total]" value=0 readonly>
+							<span class="help-block">Total number of animals seen during the observation (auto-summed).</span>
 						</div>
 						<div class="form-group">
 							<label for="total">Young Age Class</label>
 							<input class="form-control" type="text" placeholder="yearling" name="observation[young_class]">
+							<span class="help-block">If young were seen, what is their age class.</span>
 						</div>
 
 						<div class="form-group">
@@ -77,26 +88,33 @@
 								<option value="alive">Alive</option>
 								<option value="dead">Dead</option>
 							</select>
+							<span class="help-block">Is the animal alive or dead?</span>
 							<script type="text/javascript">
 								$('.status-select').selectize({
-									create: true
+									create: false,
+									placeholder: "Select alive or dead ..."
 								});
 							</script>
 						</div>
 
 						<!-- locations -->
 						<div class="col-md-6 rm-left-padding">
+							<h3>Location</h3>
+							<p class="text-muted pad-rt-sm">
+								Coordinates are are taken from your current position. If the coordinates need to be changed use the map on the left (or below) to zoom to the area you observed the animals and click to fill the coordinates with the coordinates of the point you clicked.
+							</p>
 							<div class="form-group">
 								<label for="x">Longitude</label>
-								<input class="form-control" type="number" step="0.0001" placeholder="-119.5050" name="observation[geo_x]">
+								<input class="form-control" type="number" step="0.0001" placeholder="-119.5050" name="observation[geo_x]" required>
 							</div>
 							<div class="form-group">
 								<label for="y">Latitude</label>
-								<input class="form-control" type="number" step="0.0001" placeholder="35.5050" name="observation[geo_y]">
+								<input class="form-control" type="number" step="0.0001" placeholder="35.5050" name="observation[geo_y]" required>
 							</div>
 							<div class="form-group">
 								<label for="location">Location</label>
-								<input class="form-control" type="text" placeholder="location" name="observation[location]">
+								<input class="form-control" type="text" placeholder="NE of Mt. Rose" name="observation[location]" required>
+								<span class="help-block">Short name or description of the location you saw the animals. (100 character limit)</span>
 							</div>
 							<div class="form-group">
 								<label for="comments">Comments</label>
@@ -106,7 +124,7 @@
 						</div> <!-- ./ locations -->
 						<!-- location map -->
 						<div class="col-md-6 rm-right-padding">
-								<div id="obs-map" class="img-rounded" style="height: 288px;"></div>
+								<div id="obs-map" style="height: 496px;"></div>
 								<button type="button" class="btn btn-lg btn-default btn-block" style="margin-top: 10px;" onclick="geoFindMe()">Reset Coordinates</button>
 						</div>
 

@@ -27,59 +27,62 @@
 				</div>
 			</header>
 
-			<table id="encTable" class="display" cellspacing="0" width="100%">
-				<thead>
-					<tr>
-						<th>Species</th>
-						<th>Date</th>
-						<th>Female</th>
-						<th>Male</th>
-						<th>Unk</th>
-						<th>Total</th>
-						<th>Location</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<% observations.forEach(function(observation){ %>
+			<div class="table-responsive">
+				<table id="encTable" class="display" cellspacing="0" width="100%">
+					<thead>
 						<tr>
-							<td>
-								<a href="/species/<%= observation.Species.id %>">
-									<em><%= observation.Species.species_name %></em><br>
-									<small class="text-muted"><%= observation.Species.common_name %></small>
-								</a>
-							</td>
-							<td>
-								<%= observation.date.toDateString() %>
-							</td>
-							<td>
-								<%= observation.female %>
-							</td>
-							<td>
-								<%= observation.male %>
-							</td>
-							<td>
-								<%= observation.sex_unk %>
-							</td>
-							<td>
-								<%= observation.total %>
-							</td>
-							<td>
-								<%= observation.location %>
-							</td>
-							<td>
-								<form method="POST" action="/observations/<%= observation.id %>?_method=DELETE" class="form-inline">
-									<a href="/observations/<%= observation.id %>" class="btn btn-primary btn-sm">View</a>
-									<% if(currentUser){ %>
-										<a href="/observations/<%= observation.id %>/edit" class="btn btn-warning btn-sm">Edit</a>
-										<button class="btn btn-sm btn-danger">Delete</button>
-									<% } %>
-								</form>
-							</td>
+							<th>Species</th>
+							<th>Date</th>
+							<th>Female</th>
+							<th>Male</th>
+							<th>Unk</th>
+							<th>Total</th>
+							<th>Location</th>
+							<th>Action</th>
 						</tr>
-						<% }) %>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<% observations.forEach(function(observation){ %>
+							<tr>
+								<td>
+									<a href="/species/<%= observation.Species.id %>">
+										<em><%= observation.Species.species_name %></em><br>
+										<small class="text-muted"><%= observation.Species.common_name %></small>
+									</a>
+								</td>
+								<td>
+									<%= observation.date.toDateString() %>
+								</td>
+								<td>
+									<%= observation.female %>
+								</td>
+								<td>
+									<%= observation.male %>
+								</td>
+								<td>
+									<%= observation.sex_unk %>
+								</td>
+								<td>
+									<%= observation.total %>
+								</td>
+								<td>
+									<%= observation.location %>
+								</td>
+								<td>
+									<form method="POST" action="/observations/<%= observation.id %>?_method=DELETE" class="form-inline">
+										<a href="/observations/<%= observation.id %>" class="btn btn-primary btn-sm">View</a>
+										<% if(currentUser){ %>
+											<a href="/observations/<%= observation.id %>/edit" class="btn btn-warning btn-sm">Edit</a>
+											<button class="btn btn-sm btn-danger">Delete</button>
+										<% } %>
+									</form>
+								</td>
+							</tr>
+							<% }) %>
+					</tbody>
+				</table>
+			</div>
+
 			<br>
 			<div id="mapid" style="height: 400px;"></div>
 			<br>

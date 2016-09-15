@@ -3,12 +3,30 @@ module.exports = function(sequelize, DataTypes) {
     var Observation = sequelize.define('Observation', {
         date: DataTypes.DATEONLY,
         species: DataTypes.STRING,
-        female: DataTypes.INTEGER,
-        male: DataTypes.INTEGER,
-        sex_unk: DataTypes.INTEGER,
-        adult: DataTypes.INTEGER,
-        young: DataTypes.INTEGER,
-        age_unk: DataTypes.INTEGER,
+        female: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
+        },
+        male: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
+        },
+        sex_unk: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
+        },
+        adult: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
+        },
+        young: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
+        },
+        age_unk: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
+        },
         total: DataTypes.INTEGER,
         young_class: DataTypes.STRING,
         status: DataTypes.STRING,

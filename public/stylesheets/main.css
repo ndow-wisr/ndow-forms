@@ -71,6 +71,10 @@ img.media-object {
     padding-left: 10px;
 }
 
+.pad-rt-sm {
+    padding-right: 10px;
+}
+
 .rm-left-padding{
     padding-left: 0px;
     padding-right: 5px;
@@ -96,4 +100,9 @@ img.media-object {
 .test-style {
     background-color: "grey";
     border: 1px black solid;
+}
+
+.rounded {
+    border-radius: 10px;
+    background: #000;
 }
