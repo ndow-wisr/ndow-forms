@@ -17,7 +17,8 @@ module.exports = function(sequelize, DataTypes) {
         tableName: 'species',
         classMethods: {
             associate: function(models) {
-                Species.hasMany(models.Observation)
+                Species.hasMany(models.Observation);
+                Species.hasMany(models.Animal);
             }
         }
     });

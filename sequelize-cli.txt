@@ -10,6 +10,12 @@ sequelize model:create --name User --underscored --attributes 'username:string, 
 ADD COLUMN TO OBSERVATION TABLE: Status, Source,
 sequelize migration:create --name add-status-observation
 
+CREATE ANIMAL TABLE
+sequelize model:create --name Animal --underscored --attributes 'status:string, source:string, species_id:integer, user_id:integer, sex:string'
+
+CREATE ENCOUNTER SCHEMA
+sequelize model:create --name Encounter --underscored --attributes 'enc_date:dateonly, status:string, enc_method:string, enc_reason:string, reencounter:boolean, relocated:boolean, biologist:string, comments:text, folder_url:string, qaqc_flag:boolean, trusted:boolean, loc_id:integer, animal_id:integer, rel_loc_id:integer'
+
 MISC
 
 qaqc remarks
