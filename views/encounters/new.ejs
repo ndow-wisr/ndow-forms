@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Wildlife Health Encounter</title>
+        <% include ../partials/bootstrap %> <!-- bootstrap & jquery -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
+    </head>
+    <body>
+
+        <% include ../partials/navigation %>
+
+        <div class="container col-sm-12">
+            <h2>Wildlife Health Capture Form</h2>
+                <form action="#" method="post">
+                    <fieldset>
+                        <legend>Encounter Information</legend>
+                        <!-- date, species, field_id -->
+                        <div class='row'>
+                            <!-- TODO: date picker -->
+                            <div class='col-sm-4'>
+                                <div class='form-group'>
+                                    <label>Date</label>
+                                    <input class="form-control" id="enc_date" name="enc_date" required="true" type="text" />
+                                </div>
+                            </div>
+                            <!-- TODO: species dropdown -->
+                            <div class='col-sm-4'>
+                                <div class='form-group'>
+                                    <label>Species</label>
+                                    <input class="form-control" id="species_id" name="species_id" required="true" type="text" />
+                                </div>
+                            </div>
+                            <div class='col-sm-4'>
+                                <div class='form-group'>
+                                    <label>NDOW ID</label>
+                                    <input class="form-control" id="field_id" name="field_id" required="true" type="text" />
+                                </div>
+                            </div> <!-- ./ date, species, field_id -->
+                        </div>
+                        <!-- status, sex, age -->
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <input class="form-control" id="life_status" type="text" name="life_status" required="true">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Sex</label>
+                                    <input class="form-control" id="sex" type="text" name="sex" required="true">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Age</label>
+                                    <input class="form-control" id="age" type="text" name="age" required="true">
+                                </div>
+                            </div>
+                        </div> <!-- ./ status, sex, age -->
+                        <!-- recapture, relocated -->
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Recapture</label>
+                                    <select class="form-control" name="recapture" id="recapture">
+                                        <option value="false">No</option>
+                                        <option value="true">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Relocated</label>
+                                    <select class="form-control" name="relocated" id="relocated">
+                                        <option value="false">No</option>
+                                        <option value="true">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div> <!-- ./ recapture, relocation -->
+                    </fieldset>
+
+                    <hr>
+
+                    <div class="panel-group" id="accordion" role="tablist">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a href="#collapseOne" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false">Mark Data</a>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse" id="collapseOne" role="tabpanel">
+                                <div class="panel-body">
+                                    <fieldset>
+                                        <legend>Mark Information</legend>
+                                        <!-- TODO: dropdowns on mark type, color? -->
+                                        <!-- mark number 1, odd -->
+                                        <div class="mark-group mg-odd rounded">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label>Mark Type</label>
+                                                        <input class="form-control" type="text" name="mark_type">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label>Mark Location</label>
+                                                        <input class="form-control" type="text" name="mark_location">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label>Mark ID</label>
+                                                        <input class="form-control" type="text" name="mark_id">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label>Mark Color</label>
+                                                        <input class="form-control" type="text" name="mark_color">
+                                                    </div>
+                                                </div>
+                                            <!-- </div> --> <!-- these two rows are if class="col-sm-3" -->
+                                            <!-- <div class="row"> -->
+                                                <div class="col-sm-2">
+                                                    <label>Date Given</label>
+                                                    <input class="form-control" type="text" name="date_given">
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <label>Date Removed</label>
+                                                    <input class="form-control" type="text" name="date_removed">
+                                                </div>
+                                            </div>
+                                        </div> <!-- ./ mark number 1, odd -->
+                                        <!-- mark number 2, even -->
+                                        <div class="mark-group mg-even rounded">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label>Mark Type</label>
+                                                        <input class="form-control" type="text" name="mark_type">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label>Mark Location</label>
+                                                        <input class="form-control" type="text" name="mark_location">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label>Mark ID</label>
+                                                        <input class="form-control" type="text" name="mark_id">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label>Mark Color</label>
+                                                        <input class="form-control" type="text" name="mark_color">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <label>Date Given</label>
+                                                    <input class="form-control" type="text" name="date_given">
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <label>Date Removed</label>
+                                                    <input class="form-control" type="text" name="date_removed">
+                                                </div>
+                                            </div>
+                                        </div> <!-- ./ mark number 2, even -->
+                                        <!-- mark number 3, odd -->
+                                        <div class="mark-group mg-odd rounded">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label>Mark Type</label>
+                                                        <input class="form-control" type="text" name="mark_type">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label>Mark Location</label>
+                                                        <input class="form-control" type="text" name="mark_location">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label>Mark ID</label>
+                                                        <input class="form-control" type="text" name="mark_id">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label>Mark Color</label>
+                                                        <input class="form-control" type="text" name="mark_color">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <label>Date Given</label>
+                                                    <input class="form-control" type="text" name="date_given">
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <label>Date Removed</label>
+                                                    <input class="form-control" type="text" name="date_removed">
+                                                </div>
+                                            </div>
+                                        </div> <!-- ./ mark number 3, odd -->
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title">
+                                    <a href="#collapseTwo" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false">Capture Information</a>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse" id="collapseTwo" role="tabpanel">
+                                <div class="panel-body">
+                                    <fieldset>
+                                        <legend>Capture Location Information</legend>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <!-- location name -->
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label>Location Name</label>
+                                                            <input class="form-control" type="text" name="loc_name">
+                                                        </div>
+                                                    </div>
+                                                </div> <!-- ./ location name -->
+                                                <!-- coordinates -->
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Longitude</label>
+                                                            <input class="form-control" type="text" name="loc_long">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Latitude</label>
+                                                            <input class="form-control" type="text" name="loc_lat">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Accuracy</label>
+                                                            <input class="form-control" type="text" name="loc_accuracy">
+                                                        </div>
+                                                    </div>
+                                                </div> <!-- ./ coordinates -->
+                                                <!-- spatial units -->
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Mountain Range</label>
+                                                            <input class="form-control" type="text" name="loc_mtn_range">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Hunt Unit</label>
+                                                            <input class="form-control" type="text" name="loc_hunt_unit">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Management Area</label>
+                                                            <input class="form-control" type="text" name="loc_mgmt_area">
+                                                        </div>
+                                                    </div>
+                                                </div> <!-- ./ spatial units -->
+                                                <!-- location quality and source -->
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Location Type</label>
+                                                            <input class="form-control" type="text" name="loc_type">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Location Quality</label>
+                                                            <input class="form-control" type="text" name="loc_quality">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Location Source</label>
+                                                            <input class="form-control" type="text" name="loc_source">
+                                                        </div>
+                                                    </div>
+                                                </div> <!-- ./ location quality and source -->
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label>Location Description</label>
+                                                            <textarea class="form-control" name="loc_desc" rows="3"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+<!-- <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Collapsible Group Item #1
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Collapsible Group Item #2
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Collapsible Group Item #3
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+                </form>
+        </div>
+
+
+    </body>
+</html>

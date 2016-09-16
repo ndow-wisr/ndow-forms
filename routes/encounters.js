@@ -50,11 +50,12 @@ router.get('/', function(req, res){
 
 // new, get, get page to add new observation
 router.get('/new', function(req, res){
-    res.send('http:/.../encounters/new');
+    res.render('encounters/new');
 });
 
 // create, post, create a new encounter
-router.post('/', function(req, res){
-    
-})
+// router.post('/', function(req, res){
+//
+// })
+
 module.exports = router;

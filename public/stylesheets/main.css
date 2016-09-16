@@ -106,3 +106,15 @@ img.media-object {
     border-radius: 10px;
     background: #000;
 }
+
+.mark-group {
+    padding: 10px 10px 10px 10px;
+}
+
+.mg-odd {
+    background-color: #fff;
+}
+
+.mg-even {
+    background-color: #F5F5F5;
+}
