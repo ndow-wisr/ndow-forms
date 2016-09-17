@@ -82,9 +82,88 @@
                         </div> <!-- ./ recapture, relocation -->
                     </fieldset>
 
-                    <hr>
-
+                    <!-- accordion of data modules -->
                     <div class="panel-group" id="accordion" role="tablist">
+                        <!-- abundance module -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingAbundance">
+                                <h4 class="panel-title">
+                                    <a href="#collapseAbundance" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false">Encounter Abundance</a>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse" id="collapseAbundance" role="tabpanel">
+                                <div class="panel-body">
+                                    <fieldset>
+                                        <legend>Encounter Abundance</legend>
+                                        <div>
+                                            <div class="row">
+                                                <div class="col-md-3 col-lg-1">
+                                                    <div class="form-group">
+                                                        <label>Female</label>
+                                                        <input type="text" class="form-control" name="female">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-lg-1">
+                                                    <div class="form-group">
+                                                        <label>Male</label>
+                                                        <input type="text" class="form-control" name="Male">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-lg-1">
+                                                    <div class="form-group">
+                                                        <label>Unk Sex</label>
+                                                        <input type="text" class="form-control" name="Unk Sex">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-lg-1">
+                                                    <div class="form-group">
+                                                        <label>Sex Total</label>
+                                                        <input type="text" class="form-control" name="sex_total" readonly="true">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-lg-1">
+                                                    <div class="form-group">
+                                                        <label>Adult</label>
+                                                        <input type="text" class="form-control" name="Adult">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-lg-1">
+                                                    <div class="form-group">
+                                                        <label>Young</label>
+                                                        <input type="text" class="form-control" name="Young">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-lg-1">
+                                                    <div class="form-group">
+                                                        <label>Unk Age</label>
+                                                        <input type="text" class="form-control" name="Unk Age">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-lg-1">
+                                                    <div class="form-group">
+                                                        <label>Age Total</label>
+                                                        <input type="text" class="form-control" name="age_total" readonly="true">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-lg-1">
+                                                    <div class="form-group">
+                                                        <label>Total</label>
+                                                        <input type="text" class="form-control" name="total" readonly="true">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label>Young Age Class</label>
+                                                        <input type="text" class="form-control" name="young_age_class">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div> <!-- ./ end abundance module -->
+                        <!-- mark module -->
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="headingOne">
                                 <h4 class="panel-title">
@@ -212,8 +291,8 @@
                                     </fieldset>
                                 </div>
                             </div>
-                        </div>
-
+                        </div> <!-- ./ end mark module -->
+                        <!-- capture location module -->
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="headingTwo">
                                 <h4 class="panel-title">
@@ -314,7 +393,7 @@
                                     </fieldset>
                                 </div>
                             </div>
-                        </div>
+                        </div> <!-- ./ end capture location module -->
                     </div>
 
                     <hr>
