@@ -1,0 +1,72 @@
+{
+    "encounter":{
+        "date":"2016-09-15",
+        "status":"alive",
+        "age":"adult",
+        "reencounter":"false",
+        "relocated":"false"
+    },
+    "animal":{
+        "species":"ovis canadensis",
+        "species_id":"5345",
+        "sex":"female"
+    },
+    "abundance":{
+        "female":"2",
+        "male":"2",
+        "unk_sex":"2",
+        "sex_total":"",
+        "adult":"2",
+        "young":"2",
+        "unk_age":"2",
+        "age_total":"",
+        "total":"",
+        "age_class":"yearling"
+    },
+    "mark1":{
+        "type":"ear tag",
+        "location":"right ear",
+        "id":"123E",
+        "color":"green",
+        "date_given":"today",
+        "date_removed":"year"
+    },
+    "mark_type":[
+        "pit tag",
+        "gps collar"
+        ],
+    "mark_location":[
+        "shoulders",
+        "neck"
+        ],
+    "mark_id":[
+        "1234558772",
+        "12334"
+        ],
+    "mark_color":[
+        "na",
+        "na"
+        ],
+    "date_given":[
+        "today",
+        "today"
+        ],
+    "date_removed":[
+        "year",
+        "year"
+        ],
+    "loc":{
+        "name":"ruby mountains",
+        "long":"123456",
+        "lat":"1234567",
+        "accuracy":"10",
+        "mtn_range":"Ruby Mountains",
+        "hunt_unit":"103",
+        "mgmt_area":"10",
+        "type":"description",
+        "quality":"capture",
+        "source":"geography",
+        "desc":"blah blah blah blah blah blah blah"
+    },
+    "button":""
+}

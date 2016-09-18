@@ -12,7 +12,7 @@
 
         <div class="container col-sm-12">
             <h2>Wildlife Health Capture Form</h2>
-                <form action="#" method="post">
+                <form action="/encounters" method="post">
                     <fieldset>
                         <legend>Encounter Information</legend>
                         <!-- date, species, field_id -->
@@ -21,20 +21,20 @@
                             <div class='col-sm-4'>
                                 <div class='form-group'>
                                     <label>Date</label>
-                                    <input class="form-control" id="enc_date" name="enc_date" required="true" type="text" />
+                                    <input class="form-control" id="enc_date" name="encounter[date]" required="true" type="text" />
                                 </div>
                             </div>
                             <!-- TODO: species dropdown -->
                             <div class='col-sm-4'>
                                 <div class='form-group'>
                                     <label>Species</label>
-                                    <input class="form-control" id="species_id" name="species_id" required="true" type="text" />
+                                    <input class="form-control" id="species_id" name="animal[species]" required="true" type="text" />
                                 </div>
                             </div>
                             <div class='col-sm-4'>
                                 <div class='form-group'>
                                     <label>NDOW ID</label>
-                                    <input class="form-control" id="field_id" name="field_id" required="true" type="text" />
+                                    <input class="form-control" id="field_id" name="animal[species_id]" required="true" type="text" />
                                 </div>
                             </div> <!-- ./ date, species, field_id -->
                         </div>
@@ -43,19 +43,19 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Status</label>
-                                    <input class="form-control" id="life_status" type="text" name="life_status" required="true">
+                                    <input class="form-control" id="life_status" type="text" name="encounter[status]" required="true">
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Sex</label>
-                                    <input class="form-control" id="sex" type="text" name="sex" required="true">
+                                    <input class="form-control" id="sex" type="text" name="animal[sex]" required="true">
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Age</label>
-                                    <input class="form-control" id="age" type="text" name="age" required="true">
+                                    <input class="form-control" id="encounter[age]" type="text" name="encounter[age]" required="true">
                                 </div>
                             </div>
                         </div> <!-- ./ status, sex, age -->
@@ -64,7 +64,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Recapture</label>
-                                    <select class="form-control" name="recapture" id="recapture">
+                                    <select class="form-control" name="encounter[reencounter]" id="reencounter">
                                         <option value="false">No</option>
                                         <option value="true">Yes</option>
                                     </select>
@@ -73,7 +73,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Relocated</label>
-                                    <select class="form-control" name="relocated" id="relocated">
+                                    <select class="form-control" name="encounter[relocated]" id="relocated">
                                         <option value="false">No</option>
                                         <option value="true">Yes</option>
                                     </select>
@@ -100,61 +100,61 @@
                                                 <div class="col-md-3 col-lg-1">
                                                     <div class="form-group">
                                                         <label>Female</label>
-                                                        <input type="text" class="form-control" name="female">
+                                                        <input type="text" class="form-control" name="abundance[female]">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 col-lg-1">
                                                     <div class="form-group">
                                                         <label>Male</label>
-                                                        <input type="text" class="form-control" name="Male">
+                                                        <input type="text" class="form-control" name="abundance[male]">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 col-lg-1">
                                                     <div class="form-group">
                                                         <label>Unk Sex</label>
-                                                        <input type="text" class="form-control" name="Unk Sex">
+                                                        <input type="text" class="form-control" name="abundance[unk_sex]">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 col-lg-1">
                                                     <div class="form-group">
                                                         <label>Sex Total</label>
-                                                        <input type="text" class="form-control" name="sex_total" readonly="true">
+                                                        <input type="text" class="form-control" name="abundance[sex_total]" readonly="true">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 col-lg-1">
                                                     <div class="form-group">
                                                         <label>Adult</label>
-                                                        <input type="text" class="form-control" name="Adult">
+                                                        <input type="text" class="form-control" name="abundance[adult]">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 col-lg-1">
                                                     <div class="form-group">
                                                         <label>Young</label>
-                                                        <input type="text" class="form-control" name="Young">
+                                                        <input type="text" class="form-control" name="abundance[young]">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 col-lg-1">
                                                     <div class="form-group">
                                                         <label>Unk Age</label>
-                                                        <input type="text" class="form-control" name="Unk Age">
+                                                        <input type="text" class="form-control" name="abundance[unk_age]">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 col-lg-1">
                                                     <div class="form-group">
                                                         <label>Age Total</label>
-                                                        <input type="text" class="form-control" name="age_total" readonly="true">
+                                                        <input type="text" class="form-control" name="abundance[age_total]" readonly="true">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 col-lg-1">
                                                     <div class="form-group">
                                                         <label>Total</label>
-                                                        <input type="text" class="form-control" name="total" readonly="true">
+                                                        <input type="text" class="form-control" name="abundance[total]" readonly="true">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 col-lg-3">
                                                     <div class="form-group">
                                                         <label>Young Age Class</label>
-                                                        <input type="text" class="form-control" name="young_age_class">
+                                                        <input type="text" class="form-control" name="abundance[age_class]">
                                                     </div>
                                                 </div>
                                             </div>
@@ -181,36 +181,36 @@
                                                 <div class="col-sm-2">
                                                     <div class="form-group">
                                                         <label>Mark Type</label>
-                                                        <input class="form-control" type="text" name="mark_type">
+                                                        <input class="form-control" type="text" name="mark1[type]">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="form-group">
                                                         <label>Mark Location</label>
-                                                        <input class="form-control" type="text" name="mark_location">
+                                                        <input class="form-control" type="text" name="mark1[location]">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="form-group">
                                                         <label>Mark ID</label>
-                                                        <input class="form-control" type="text" name="mark_id">
+                                                        <input class="form-control" type="text" name="mark1[id]">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="form-group">
                                                         <label>Mark Color</label>
-                                                        <input class="form-control" type="text" name="mark_color">
+                                                        <input class="form-control" type="text" name="mark1[color]">
                                                     </div>
                                                 </div>
                                             <!-- </div> --> <!-- these two rows are if class="col-sm-3" -->
                                             <!-- <div class="row"> -->
                                                 <div class="col-sm-2">
                                                     <label>Date Given</label>
-                                                    <input class="form-control" type="text" name="date_given">
+                                                    <input class="form-control" type="text" name="mark1[date_given]">
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <label>Date Removed</label>
-                                                    <input class="form-control" type="text" name="date_removed">
+                                                    <input class="form-control" type="text" name="mark1[date_removed]">
                                                 </div>
                                             </div>
                                         </div> <!-- ./ mark number 1, odd -->
@@ -310,7 +310,7 @@
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
                                                             <label>Location Name</label>
-                                                            <input class="form-control" type="text" name="loc_name">
+                                                            <input class="form-control" type="text" name="loc[name]">
                                                         </div>
                                                     </div>
                                                 </div> <!-- ./ location name -->
@@ -319,19 +319,19 @@
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Longitude</label>
-                                                            <input class="form-control" type="text" name="loc_long">
+                                                            <input class="form-control" type="text" name="loc[long]">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Latitude</label>
-                                                            <input class="form-control" type="text" name="loc_lat">
+                                                            <input class="form-control" type="text" name="loc[lat]">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Accuracy</label>
-                                                            <input class="form-control" type="text" name="loc_accuracy">
+                                                            <input class="form-control" type="text" name="loc[accuracy]">
                                                         </div>
                                                     </div>
                                                 </div> <!-- ./ coordinates -->
@@ -340,19 +340,19 @@
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Mountain Range</label>
-                                                            <input class="form-control" type="text" name="loc_mtn_range">
+                                                            <input class="form-control" type="text" name="loc[mtn_range]">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Hunt Unit</label>
-                                                            <input class="form-control" type="text" name="loc_hunt_unit">
+                                                            <input class="form-control" type="text" name="loc[hunt_unit]">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Management Area</label>
-                                                            <input class="form-control" type="text" name="loc_mgmt_area">
+                                                            <input class="form-control" type="text" name="loc[mgmt_area]">
                                                         </div>
                                                     </div>
                                                 </div> <!-- ./ spatial units -->
@@ -361,19 +361,19 @@
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Location Type</label>
-                                                            <input class="form-control" type="text" name="loc_type">
+                                                            <input class="form-control" type="text" name="loc[type]">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Location Quality</label>
-                                                            <input class="form-control" type="text" name="loc_quality">
+                                                            <input class="form-control" type="text" name="loc[quality]">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Location Source</label>
-                                                            <input class="form-control" type="text" name="loc_source">
+                                                            <input class="form-control" type="text" name="loc[source]">
                                                         </div>
                                                     </div>
                                                 </div> <!-- ./ location quality and source -->
@@ -381,7 +381,7 @@
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
                                                             <label>Location Description</label>
-                                                            <textarea class="form-control" name="loc_desc" rows="3"></textarea>
+                                                            <textarea class="form-control" name="loc[desc]" rows="3"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -395,57 +395,7 @@
                             </div>
                         </div> <!-- ./ end capture location module -->
                     </div>
-
-                    <hr>
-
-<!-- <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Collapsible Group Item #1
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingTwo">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Collapsible Group Item #2
-        </a>
-      </h4>
-    </div>
-    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingThree">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Collapsible Group Item #3
-        </a>
-      </h4>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-</div> -->
-
-
-
+                    <button type="submit" name="button">Submit</button>
                 </form>
         </div>
 

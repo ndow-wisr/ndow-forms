@@ -54,8 +54,9 @@ router.get('/new', function(req, res){
 });
 
 // create, post, create a new encounter
-// router.post('/', function(req, res){
-//
-// })
+router.post('/', function(req, res){
+    var dat = req.body
+    console.log(JSON.stringify(dat));
+});
 
 module.exports = router;
