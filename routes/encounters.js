@@ -2,34 +2,26 @@ var express = require('express'),
     router = express.Router(),
     models = require('../models');
 
-// var animal = {
-//     field_id: '10232',
-//     status: 'dead',
-//     source: 'wildlife health app',
-//     species_id: 754,
-//     user_id: 1,
-//     sex: 'male'
-// }
-//
-// models.Animal.create(animal);
-
-// var encounter = {
-//     enc_date: '2016-09-15',
-//     status: 'alive',
-//     enc_method: 'basecamp - helicopter',
-//     enc_reason: 'disease surveilance',
-//     reencounter: false,
-//     relocated: false,
-//     biologist: 'Pat Cummings',
-//     comments: 'blah, comment, blah',
-//     folder_url: 'http://www.example.com',
-//     qaqc_flag: false,
-//     trusted: true,
-//     loc_id: 1,
-//     animal_id: 2,
-//     rel_loc_id: 2
-// }
-// models.Encounter.create(encounter);
+models.Animal.create({
+    source: 'wildife health app',
+    species_id: 1,
+    user_id: 1,
+    sex: 'female',
+    field_id: 20000,
+    Encounters: [
+        {
+            status: 'alive',
+            enc_date: '2016-10-10',
+            enc_method: 'capture',
+            enc_reason: 'disease',
+            biologist: 'mitchell gritts'
+        }
+    ]
+}, {
+    include: [{
+        model: models.Encounter
+    }]
+});
 
 // index, get, list all encounters
 router.get('/', function(req, res){
@@ -55,8 +47,42 @@ router.get('/new', function(req, res){
 
 // create, post, create a new encounter
 router.post('/', function(req, res){
-    var dat = req.body
-    console.log(JSON.stringify(dat));
+    // var dat = req.body
+    // console.log(JSON.stringify(dat));
+    var enc = {
+        status: req.body.status,
+        enc_date: req.body.date,
+        reencounter: req.body.reencounter,
+        relocated: req.body.relocated
+    };
+    var animal = {
+        sex: req.body.sex,
+        field_id: req.body.species_id,
+        species_id: 1
+    };
+    models.Animal.create({
+        source: 'wildife health app',
+        species_id: 1,
+        user_id: 1,
+        sex: 'female',
+        field_id: 20000,
+        encounters: [
+            {
+                status: 'alive',
+                enc_date: '2016-10-10',
+                enc_method: 'capture',
+                enc_reason: 'disease',
+                biologist: 'mitchell gritts'
+            }
+        ]
+    }, {
+        include: [{
+            model: models.Encounter,
+            as: 'encounters'
+        }]
+    }).then(function(){
+        res.redirect('/');
+    });
 });
 
 module.exports = router;
