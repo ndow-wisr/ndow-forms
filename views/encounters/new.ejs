@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>Wildlife Health Encounter</title>
         <% include ../partials/bootstrap %> <!-- bootstrap & jquery -->
+        <% include ../partials/selectizejs %> <!-- selectize js -->
         <link rel="stylesheet" href="/stylesheets/main.css">
     </head>
     <body>
@@ -21,20 +22,21 @@
                             <div class='col-sm-4'>
                                 <div class='form-group'>
                                     <label>Date</label>
-                                    <input class="form-control" id="enc_date" name="encounter[date]" required="true" type="text" />
+                                    <input class="form-control" id="enc_date" name="encounter[enc_date]" required="true" type="text" />
                                 </div>
                             </div>
                             <!-- TODO: species dropdown -->
                             <div class='col-sm-4'>
                                 <div class='form-group'>
                                     <label>Species</label>
-                                    <input class="form-control" id="species_id" name="animal[species]" required="true" type="text" />
+                                    <input type="integer" class="species-select" name="animal[species_id]">
+                                    <!-- <select name="animal[species_id]" class="species-select"></select> -->
                                 </div>
                             </div>
                             <div class='col-sm-4'>
                                 <div class='form-group'>
                                     <label>NDOW ID</label>
-                                    <input class="form-control" id="field_id" name="animal[species_id]" required="true" type="text" />
+                                    <input class="form-control" id="field_id" name="animal[field_id]" required="true" type="text" />
                                 </div>
                             </div> <!-- ./ date, species, field_id -->
                         </div>
@@ -43,7 +45,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Status</label>
-                                    <input class="form-control" id="life_status" type="text" name="encounter[status]" required="true">
+                                    <input class="form-control" id="life_status" type="text" name="encounter[life_status]" required="true">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -81,6 +83,37 @@
                             </div>
                         </div> <!-- ./ recapture, relocation -->
                     </fieldset>
+                    <fieldset> <!-- enc_method, enc_reason -->
+                        <legend>Methods and Justification</legend>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Encounter Method</label>
+                                    <select class="form-control" name="encounter[enc_method]">
+                                        <option value="null"></option>
+                                        <option value="Capture Crew - Helicopter">Capture Crew - Helicopter</option>
+                                        <option value="Basecamp - Helicopter">Basecamp - Helicopter</option>
+                                        <option value="Marked - Dead">Marked - Dead</option>
+                                        <option value="Marked - Observation">Marked - Observation</option>
+                                        <option value="Unmarked - Dead">Unmarked - Dead</option>
+                                        <option value="Collar Failure">Collar Failure</option>
+                                        <option value="Collar Dropped">Collar Dropped</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Reason for Encounter</label>
+                                    <select name="encounter[enc_reason]" id="" class="form-control">
+                                        <option value="null"></option>
+                                        <option value="Disease Surveilance">Disease Surveilance</option>
+                                        <option value="Translocation">Translocation</option>
+                                        <option value="Monitoring">Monitoring</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset> <!-- ./ end enc_reason, enc_method -->
 
                     <!-- accordion of data modules -->
                     <div class="panel-group" id="accordion" role="tablist">
@@ -399,6 +432,37 @@
                 </form>
         </div>
 
-
+    <script type="text/javascript">
+        $('.species-select').selectize({
+            placeholder: 'Select species...',
+            valueField: 'id',
+            labelField: 'common_name',
+            searchField: 'common_name',
+            preload: true,
+            options: [],
+            render: {
+                option: function(item, escape){
+                    console.log(item);
+                    return '<p><span>' + escape(item.common_name) + '</span> - <span>' + escape(item.species_name) + '</span></p>'
+                }
+            },
+            load: function(query, callback){
+                $.ajax({
+                    url: 'http://' + window.location.host + '/list-species',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        name: query
+                    },
+                    error: function(){
+                        callback();
+                    },
+                    success: function(res) {
+                        callback(res);
+                    }
+                });
+            }
+        });
+    </script>
     </body>
 </html>
