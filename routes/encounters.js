@@ -2,27 +2,6 @@ var express = require('express'),
     router = express.Router(),
     models = require('../models');
 
-// models.Animal.create({
-//     source: 'wildife health app',
-//     species_id: 1,
-//     user_id: 1,
-//     sex: 'female',
-//     field_id: 20000,
-//     Encounters: [
-//         {
-//             status: 'alive',
-//             enc_date: '2016-10-10',
-//             enc_method: 'capture',
-//             enc_reason: 'disease',
-//             biologist: 'mitchell gritts'
-//         }
-//     ]
-// }, {
-//     include: [{
-//         model: models.Encounter
-//     }]
-// });
-
 // index, get, list all encounters
 router.get('/', function(req, res){
     // res.send('http:/.../encounters');
@@ -48,34 +27,38 @@ router.get('/new', function(req, res){
 
 // create, post, create a new encounter
 router.post('/', function(req, res){
-    var dat = req.body;
-    console.log(JSON.stringify(dat, null, '\t'));
-    console.log(req.body.animal.species_id);
+    // var dat = req.body;
+    // console.log(JSON.stringify(dat, null, '\t'));
+
     var animal = req.body.animal;
-    animal.Encounters = req.body.encounter;
+    var markNull;
+    if (req.body.markOne.mark_removed == "") {
+        markNull = null;
+    } else {
+        markNull = req.body.markOne.mark_removed;
+    };
+
+    animal.Encounters = [ req.body.encounter ];
+    animal.Marks = [
+        {
+            mark_type: req.body.markOne.mark_type,
+            mark_id: req.body.markOne.mark_id,
+            mark_color: req.body.markOne.mark_color,
+            mark_location: req.body.markOne.mark_location,
+            date_given: req.body.markOne.date_given,
+            mark_removed: markNull
+        }
+    ];
 
     models.Animal.create(animal, {
-        include: [{
-            model: models.Encounter
-        }]
+        include: [
+            { model: models.Encounter },
+            { model: models.Mark }
+        ]
     }).then(function(){
+        console.log(JSON.stringify(animal, null, '\t'));
         res.redirect('/encounters');
     });
-
-    // models.Animal.create({
-    //     source: 'wildlife health',
-    //     species_id: req.body.animal[species_id],
-    //     user_id: 1,
-    //     sex: req.body.sex,
-    //     field_id: req.body.field_id,
-    //     Encounters: [ req.body.encounter ]
-    // }, {
-    //     include: [{
-    //         model: models.Encounter
-    //     }]
-    // }).then(function(){
-    //     res.redirect('/encounters');
-    // });
 });
 
 module.exports = router;

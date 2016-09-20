@@ -6,7 +6,11 @@ module.exports = function(sequelize, DataTypes) {
         mark_color: DataTypes.STRING,
         mark_location: DataTypes.STRING,
         date_given: DataTypes.DATEONLY,
-        mark_removed: DataTypes.DATEONLY,
+        mark_removed: {
+            type: DataTypes.DATEONLY,
+            allowNull: true,
+            defaultValue: null
+        },
         mark_on_animal: DataTypes.BOOLEAN,
         animal_id: DataTypes.INTEGER
     }, {
