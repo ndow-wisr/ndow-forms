@@ -16,6 +16,7 @@ module.exports = function(sequelize, DataTypes) {
                 Animal.belongsTo(models.User);
                 Animal.belongsTo(models.Species);
                 Animal.hasMany(models.Encounter);
+                Animal.hasMany(models.Makr);
             }
         }
     });
