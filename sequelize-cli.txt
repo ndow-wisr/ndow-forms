@@ -20,6 +20,9 @@ CREATE MARKS SCHEMA
 
 sequelize model:create --name Mark --underscored --attributes 'mark_type:string, mark_id:string, mark_color:string, mark_location:string, date_given:dateonly, mark_removed:dateonly, mark_on_animal:boolean, animal_id:integer'
 
+CREATE ABUNDANCE SCHEMA
+sequelize model:create --name Abundance --underscored --attributes 'n_female:integer, n_male:integer, n_unk_sex:integer, n_adult:integer, n_young:integer, n_unk_age:integer, sex_total:integer, age_total:integer, n_total:integer, young_age_class:string, encounter_id:integer'
+
 ADDING CALIFORNIA BIGHORN SHEEP TO THE SPECIES TABLE
 insert into species (common_name, species_name, subspecies, eng_class, eng_subclass, species_code, state_status, sensitive, sensitive_rationale, created_at, updated_at) values ('California bighorn sheep', 'Ovis canadensis', 'californiana', 'Mammal', 'Big Game', 1311, 'Game', false, '', Now(), Now());
 

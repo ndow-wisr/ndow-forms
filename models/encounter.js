@@ -33,7 +33,8 @@ module.exports = function(sequelize, DataTypes) {
         tableName: 'encounters',
         classMethods: {
             associate: function(models) {
-                Encounter.belongsTo(models.Animal)
+                Encounter.belongsTo(models.Animal);
+                Encounter.hasMany(models.Abundance);
             }
         }
     });
