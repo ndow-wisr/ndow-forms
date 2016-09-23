@@ -46,8 +46,8 @@
 							<tr>
 								<td>
 									<a href="/species/<%= observation.Species.id %>">
-										<em><%= observation.Species.species_name %></em><br>
-										<small class="text-muted"><%= observation.Species.common_name %></small>
+										<%= observation.Species.common_name %><br>
+										<small class="text-muted"><em><%= observation.Species.species_name %></em></small>
 									</a>
 								</td>
 								<td>
