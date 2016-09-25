@@ -27,18 +27,20 @@ router.get('/new', function(req, res){
 
 // create, post, create a new encounter
 router.post('/', function(req, res){
-    // var dat = req.body;
-    // console.log(JSON.stringify(dat, null, '\t'));
+    var dat = req.body;
+    console.log(JSON.stringify(dat, null, '\t'));
 
     var animal = req.body.animal;
     var markNull;
+    // TODO: add dynamically created content without hardcoding 'rows'
     if (req.body.markOne.mark_removed == "") {
         markNull = null;
     } else {
         markNull = req.body.markOne.mark_removed;
     };
 
-    animal.Encounters = [ req.body.encounter ];
+    animal.Encounters = [ req.body.encounter,
+                          Abundance: req.body.abundance ];
     animal.Marks = [
         {
             mark_type: req.body.markOne.mark_type,
@@ -49,16 +51,21 @@ router.post('/', function(req, res){
             mark_removed: markNull
         }
     ];
+    animal.Encounters.Abundance = req.body.abundance;
 
-    models.Animal.create(animal, {
-        include: [
-            { model: models.Encounter },
-            { model: models.Mark }
-        ]
-    }).then(function(){
-        console.log(JSON.stringify(animal, null, '\t'));
-        res.redirect('/encounters');
-    });
+    console.log(JSON.stringify(animal, null, '\t'));
+
+    res.redirect('/encounters');
+
+    // models.Animal.create(animal, {
+    //     include: [
+    //         { model: models.Encounter },
+    //         { model: models.Mark }
+    //     ]
+    // }).then(function(){
+    //     console.log(JSON.stringify(animal, null, '\t'));
+    //     res.redirect('/encounters');
+    // });
 });
 
 module.exports = router;
