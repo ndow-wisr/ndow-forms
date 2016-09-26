@@ -34,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 Encounter.belongsTo(models.Animal);
-                Encounter.hasMany(models.Abundance);
+                Encounter.hasOne(models.Abundance);
             }
         }
     });

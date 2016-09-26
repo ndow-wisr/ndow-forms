@@ -31,41 +31,35 @@ router.post('/', function(req, res){
     console.log(JSON.stringify(dat, null, '\t'));
 
     var animal = req.body.animal;
-    var markNull;
-    // TODO: add dynamically created content without hardcoding 'rows'
-    if (req.body.markOne.mark_removed == "") {
-        markNull = null;
-    } else {
-        markNull = req.body.markOne.mark_removed;
-    };
+    var encounter = req.body.encounter;
+    var marks = req.body.markOne;
+    var abundance = req.body.abundance;
 
-    animal.Encounters = [ req.body.encounter,
-                          Abundance: req.body.abundance ];
-    animal.Marks = [
-        {
-            mark_type: req.body.markOne.mark_type,
-            mark_id: req.body.markOne.mark_id,
-            mark_color: req.body.markOne.mark_color,
-            mark_location: req.body.markOne.mark_location,
-            date_given: req.body.markOne.date_given,
-            mark_removed: markNull
-        }
-    ];
-    animal.Encounters.Abundance = req.body.abundance;
+    // TODO: add dynamically created content without hardcoding 'rows'
+    // replace blank ("") date removed with null because "" doesn't default to null or the default value and Postgres can't accepts "" as a date input value
+    if (marks.mark_removed == "") {
+        marks.mark_removed = null;
+    }
+
+    // buidling the model
+    encounter.Abundance = abundance;
+    animal.Encounter = [ encounter ];
+    animal.Mark = [ marks ];
 
     console.log(JSON.stringify(animal, null, '\t'));
 
-    res.redirect('/encounters');
+    // res.redirect('/encounters/new');
 
-    // models.Animal.create(animal, {
-    //     include: [
-    //         { model: models.Encounter },
-    //         { model: models.Mark }
-    //     ]
-    // }).then(function(){
-    //     console.log(JSON.stringify(animal, null, '\t'));
-    //     res.redirect('/encounters');
-    // });
+    models.Animal.create(animal, {
+        include: [
+            { model: models.Encounter,
+              include: [ models.Abundance ]},
+            { model: models.Mark }
+        ]
+    }).then(function(){
+        console.log(JSON.stringify(animal, null, '\t'));
+        res.redirect('/encounters');
+    });
 });
 
 module.exports = router;
