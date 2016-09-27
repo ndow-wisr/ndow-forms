@@ -35,6 +35,7 @@ module.exports = function(sequelize, DataTypes) {
             associate: function(models) {
                 Encounter.belongsTo(models.Animal);
                 Encounter.hasOne(models.Abundance);
+                Encounter.belongsTo(models.Location);
             }
         }
     });
