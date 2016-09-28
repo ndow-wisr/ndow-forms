@@ -24,7 +24,9 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.BOOLEAN,
             defaultValue: true
         },
-        loc_id: DataTypes.INTEGER,
+        loc_id: {
+            type: DataTypes.INTEGER,
+        },
         animal_id: DataTypes.INTEGER,
         rel_loc_id: DataTypes.INTEGER
     }, {
@@ -35,7 +37,7 @@ module.exports = function(sequelize, DataTypes) {
             associate: function(models) {
                 Encounter.belongsTo(models.Animal);
                 Encounter.hasOne(models.Abundance);
-                Encounter.belongsTo(models.Location);
+                Encounter.belongsTo(models.Location, {foreignKey: 'loc_id'});
             }
         }
     });

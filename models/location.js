@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
         tableName: 'locations',
         classMethods: {
             associate: function(models) {
-                Location.hasMany(models.Encounter);
+                Location.hasMany(models.Encounter, {targetKey: 'loc_id'});
             }
         }
     });
