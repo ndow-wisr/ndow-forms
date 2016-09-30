@@ -47,35 +47,20 @@ var location = {
     loc_mgmt_area: 16
 };
 
-// encounter.Abundance = abundance;
-// animal.Encounters = [ encounter ];
-// animal.Marks = [ mark ];
-//
-// models.Animal.create(animal, {
-//     include: [
-//         {
-//             model: models.Encounter,
-//             include: [ {model: models.Abundance} ]
-//         },
-//         {model: models.Mark}
-//     ]
-// });
-
-// create with belong to
+encounter.Abundance = abundance;
 encounter.Location = location;
+animal.Encounters = [ encounter ];
+animal.Marks = [ mark ];
 
-// console.log(JSON.stringify(encounter, null, '\t'));
-models.Encounter.create(encounter, {
+models.Animal.create(animal, {
     include: [
-        {model: models.Location}
+        {
+            model: models.Encounter,
+            include: [
+                {model: models.Abundance},
+                {model: models.Location}
+            ]
+        },
+        {model: models.Mark}
     ]
 });
-
-// models.Animal
-//     .findOrCreate({where: {field_id: animal.field_id}, defaults: animal})
-//     .spread(function(animal, created){
-//         console.log(animal.get({
-//             plain: true
-//         }))
-//         console.log(created);
-//     })

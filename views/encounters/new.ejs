@@ -5,6 +5,7 @@
         <title>Wildlife Health Encounter</title>
         <% include ../partials/bootstrap %> <!-- bootstrap & jquery -->
         <% include ../partials/selectizejs %> <!-- selectize js -->
+        <% include ../partials/leaflet %> <!-- leafletjs -->
         <link rel="stylesheet" href="/stylesheets/main.css">
     </head>
     <body>
@@ -341,7 +342,7 @@
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
                                                             <label>Location Name</label>
-                                                            <input class="form-control" type="text" name="loc[name]">
+                                                            <input class="form-control" type="text" name="loc[loc_name]">
                                                         </div>
                                                     </div>
                                                 </div> <!-- ./ location name -->
@@ -350,19 +351,19 @@
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Longitude</label>
-                                                            <input class="form-control" type="text" name="loc[long]">
+                                                            <input class="form-control" type="text" name="loc[loc_long]">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Latitude</label>
-                                                            <input class="form-control" type="text" name="loc[lat]">
+                                                            <input class="form-control" type="text" name="loc[loc_lat]">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Accuracy</label>
-                                                            <input class="form-control" type="text" name="loc[accuracy]">
+                                                            <input class="form-control" type="text" name="loc[loc_accuracy]">
                                                         </div>
                                                     </div>
                                                 </div> <!-- ./ coordinates -->
@@ -371,19 +372,19 @@
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Mountain Range</label>
-                                                            <input class="form-control" type="text" name="loc[mtn_range]">
+                                                            <input class="form-control" type="text" name="loc[loc_mtn_range]">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Hunt Unit</label>
-                                                            <input class="form-control" type="text" name="loc[hunt_unit]">
+                                                            <input class="form-control" type="text" name="loc[loc_hunt_unit]">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Management Area</label>
-                                                            <input class="form-control" type="text" name="loc[mgmt_area]">
+                                                            <input class="form-control" type="text" name="loc[loc_mgmt_area]">
                                                         </div>
                                                     </div>
                                                 </div> <!-- ./ spatial units -->
@@ -392,19 +393,19 @@
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Location Type</label>
-                                                            <input class="form-control" type="text" name="loc[type]">
+                                                            <input class="form-control" type="text" name="loc[loc_type]">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Location Quality</label>
-                                                            <input class="form-control" type="text" name="loc[quality]">
+                                                            <input class="form-control" type="text" name="loc[loc_quality]">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label>Location Source</label>
-                                                            <input class="form-control" type="text" name="loc[source]">
+                                                            <input class="form-control" type="text" name="loc[loc_source]">
                                                         </div>
                                                     </div>
                                                 </div> <!-- ./ location quality and source -->
@@ -412,13 +413,23 @@
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
                                                             <label>Location Description</label>
-                                                            <textarea class="form-control" name="loc[desc]" rows="3"></textarea>
+                                                            <textarea class="form-control" name="loc[loc_desc]" rows="3"></textarea> <!-- TODO: add loc_desc to locations model and table -->
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-6">
+                                            </div> <!-- ./ location input fields -->
+                                            <div class="col-sm-6"> <!-- ./ location map -->
+                                                <div id="encMap" style="height:400px;"></div>
+                                                <script type="text/javascript">
+                                                var obmap = L.map('encMap').setView([39.38526, -116.87256], 7);
+                                                L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+                                                    attribution: 'Tiles &copy; Esri'
+                                                }).addTo(obmap);
 
+                                                $("#collapseTwo").on("shown.bs.collapse", function() {
+                                                    obmap.invalidateSize(false);
+                                                });
+                                                </script>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -429,7 +440,6 @@
                     <button type="submit" name="button">Submit</button>
                 </form>
         </div>
-
     <script type="text/javascript">
         $('.species-select').selectize({
             placeholder: 'Select species...',
@@ -440,7 +450,7 @@
             options: [],
             render: {
                 option: function(item, escape){
-                    console.log(item);
+                    // console.log(item);
                     return '<p><span>' + escape(item.common_name) + '</span> - <span>' + escape(item.species_name) + '</span></p>'
                 }
             },

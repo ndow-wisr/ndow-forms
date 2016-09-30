@@ -27,13 +27,14 @@ router.get('/new', function(req, res){
 
 // create, post, create a new encounter
 router.post('/', function(req, res){
-    var dat = req.body;
-    console.log(JSON.stringify(dat, null, '\t'));
+    // var dat = req.body;
+    // console.log(JSON.stringify(dat, null, '\t'));
 
     var animal = req.body.animal;
     var encounter = req.body.encounter;
     var marks = req.body.markOne;
     var abundance = req.body.abundance;
+    var location = req.body.loc;
 
     // TODO: add dynamically created content without hardcoding 'rows'
     // replace blank ("") date removed with null because "" doesn't default to null or the default value and Postgres can't accepts "" as a date input value
@@ -43,21 +44,27 @@ router.post('/', function(req, res){
 
     // buidling the model
     encounter.Abundance = abundance;
-    animal.Encounter = [ encounter ];
-    animal.Mark = [ marks ];
+    encounter.Location = location;
+    animal.Encounters = [ encounter ];
+    animal.Marks = [ marks ];
 
-    console.log(JSON.stringify(animal, null, '\t'));
+    // console.log(JSON.stringify(animal, null, '\t'));
 
     // res.redirect('/encounters/new');
 
     models.Animal.create(animal, {
         include: [
-            { model: models.Encounter,
-              include: [ models.Abundance ]},
+            {
+                model: models.Encounter,
+                include: [
+                    {model: models.Abundance},
+                    {model: models.Location}
+                ]
+            },
             { model: models.Mark }
         ]
     }).then(function(){
-        console.log(JSON.stringify(animal, null, '\t'));
+        // console.log(JSON.stringify(animal, null, '\t'));
         res.redirect('/encounters');
     });
 });
