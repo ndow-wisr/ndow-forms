@@ -27,8 +27,12 @@ router.get('/new', function(req, res){
 
 // create, post, create a new encounter
 router.post('/', function(req, res){
-    // var dat = req.body;
-    // console.log(JSON.stringify(dat, null, '\t'));
+    // Object.keys(dat).forEach(function(key) {
+    //     if (dat[key] == '') {
+    //         dat[key] = null;
+    //     }
+    //     console.log(key, dat[key]);
+    // });
 
     var animal = req.body.animal;
     var encounter = req.body.encounter;
@@ -38,9 +42,10 @@ router.post('/', function(req, res){
 
     // TODO: add dynamically created content without hardcoding 'rows'
     // replace blank ("") date removed with null because "" doesn't default to null or the default value and Postgres can't accepts "" as a date input value
-    if (marks.mark_removed == "") {
-        marks.mark_removed = null;
-    }
+
+    // if (marks.mark_removed == "") {
+    //     marks.mark_removed = null;
+    // }
 
     // buidling the model
     encounter.Abundance = abundance;
@@ -49,24 +54,30 @@ router.post('/', function(req, res){
     animal.Marks = [ marks ];
 
     // console.log(JSON.stringify(animal, null, '\t'));
-
+    Object.keys(abundance).forEach(function(key) {
+        if (abundance[key] == '') {
+            abundance[key] = null;
+        }
+        console.log(key, abundance[key]);
+    });
+    console.log(abundance);
     // res.redirect('/encounters/new');
 
-    models.Animal.create(animal, {
-        include: [
-            {
-                model: models.Encounter,
-                include: [
-                    {model: models.Abundance},
-                    {model: models.Location}
-                ]
-            },
-            { model: models.Mark }
-        ]
-    }).then(function(){
-        // console.log(JSON.stringify(animal, null, '\t'));
-        res.redirect('/encounters');
-    });
+    // models.Animal.create(animal, {
+    //     include: [
+    //         {
+    //             model: models.Encounter,
+    //             include: [
+    //                 {model: models.Abundance},
+    //                 {model: models.Location}
+    //             ]
+    //         },
+    //         { model: models.Mark }
+    //     ]
+    // }).then(function(){
+    //     // console.log(JSON.stringify(animal, null, '\t'));
+    //     res.redirect('/encounters');
+    // });
 });
 
 module.exports = router;
