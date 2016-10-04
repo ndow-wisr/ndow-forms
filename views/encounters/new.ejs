@@ -6,6 +6,7 @@
         <% include ../partials/bootstrap %> <!-- bootstrap & jquery -->
         <% include ../partials/selectizejs %> <!-- selectize js -->
         <% include ../partials/leaflet %> <!-- leafletjs -->
+        <% include ../partials/pikaday %> <!-- pikadayjs -->
         <link rel="stylesheet" href="/stylesheets/main.css">
     </head>
     <body>
@@ -23,7 +24,7 @@
                             <div class='col-sm-4'>
                                 <div class='form-group'>
                                     <label>Date</label>
-                                    <input class="form-control" id="enc_date" name="encounter[enc_date]" required="true" type="date" />
+                                    <input class="form-control" id="enc_date" name="encounter[enc_date]" required="true" type="text" />
                                 </div>
                             </div>
                             <!-- TODO: species dropdown -->
@@ -504,6 +505,11 @@
                 });
             }
         });
+    </script>
+    <script type="text/javascript">
+        var picker = new Pikaday({ field: document.getElementById('enc_date'),
+                           yearRange: [1900, 2026]
+                         });
     </script>
     </body>
 </html>
