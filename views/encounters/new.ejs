@@ -37,7 +37,7 @@
                             <div class='col-sm-4'>
                                 <div class='form-group'>
                                     <label>NDOW ID</label>
-                                    <input class="form-control" id="field_id" name="animal[field_id]" required="true" type="text" />
+                                    <input class="form-control" id="field_id" name="animal[field_id]" type="text" />
                                 </div>
                             </div> <!-- ./ date, species, field_id -->
                         </div>
@@ -115,6 +115,37 @@
                             </div>
                         </div>
                     </fieldset> <!-- ./ end enc_reason, enc_method -->
+
+                    <!-- supplemental data checkboxes -->
+                    <fieldset>
+                        <legend>Supplemental Data</legend>
+                        <div class="row pad-bottom">
+                            <div class="col-sm-3">
+                                <label class="checkbox-inline input-lg"><input type="checkbox"> Abundance</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="checkbox-inline input-lg"><input type="checkbox"> Marks</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="checkbox-inline input-lg"><input type="checkbox"> Capture Location</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="checkbox-inline input-lg"><input type="checkbox"> Release Location</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="checkbox-inline input-lg"><input type="checkbox"> Biometric</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="checkbox-inline input-lg"><input type="checkbox"> Vitals</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="checkbox-inline input-lg"><input type="checkbox"> Injuries</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="checkbox-inline input-lg"><input type="checkbox"> Medications</label>
+                            </div>
+                        </div>
+                    </fieldset> <!-- ./ supplemental data checkboxes -->
 
                     <!-- accordion of data modules -->
                     <div class="panel-group" id="accordion" role="tablist">
@@ -197,6 +228,7 @@
                                 </div>
                             </div>
                         </div> <!-- ./ end abundance module -->
+
                         <!-- mark module -->
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="headingOne">
@@ -324,6 +356,7 @@
                                 </div>
                             </div>
                         </div> <!-- ./ end mark module -->
+
                         <!-- capture location module -->
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="headingTwo">

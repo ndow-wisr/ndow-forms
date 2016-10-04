@@ -118,3 +118,7 @@ img.media-object {
 .mg-even {
     background-color: #F5F5F5;
 }
+
+input[type=checkbox] {
+    transform: scale(1.15);
+}
