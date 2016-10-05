@@ -13,142 +13,200 @@
 
         <% include ../partials/navigation %>
 
-        <div class="container col-sm-12">
-            <h2>Wildlife Health Capture Form</h2>
-                <form action="/encounters" method="post">
-                    <fieldset>
-                        <legend>Encounter Information</legend>
-                        <!-- date, species, field_id -->
-                        <div class='row'>
-                            <!-- TODO: date picker -->
-                            <div class='col-sm-4'>
-                                <div class='form-group'>
-                                    <label>Date</label>
-                                    <input class="form-control" id="enc_date" name="encounter[enc_date]" required="true" type="text" />
-                                </div>
-                            </div>
-                            <!-- TODO: species dropdown -->
-                            <div class='col-sm-4'>
-                                <div class='form-group'>
-                                    <label>Species</label>
-                                    <!-- <input type="integer" class="species-select" name="animal[species_id]"> -->
-                                    <select name="animal[species_id]" class="species-select"></select>
-                                </div>
-                            </div>
-                            <div class='col-sm-4'>
-                                <div class='form-group'>
-                                    <label>NDOW ID</label>
-                                    <input class="form-control" id="field_id" name="animal[field_id]" type="text" />
-                                </div>
-                            </div> <!-- ./ date, species, field_id -->
-                        </div>
-                        <!-- status, sex, age -->
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <input class="form-control" id="life_status" type="text" name="encounter[life_status]" required="true">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label>Sex</label>
-                                    <input class="form-control" id="sex" type="text" name="animal[sex]" required="true">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label>Age</label>
-                                    <input class="form-control" id="encounter[age]" type="text" name="encounter[age]" required="true">
-                                </div>
-                            </div>
-                        </div> <!-- ./ status, sex, age -->
-                        <!-- recapture, relocated -->
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label>Recapture</label>
-                                    <select class="form-control" name="encounter[reencounter]" id="reencounter">
-                                        <option value="false">No</option>
-                                        <option value="true">Yes</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label>Relocated</label>
-                                    <select class="form-control" name="encounter[relocated]" id="relocated">
-                                        <option value="false">No</option>
-                                        <option value="true">Yes</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div> <!-- ./ recapture, relocation -->
-                    </fieldset>
-                    <fieldset> <!-- enc_method, enc_reason -->
-                        <legend>Methods and Justification</legend>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label>Encounter Method</label>
-                                    <select class="form-control" name="encounter[enc_method]">
-                                        <option value="null"></option>
-                                        <option value="Capture Crew - Helicopter">Capture Crew - Helicopter</option>
-                                        <option value="Basecamp - Helicopter">Basecamp - Helicopter</option>
-                                        <option value="Marked - Dead">Marked - Dead</option>
-                                        <option value="Marked - Observation">Marked - Observation</option>
-                                        <option value="Unmarked - Dead">Unmarked - Dead</option>
-                                        <option value="Collar Failure">Collar Failure</option>
-                                        <option value="Collar Dropped">Collar Dropped</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label>Reason for Encounter</label>
-                                    <select name="encounter[enc_reason]" id="" class="form-control">
-                                        <option value="null"></option>
-                                        <option value="Disease Surveilance">Disease Surveilance</option>
-                                        <option value="Translocation">Translocation</option>
-                                        <option value="Monitoring">Monitoring</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset> <!-- ./ end enc_reason, enc_method -->
+        <div class="container">
+        <form class="form-horizontal" action="/encounters" method="POST" name="encForm">
+            <!-- animal and encounter module -->
+            <fieldset>
+                <legend>Entry Form</legend>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Encounter Date</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="encDate" name="enc[enc_date]">
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>pick a date from the dropdown</small></span>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    var picker = new Pikaday({
+                        field: document.getElementById('encDate'),
+                        format: 'YYYY-MM-DD',
+                        yearRange: [1990, 2020]
+                    });
+                </script>
+                <div class="form-group"> <!-- TODO: selectize -->
+                    <label class="col-sm-2 control-label">Species</label>
+                    <div class="col-sm-5">
+                        <select class="form-control species-select" id="encSpecies" name="animal[species_id]"></select>
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>start typing a common name, then select from the list</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">NDOW ID</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="ndowId" name="animal[field_id]">
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>enter the NDOW ID for this animal</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Status</label>
+                    <div class="col-sm-5">
+                        <select class="form-control" name="enc[status]">
+                            <option value=""></option>
+                            <option value="alive">Alive</option>
+                            <option value="mortality">Mortality</option>
+                            <option value="hunter harvest">Hunter Harvest</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>select the life status of the encounter</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Sex</label>
+                    <div class="col-sm-5">
+                        <select class="form-control" name="animal[sex]">
+                            <option value=""></option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="unk">Unknown</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>select the sex of the species</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Age</label>
+                    <div class="col-sm-5">
+                        <select class="form-control" name="enc[age]">
+                            <option value=""></option>
+                            <option value="yoy">young-of-year</option>
+                            <option value="Juvenile">Juvenile</option>
+                            <option value="Adult">Adult</option>
+                            <option value="unk">Unknown</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>select the age of the animal</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Capture Reason</label>
+                    <div class="col-sm-5">
+                        <select class="form-control" name="enc[enc_reason]">
+                            <option value=""></option>
+                            <option value="surveilance">Disease Surveilance</option>
+                            <option value="translocation">Translocation</option>
+                            <option value="monitoring">Monitoring</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>select a reason for the capture</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Capture Method</label>
+                    <div class="col-sm-5">
+                        <select class="form-control" name="enc[enc_method]">
+                            <option value=""></option>
+                            <option value="Capture Crew - Helicopter">Capture Crew - Helicopter</option>
+                            <option value="Basecamp - Helicopter">Basecamp - Helicopter</option>
+                            <option value="Marked - Dead">Marked - Dead</option>
+                            <option value="Marked - Observation">Marked - Observation</option>
+                            <option value="Unmarked - Dead">Unmarked - Dead</option>
+                            <option value="Collar Failure">Collar Failure</option>
+                            <option value="Collar Drop">Collar Drop</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>select the capture method used for this animal</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Re-Encounter?</label>
+                    <div class="col-sm-5">
+                        <select class="form-control" name="enc[reencounter]">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>was this animal previously encountered (capture)</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Relocated?</label>
+                    <div class="col-sm-5">
+                        <select class="form-control" name="enc[relocated]">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>is this animal being relocated to a new location</small></span>
+                    </div>
+                </div>
+            </fieldset>
 
-                    <!-- supplemental data checkboxes -->
-                    <fieldset>
-                        <legend>Supplemental Data</legend>
-                        <div class="row pad-bottom">
-                            <div class="col-sm-3">
-                                <label class="checkbox-inline input-lg"><input type="checkbox"> Abundance</label>
-                            </div>
-                            <div class="col-sm-3">
-                                <label class="checkbox-inline input-lg"><input type="checkbox"> Marks</label>
-                            </div>
-                            <div class="col-sm-3">
-                                <label class="checkbox-inline input-lg"><input type="checkbox"> Capture Location</label>
-                            </div>
-                            <div class="col-sm-3">
-                                <label class="checkbox-inline input-lg"><input type="checkbox"> Release Location</label>
-                            </div>
-                            <div class="col-sm-3">
-                                <label class="checkbox-inline input-lg"><input type="checkbox"> Biometric</label>
-                            </div>
-                            <div class="col-sm-3">
-                                <label class="checkbox-inline input-lg"><input type="checkbox"> Vitals</label>
-                            </div>
-                            <div class="col-sm-3">
-                                <label class="checkbox-inline input-lg"><input type="checkbox"> Injuries</label>
-                            </div>
-                            <div class="col-sm-3">
-                                <label class="checkbox-inline input-lg"><input type="checkbox"> Medications</label>
-                            </div>
-                        </div>
-                    </fieldset> <!-- ./ supplemental data checkboxes -->
+            <!-- capture location data -->
+            <fieldset>
+                <legend>Capture Location</legend>
+                <!-- TODO: add leaflet map -->
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Location Name</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="" name="loc[loc_name]">
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>enter a short name for the location</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Longitude</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="" name="loc[loc_lon]">
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>longitude of the capture location</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Latitude</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="" name="loc[loc_lat]">
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>latitude of the capture location</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Mountain Range</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="" name="loc[loc_mtn_range]">
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>name of the range the animal was captured</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Hunt Unit</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="" name="loc[loc_hunt_unit]">
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>hunt unit the animal was captured in</small></span>
+                    </div>
+                </div>
+            </fieldset>
 
-                    <!-- accordion of data modules -->
+            <legend>Supplemental Data</legend>
+
+            <!-- accordion of data modules -->
                     <div class="panel-group" id="accordion" role="tablist">
                         <!-- abundance module -->
                         <div class="panel panel-default">
@@ -159,73 +217,63 @@
                             </div>
                             <div class="panel-collapse collapse" id="collapseAbundance" role="tabpanel">
                                 <div class="panel-body">
-                                    <fieldset>
-                                        <legend>Encounter Abundance</legend>
-                                        <div>
-                                            <div class="row">
-                                                <div class="col-md-3 col-lg-1">
-                                                    <div class="form-group">
-                                                        <label>Female</label>
-                                                        <input type="number" min=0 class="form-control" name="abundance[n_female]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-lg-1">
-                                                    <div class="form-group">
-                                                        <label>Male</label>
-                                                        <input type="number" min=0 class="form-control" name="abundance[n_male]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-lg-1">
-                                                    <div class="form-group">
-                                                        <label>Unk Sex</label>
-                                                        <input type="number" min=0 class="form-control" name="abundance[n_unk_sex]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-lg-1">
-                                                    <div class="form-group">
-                                                        <label>Sex Total</label>
-                                                        <input type="number" min=0 class="form-control" name="abundance[sex_total]" readonly="true">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-lg-1">
-                                                    <div class="form-group">
-                                                        <label>Adult</label>
-                                                        <input type="number" min=0 class="form-control" name="abundance[n_adult]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-lg-1">
-                                                    <div class="form-group">
-                                                        <label>Young</label>
-                                                        <input type="number" min=0 class="form-control" name="abundance[n_young]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-lg-1">
-                                                    <div class="form-group">
-                                                        <label>Unk Age</label>
-                                                        <input type="number" min=0 class="form-control" name="abundance[n_unk_age]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-lg-1">
-                                                    <div class="form-group">
-                                                        <label>Age Total</label>
-                                                        <input type="number" min=0 class="form-control" name="abundance[age_total]" readonly="true">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-lg-1">
-                                                    <div class="form-group">
-                                                        <label>Total</label>
-                                                        <input type="number" min=0 class="form-control" name="abundance[n_total]" readonly="true">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-lg-3">
-                                                    <div class="form-group">
-                                                        <label>Young Age Class</label>
-                                                        <input type="text" class="form-control" name="abundance[young_age_class]">
-                                                    </div>
-                                                </div>
-                                            </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Mark Type</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control" id="" name="mark[mark_type]">
                                         </div>
-                                    </fieldset>
+                                        <div class="col-sm-5">
+                                            <span class="help-block"><small>what type of mark was given to this animal</small></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Mark ID</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control" id="" name="mark[mark_id]">
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <span class="help-block"><small>what is the ID of the given mark</small></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Mark Color</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control" id="" name="mark[mark_color]">
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <span class="help-block"><small>what color is the mark, NA is acceptable</small></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Mark Location</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control" id="" name="mark[mark_location]">
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <span class="help-block"><small>where on the animal is the mark</small></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Date Given</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control" id="" name="mark[date_given]">
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <span class="help-block"><small>what date was the mark given</small></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Date Removed</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control" id="" name="mark[mark_removed]">
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <span class="help-block"><small>what date was the mark removed</small></span>
+                                        </div>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div> <!-- ./ end abundance module -->
@@ -239,121 +287,7 @@
                             </div>
                             <div class="panel-collapse collapse" id="collapseOne" role="tabpanel">
                                 <div class="panel-body">
-                                    <fieldset>
-                                        <legend>Mark Information</legend>
-                                        <!-- TODO: dropdowns on mark type, color? -->
-                                        <!-- mark number 1, odd -->
-                                        <div class="mark-group mg-odd rounded">
-                                            <div class="row">
-                                                <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <label>Mark Type</label>
-                                                        <input class="form-control" type="text" name="markOne[mark_type]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <label>Mark Location</label>
-                                                        <input class="form-control" type="text" name="markOne[mark_location]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <label>Mark ID</label>
-                                                        <input class="form-control" type="text" name="markOne[mark_id]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <label>Mark Color</label>
-                                                        <input class="form-control" type="text" name="markOne[mark_color]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <label>Date Given</label>
-                                                    <input class="form-control" type="date" name="markOne[date_given]">
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <label>Date Removed</label>
-                                                    <input class="form-control" type="date" name="markOne[mark_removed]">
-                                                </div>
-                                            </div>
-                                        </div> <!-- ./ mark number 1, odd -->
-                                        <!-- mark number 2, even -->
-                                        <div class="mark-group mg-even rounded">
-                                            <div class="row">
-                                                <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <label>Mark Type</label>
-                                                        <input class="form-control" type="text" name="markTwo[mark_type]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <label>Mark Location</label>
-                                                        <input class="form-control" type="text" name="markTwo[mark_location]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <label>Mark ID</label>
-                                                        <input class="form-control" type="text" name="markTwo[mark_id]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <label>Mark Color</label>
-                                                        <input class="form-control" type="text" name="markTwo[mark_color]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <label>Date Given</label>
-                                                    <input class="form-control" type="date" name="markTwo[date_given]">
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <label>Date Removed</label>
-                                                    <input class="form-control" type="date" name="markTwo[mark_removed]">
-                                                </div>
-                                            </div>
-                                        </div> <!-- ./ mark number 2, even -->
-                                        <!-- mark number 3, odd -->
-                                        <div class="mark-group mg-odd rounded">
-                                            <div class="row">
-                                                <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <label>Mark Type</label>
-                                                        <input class="form-control" type="text" name="markThree[mark_type]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <label>Mark Location</label>
-                                                        <input class="form-control" type="text" name="markThree[mark_location]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <label>Mark ID</label>
-                                                        <input class="form-control" type="text" name="markThree[mark_id]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <label>Mark Color</label>
-                                                        <input class="form-control" type="text" name="markThree[mark_color]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <label>Date Given</label>
-                                                    <input class="form-control" type="date" name="markThree[date_given]">
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <label>Date Removed</label>
-                                                    <input class="form-control" type="date" name="markThree[mark_removed]">
-                                                </div>
-                                            </div>
-                                        </div> <!-- ./ mark number 3, odd -->
-                                    </fieldset>
+                                    blah
                                 </div>
                             </div>
                         </div> <!-- ./ end mark module -->
@@ -367,113 +301,28 @@
                             </div>
                             <div class="panel-collapse collapse" id="collapseTwo" role="tabpanel">
                                 <div class="panel-body">
-                                    <fieldset>
-                                        <legend>Capture Location Information</legend>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <!-- location name -->
-                                                <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <label>Location Name</label>
-                                                            <input class="form-control" type="text" name="loc[loc_name]">
-                                                        </div>
-                                                    </div>
-                                                </div> <!-- ./ location name -->
-                                                <!-- coordinates -->
-                                                <div class="row">
-                                                    <div class="col-sm-4">
-                                                        <div class="form-group">
-                                                            <label>Longitude</label>
-                                                            <input class="form-control" type="text" name="loc[loc_long]">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <div class="form-group">
-                                                            <label>Latitude</label>
-                                                            <input class="form-control" type="text" name="loc[loc_lat]">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <div class="form-group">
-                                                            <label>Accuracy</label>
-                                                            <input class="form-control" type="text" name="loc[loc_accuracy]">
-                                                        </div>
-                                                    </div>
-                                                </div> <!-- ./ coordinates -->
-                                                <!-- spatial units -->
-                                                <div class="row">
-                                                    <div class="col-sm-4">
-                                                        <div class="form-group">
-                                                            <label>Mountain Range</label>
-                                                            <input class="form-control" type="text" name="loc[loc_mtn_range]">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <div class="form-group">
-                                                            <label>Hunt Unit</label>
-                                                            <input class="form-control" type="text" name="loc[loc_hunt_unit]">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <div class="form-group">
-                                                            <label>Management Area</label>
-                                                            <input class="form-control" type="text" name="loc[loc_mgmt_area]">
-                                                        </div>
-                                                    </div>
-                                                </div> <!-- ./ spatial units -->
-                                                <!-- location quality and source -->
-                                                <div class="row">
-                                                    <div class="col-sm-4">
-                                                        <div class="form-group">
-                                                            <label>Location Type</label>
-                                                            <input class="form-control" type="text" name="loc[loc_type]">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <div class="form-group">
-                                                            <label>Location Quality</label>
-                                                            <input class="form-control" type="text" name="loc[loc_quality]">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <div class="form-group">
-                                                            <label>Location Source</label>
-                                                            <input class="form-control" type="text" name="loc[loc_source]">
-                                                        </div>
-                                                    </div>
-                                                </div> <!-- ./ location quality and source -->
-                                                <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <label>Location Description</label>
-                                                            <textarea class="form-control" name="loc[loc_desc]" rows="3"></textarea> <!-- TODO: add loc_desc to locations model and table -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> <!-- ./ location input fields -->
-                                            <div class="col-sm-6"> <!-- ./ location map -->
-                                                <div id="encMap" style="height:400px;"></div>
-                                                <script type="text/javascript">
-                                                var obmap = L.map('encMap').setView([39.38526, -116.87256], 7);
-                                                L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-                                                    attribution: 'Tiles &copy; Esri'
-                                                }).addTo(obmap);
-
-                                                $("#collapseTwo").on("shown.bs.collapse", function() {
-                                                    obmap.invalidateSize(false);
-                                                });
-                                                </script>
-                                            </div>
-                                        </div>
-                                    </fieldset>
+                                    blah ...
                                 </div>
                             </div>
                         </div> <!-- ./ end capture location module -->
                     </div>
-                    <button type="submit" name="button">Submit</button>
-                </form>
-        </div>
+
+            <button type="submit" name="button" class="btn btn-success">Save</button>
+
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"></label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="" name="">
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small></small></span>
+                    </div>
+                </div>
+
+
+
+
     <script type="text/javascript">
         $('.species-select').selectize({
             placeholder: 'Select species...',

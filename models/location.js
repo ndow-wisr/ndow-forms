@@ -13,6 +13,7 @@ module.exports = function(sequelize, DataTypes) {
         loc_mtn_range: DataTypes.STRING,
         loc_hunt_unit: DataTypes.INTEGER,
         loc_mgmt_area: DataTypes.INTEGER
+        // TODO: add loc_description
     }, {
         underscored: true,
         freezeTabelName: true,

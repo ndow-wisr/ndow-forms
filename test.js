@@ -30,7 +30,10 @@ var mark = {
 var abundance = {
     n_male: 1,
     n_female: 2,
-    n_unk_sex: 3
+    n_unk_sex: 3,
+    n_adult: '',
+    n_young: '',
+    n_unk_age: ''
 };
 var location = {
     loc_name: 'Antelope Valley',
@@ -47,20 +50,29 @@ var location = {
     loc_mgmt_area: 16
 };
 
-encounter.Abundance = abundance;
-encounter.Location = location;
-animal.Encounters = [ encounter ];
-animal.Marks = [ mark ];
-
-models.Animal.create(animal, {
-    include: [
-        {
-            model: models.Encounter,
-            include: [
-                {model: models.Abundance},
-                {model: models.Location}
-            ]
-        },
-        {model: models.Mark}
-    ]
+Object.keys(abundance).forEach(function(key) {
+    if (abundance[key] == '') {
+        // abundance[key] = null;
+        delete abundance[key];
+    }
+    console.log(key, abundance[key]);
 });
+console.log(abundance);
+
+// encounter.Abundance = abundance;
+// encounter.Location = location;
+// animal.Encounters = [ encounter ];
+// animal.Marks = [ mark ];
+
+// models.Animal.create(animal, {
+//     include: [
+//         {
+//             model: models.Encounter,
+//             include: [
+//                 {model: models.Abundance},
+//                 {model: models.Location}
+//             ]
+//         },
+//         {model: models.Mark}
+//     ]
+// });

@@ -27,41 +27,45 @@ router.get('/new', function(req, res){
 
 // create, post, create a new encounter
 router.post('/', function(req, res){
-    // Object.keys(dat).forEach(function(key) {
-    //     if (dat[key] == '') {
-    //         dat[key] = null;
-    //     }
-    //     console.log(key, dat[key]);
-    // });
+    // console.log(JSON.stringify(req.body, null, '\t'));
 
-    var animal = req.body.animal;
-    var encounter = req.body.encounter;
-    var marks = req.body.markOne;
-    var abundance = req.body.abundance;
-    var location = req.body.loc;
+    animal = req.body.animal;
+    encounter = req.body.enc;
+    location = req.body.loc;
+
+    encounter.Location = location;
+    animal.Encounters = [ encounter ];
+
+    console.log(JSON.stringify(animal, null, '\t'));
+
+    models.Animal.create(animal, {
+        include: [
+            {
+                model: models.Encounter,
+                include: [
+                    { model: models.Location }
+                ]
+            }
+        ]
+    }).then(function(){
+        res.redirect('/encounters/new');
+    });
+
+    // var animal = req.body.animal;
+    // var encounter = req.body.encounter;
+    // var marks = req.body.markOne;
+    // var abundance = req.body.abundance;
+    // var location = req.body.loc;
 
     // TODO: add dynamically created content without hardcoding 'rows'
     // replace blank ("") date removed with null because "" doesn't default to null or the default value and Postgres can't accepts "" as a date input value
 
-    // if (marks.mark_removed == "") {
-    //     marks.mark_removed = null;
-    // }
-
     // buidling the model
-    encounter.Abundance = abundance;
-    encounter.Location = location;
-    animal.Encounters = [ encounter ];
-    animal.Marks = [ marks ];
+    // encounter.Abundance = abundance;
+    // encounter.Location = location;
+    // animal.Encounters = [ encounter ];
+    // animal.Marks = [ marks ];
 
-    // console.log(JSON.stringify(animal, null, '\t'));
-    Object.keys(abundance).forEach(function(key) {
-        if (abundance[key] == '') {
-            abundance[key] = null;
-        }
-        console.log(key, abundance[key]);
-    });
-    console.log(abundance);
-    // res.redirect('/encounters/new');
 
     // models.Animal.create(animal, {
     //     include: [
