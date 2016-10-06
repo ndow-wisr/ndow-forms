@@ -29,27 +29,38 @@ router.get('/new', function(req, res){
 router.post('/', function(req, res){
     // console.log(JSON.stringify(req.body, null, '\t'));
 
-    animal = req.body.animal;
-    encounter = req.body.enc;
-    location = req.body.loc;
+    var animal = req.body.animal;
+    var encounter = req.body.enc;
+    var location = req.body.loc;
+
+    if (encounter.marks == 'yes') {
+        var marks = req.body.mark;
+        Object.keys(marks).forEach(function(key) {
+            if (marks[key] == '') {
+                delete marks[key];
+            }
+        });
+        animal.Marks = [ marks ];
+    };
 
     encounter.Location = location;
     animal.Encounters = [ encounter ];
 
     console.log(JSON.stringify(animal, null, '\t'));
 
-    models.Animal.create(animal, {
-        include: [
-            {
-                model: models.Encounter,
-                include: [
-                    { model: models.Location }
-                ]
-            }
-        ]
-    }).then(function(){
+    // models.Animal.create(animal, {
+    //     include: [
+    //         { model: models.Mark },
+    //         {
+    //             model: models.Encounter,
+    //             include: [
+    //                 { model: models.Location }
+    //             ]
+    //         }
+    //     ]
+    // }).then(function(){
         res.redirect('/encounters/new');
-    });
+    // });
 
     // var animal = req.body.animal;
     // var encounter = req.body.encounter;

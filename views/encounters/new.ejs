@@ -153,6 +153,74 @@
                 </div>
             </fieldset>
 
+            <!-- weather condition & handling time -->
+            <fieldset>
+                <legend>Weather and Handling</legend>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Ambient Temp</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="" name="env[amb_temp]">
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>ambient temperature while the animal is handled</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Weather</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="" name="env[weather]">
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>weather while the animal is handled</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Wind</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="" name="env[wind]">
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>how strongly is the wind blowing while the animal is handled</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Capture Time</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="" name="enc[cap_time]">
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>what time was the animal captured or encountered</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Chase Time</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="" name="enc[chase_time]">
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>how long was the animal chased by the helicopter</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Arrival Time</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="" name="enc[arr_time]">
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>what time did the animal arrive at basecamp</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Finished Time</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="" name="enc[fin_time]">
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>what time was the animal no longer being handled</small></span>
+                    </div>
+                </div>
+            </fieldset>
+
             <!-- capture location data -->
             <fieldset>
                 <legend>Capture Location</legend>
@@ -208,75 +276,105 @@
 
             <!-- accordion of data modules -->
                     <div class="panel-group" id="accordion" role="tablist">
-                        <!-- abundance module -->
+                        <!-- marks module -->
                         <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingAbundance">
+                            <div class="panel-heading" role="tab" id="headingMarks">
                                 <h4 class="panel-title">
-                                    <a href="#collapseAbundance" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false">Encounter Abundance</a>
+                                    <a href="#collapseMarks" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false">Marks</a>
                                 </h4>
                             </div>
-                            <div class="panel-collapse collapse" id="collapseAbundance" role="tabpanel">
+                            <div class="panel-collapse collapse" id="collapseMarks" role="tabpanel">
                                 <div class="panel-body">
-
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">Mark Type</label>
+                                        <label class="col-sm-2 control-label">Mark Data?</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="" name="mark[mark_type]">
+                                            <select class="form-control" name="enc[marks]">
+                                                <option value="no">No</option>
+                                                <option value="yes">Yes</option>
+                                            </select>
                                         </div>
                                         <div class="col-sm-5">
-                                            <span class="help-block"><small>what type of mark was given to this animal</small></span>
+                                            <span class="help-block"><small>is there mark data that needs to be entered</small></span>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Mark ID</label>
-                                        <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="" name="mark[mark_id]">
-                                        </div>
-                                        <div class="col-sm-5">
-                                            <span class="help-block"><small>what is the ID of the given mark</small></span>
+                                    <hr>
+                                    <div id="marks">
+                                        <div class="" id="markRow">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Mark Type</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="" name="mark[mark_type]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what type of mark was given to this animal</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Mark ID</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="" name="mark[mark_id]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what is the ID of the given mark</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Mark Color</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="" name="mark[mark_color]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what color is the mark, NA is acceptable</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Mark Location</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="" name="mark[mark_location]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>where on the animal is the mark</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Date Given</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="dateGiven" name="mark[date_given]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what date was the mark given</small></span>
+                                                </div>
+                                                <script>
+                                                    var picker = new Pikaday({
+                                                        field: document.getElementById('dateGiven'),
+                                                        format: 'YYYY-MM-DD',
+                                                        yearRange: [1990, 2020]
+                                                    });
+                                                </script>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Date Removed</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="dateRem" name="mark[mark_removed]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what date was the mark removed</small></span>
+                                                </div>
+                                                <script>
+                                                    var picker = new Pikaday({
+                                                        field: document.getElementById('dateRem'),
+                                                        format: 'YYYY-MM-DD',
+                                                        yearRange: [1990, 2020]
+                                                    });
+                                                </script>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Mark Color</label>
-                                        <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="" name="mark[mark_color]">
-                                        </div>
-                                        <div class="col-sm-5">
-                                            <span class="help-block"><small>what color is the mark, NA is acceptable</small></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Mark Location</label>
-                                        <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="" name="mark[mark_location]">
-                                        </div>
-                                        <div class="col-sm-5">
-                                            <span class="help-block"><small>where on the animal is the mark</small></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Date Given</label>
-                                        <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="" name="mark[date_given]">
-                                        </div>
-                                        <div class="col-sm-5">
-                                            <span class="help-block"><small>what date was the mark given</small></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Date Removed</label>
-                                        <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="" name="mark[mark_removed]">
-                                        </div>
-                                        <div class="col-sm-5">
-                                            <span class="help-block"><small>what date was the mark removed</small></span>
-                                        </div>
-                                    </div>
-
-
+                                    <button class="btn btn-primary" type="button" name="addMark" onClick="addInput('marks');">Add Mark</button>
                                 </div>
                             </div>
-                        </div> <!-- ./ end abundance module -->
+                        </div> <!-- ./ end mark module -->
+                        <!-- ./ marks module -->
 
                         <!-- mark module -->
                         <div class="panel panel-default">
@@ -310,18 +408,32 @@
             <button type="submit" name="button" class="btn btn-success">Save</button>
 
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label"></label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="" name="">
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small></small></span>
-                    </div>
-                </div>
+<div class="form-group">
+    <label class="col-sm-2 control-label"></label>
+    <div class="col-sm-5">
+        <input type="text" class="form-control" id="" name="">
+    </div>
+    <div class="col-sm-5">
+        <span class="help-block"><small></small></span>
+    </div>
+</div>
 
 
-
+    <script type="text/javascript">
+        var counter = 1;
+        var limit = 3;
+        function addInput(divName){
+         if (counter == limit)  {
+              alert("You have reached the limit of adding " + counter + " inputs");
+         }
+         else {
+              var newdiv = document.createElement('div');
+              newdiv.innerHTML = "Entry " + (counter + 1) + " <br><input type='text' name='myInputs[]'>";
+              document.getElementById(divName).appendChild(newdiv);
+              counter++;
+         }
+        }
+    </script>
 
     <script type="text/javascript">
         $('.species-select').selectize({
