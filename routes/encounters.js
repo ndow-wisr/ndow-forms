@@ -27,12 +27,13 @@ router.get('/new', function(req, res){
 
 // create, post, create a new encounter
 router.post('/', function(req, res){
-    console.log(JSON.stringify(req.body, null, '\t'));
+    // console.log(JSON.stringify(req.body.mark, null, '\t'));
 
-    // var animal = req.body.animal;
-    // var encounter = req.body.enc;
-    // var location = req.body.loc;
-    //
+    var animal = req.body.animal;
+    var encounter = req.body.enc;
+    var location = req.body.loc;
+    var marks = parseDynamicContent(req.body.mark);
+
     // if (encounter.marks == 'yes') {
     //     var marks = req.body.mark;
     //     Object.keys(marks).forEach(function(key) {
@@ -42,25 +43,25 @@ router.post('/', function(req, res){
     //     });
     //     animal.Marks = [ marks ];
     // };
-    //
-    // encounter.Location = location;
-    // animal.Encounters = [ encounter ];
-    //
-    // console.log(JSON.stringify(animal, null, '\t'));
-    //
-    // // models.Animal.create(animal, {
-    // //     include: [
-    // //         { model: models.Mark },
-    // //         {
-    // //             model: models.Encounter,
-    // //             include: [
-    // //                 { model: models.Location }
-    // //             ]
-    // //         }
-    // //     ]
-    // // }).then(function(){
+
+    encounter.Location = location;
+    animal.Encounters = [ encounter ];
+    animal.Marks = marks;
+    console.log(JSON.stringify(animal, null, '\t'));
+
+    models.Animal.create(animal, {
+        include: [
+            { model: models.Mark },
+            {
+                model: models.Encounter,
+                include: [
+                    { model: models.Location }
+                ]
+            }
+        ]
+    }).then(function(){
         res.redirect('/encounters/new');
-    // });
+    });
 
     // var animal = req.body.animal;
     // var encounter = req.body.encounter;
@@ -94,5 +95,25 @@ router.post('/', function(req, res){
     //     res.redirect('/encounters');
     // });
 });
+
+function parseDynamicContent(rq) {
+    var n = 0;
+    var dat = [];
+    while (n < rq[Object.keys(rq)[0]].length) {
+        var m = 0;
+        var obj = {};
+        while (m < Object.keys(rq).length) {
+            var val = rq[Object.keys(rq)[m]][n];
+            if (val == '') {
+                val = null
+            }
+            obj[Object.keys(rq)[m]] = val
+            m++;
+        }
+        dat.push(obj)
+        n++;
+    }
+    return dat;
+}
 
 module.exports = router;
