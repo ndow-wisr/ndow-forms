@@ -24,7 +24,7 @@
                         <input type="text" class="form-control" id="encDate" name="enc[enc_date]">
                     </div>
                     <div class="col-sm-5">
-                        <span class="help-block"><small>pick a date from the dropdown</small></span>
+                        <span class="help-block pick-date"><small>pick a date from the dropdown</small></span>
                     </div>
                 </div>
                 <script type="text/javascript">
@@ -299,11 +299,11 @@
                                     </div>
                                     <hr>
                                     <div id="marks">
-                                        <div class="" id="markRow">
+                                        <div class="mark-row" id="markRow">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Mark Type</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="" name="mark[mark_type]">
+                                                    <input type="text" class="form-control" id="markType" name="mark[mark_type]">
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what type of mark was given to this animal</small></span>
@@ -312,7 +312,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Mark ID</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="" name="mark[mark_id]">
+                                                    <input type="text" class="form-control" id="markID" name="mark[mark_id]">
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what is the ID of the given mark</small></span>
@@ -321,7 +321,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Mark Color</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="" name="mark[mark_color]">
+                                                    <input type="text" class="form-control" id="markColor" name="mark[mark_color]">
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what color is the mark, NA is acceptable</small></span>
@@ -330,7 +330,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Mark Location</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="" name="mark[mark_location]">
+                                                    <input type="text" class="form-control" id="markLocation" name="mark[mark_location]">
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>where on the animal is the mark</small></span>
@@ -339,38 +339,24 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Date Given</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="dateGiven" name="mark[date_given]">
+                                                    <input type="text" class="form-control pick-date" id="dateGiven" name="mark[date_given]">
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what date was the mark given</small></span>
                                                 </div>
-                                                <script>
-                                                    var picker = new Pikaday({
-                                                        field: document.getElementById('dateGiven'),
-                                                        format: 'YYYY-MM-DD',
-                                                        yearRange: [1990, 2020]
-                                                    });
-                                                </script>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Date Removed</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="dateRem" name="mark[mark_removed]">
+                                                    <input type="text" class="form-control pick-date" id="dateRemoved" name="mark[mark_removed]">
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what date was the mark removed</small></span>
                                                 </div>
-                                                <script>
-                                                    var picker = new Pikaday({
-                                                        field: document.getElementById('dateRem'),
-                                                        format: 'YYYY-MM-DD',
-                                                        yearRange: [1990, 2020]
-                                                    });
-                                                </script>
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary" type="button" name="addMark" onClick="addInput('marks');">Add Mark</button>
+                                    <button class="btn btn-primary btn-add" type="button" name="addMark" onClick="addInput('marks');">Add Mark</button>
                                 </div>
                             </div>
                         </div> <!-- ./ end mark module -->
@@ -421,20 +407,31 @@
 
     <script type="text/javascript">
         var counter = 1;
-        var limit = 3;
-        function addInput(divName){
-         if (counter == limit)  {
-              alert("You have reached the limit of adding " + counter + " inputs");
-         }
-         else {
-              var newdiv = document.createElement('div');
-              newdiv.innerHTML = "Entry " + (counter + 1) + " <br><input type='text' name='myInputs[]'>";
-              document.getElementById(divName).appendChild(newdiv);
-              counter++;
-         }
+        function addInput(divName) {
+            var $clone = $("#markRow").clone();
+
+            $clone.find('[id]').each(function() {
+                var $th = $(this);
+                $th.attr('id', $th.attr('id') + counter)
+            });
+
+            counter ++;
+
+            if (counter % 2 == 0) {
+                $clone.addClass("row-shaded");
+            }
+
+            $clone.appendTo("#marks");
         }
     </script>
-
+    <script type="text/javascript">
+        $('body').on('focus',".pick-date", function(){
+            $(this).pikaday({
+                format: 'YYYY-MM-DD',
+                yearRange: [1990, 2020]
+            });
+        });
+    </script>
     <script type="text/javascript">
         $('.species-select').selectize({
             placeholder: 'Select species...',

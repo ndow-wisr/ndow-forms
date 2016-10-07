@@ -119,6 +119,25 @@ img.media-object {
     background-color: #F5F5F5;
 }
 
-input[type=checkbox] {
+/*input[type=checkbox] {
     transform: scale(1.15);
+}*/
+
+.mark-row {
+    padding-top: 15px;
+    padding-bottom: 1px;
+    border-radius: 5px;
+}
+
+.row-shaded {
+    background-color: #F5F5F5;
+}
+
+.btn-add {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    padding-left: 50px;
+    display: block;
+    padding-right: 50px;
 }
