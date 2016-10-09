@@ -19,7 +19,8 @@
 
 		<!-- main content panel -->
         <div class="col-md-7">
-			<a href="/species/<%= observation.Species.id %>">
+			<!-- <a href="/species/<%= observation.Species.id %>"> -->
+			<a href="#">
             	<h2><em><%= observation.Species.species_name %></em> <small><%= observation.Species.common_name %></small></h2>
 			</a>
             <hr>
@@ -161,6 +162,9 @@
 			created: <%= observation.created_at.toISOString().replace(/T/, ' ').replace(/\..+/, '') %>
 		</small>
 	</div>
+
+	<% include ../partials/footer %>
+
 	<script type="text/javascript">
 		var coords = [<%= observation.geo_y %>, <%= observation.geo_x %>];
 		var obmap = L.map('obs-map').setView(coords, 11);

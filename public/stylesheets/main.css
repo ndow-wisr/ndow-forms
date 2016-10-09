@@ -141,3 +141,14 @@ img.media-object {
     display: block;
     padding-right: 50px;
 }
+
+.footer {
+    background-color: #F8F8F8;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.footer-col {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

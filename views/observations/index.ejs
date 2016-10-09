@@ -46,7 +46,8 @@
 						<% observations.forEach(function(observation){ %>
 							<tr>
 								<td>
-									<a href="/species/<%= observation.Species.id %>">
+									<!-- <a href="/species/<%= observation.Species.id %>"> -->
+									<a href="#">
 										<%= observation.Species.common_name %><br>
 										<small class="text-muted"><em><%= observation.Species.species_name %></em></small>
 									</a>
@@ -91,6 +92,8 @@
 			<div id="mapid" style="height: 400px;"></div>
 			<br>
 		</div>
+
+		<% include ../partials/footer %>
 
 		<script type="text/javascript">
 			$(document).ready(function() {
