@@ -26,7 +26,7 @@
 					</p>
 				</div>
 			</header>
-
+			<h2><%= currentUser.user_role %></h2>
 			<div class="table-responsive">
 				<table id="encTable" class="display" cellspacing="0" width="100%">
 					<thead>
@@ -38,6 +38,7 @@
 							<th>Unk</th>
 							<th>Total</th>
 							<th>Location</th>
+							<th>User</th>
 							<th>Action</th>
 						</tr>
 					</thead>
@@ -69,9 +70,12 @@
 									<%= observation.location %>
 								</td>
 								<td>
+									<%= observation.User.id %>
+								</td>
+								<td>
 									<form method="POST" action="/observations/<%= observation.id %>?_method=DELETE" class="form-inline">
 										<a href="/observations/<%= observation.id %>" class="btn btn-primary btn-sm">View</a>
-										<% if(currentUser){ %>
+										<% if( (currentUser && observation.User.id == (currentUser.id)) || (currentUser && observation.User.user_role == ('super'))){ %>
 											<a href="/observations/<%= observation.id %>/edit" class="btn btn-warning btn-sm">Edit</a>
 											<button class="btn btn-sm btn-danger">Delete</button>
 										<% } %>

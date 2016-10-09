@@ -114,7 +114,7 @@
             </div>
 
 			<!-- observation action buttons -->
-			<% if(currentUser) { %>
+			<% if( (currentUser && observation.User.id == (currentUser.id)) || (currentUser && observation.User.user_role == ('super')) ) { %>
 				<div id="obs-action-btns" class="pad-bottom text-right">
 					<a class="btn btn-warning btn-block mgn-bottom" href="/observations/<%= observation.id %>/edit">Edit Observation</a>
 					<form id="delete-form" action="/observations/<%= observation.id %>?_method=DELETE" method="post">
