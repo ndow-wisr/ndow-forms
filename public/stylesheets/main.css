@@ -8,9 +8,28 @@ img.media-object {
     margin-left: 10px;
 }
 
+header {
+    height: 100vh;
+    background-image: url("../img/bhs.jpg");
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-attachment: fixed;
+}
+
+.opaque-box {
+    background-color: rgba(255, 255, 255, .25);
+    padding-bottom: 25px;
+    border-radius: 10px;
+}
+
 .header-text {
     color: white;
     font-weight: 800;
+    text-shadow: 0px 3px 6px rgba(0, 0, 0, .25)
 }
 
 .landing-body {
