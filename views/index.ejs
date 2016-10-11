@@ -1,87 +1,101 @@
 <!DOCTYPE html>
-<html lang = "en">
-	<head>
-		<meta charset = "utf-8" />
-		<title>NDOW Forms</title>
-		<% include ./partials/bootstrap %>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>NDOW Forms</title>
+	<% include ./partials/bootstrap %>
 		<link rel="stylesheet" href="/stylesheets/main.css">
-	</head>
-	<body>
-		<% include ./partials/navigation %>
+</head>
 
-	<header>
+<body>
+	<% include ./partials/navigation %>
+
+		<header>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<h2 class="header-text">NDOW Forms</h2>
+						<h3 class="header-text">The department's home for online data entry</h3>
+					</div>
+
+					<% if (!currentUser) { %>
+						<div class="col-sm-4 col-sm-offset-1 opaque-box">
+							<form action="/login" method="post">
+								<h2 class="header-text">Login</h2>
+								<div class="form-group">
+									<label for="username" class="header-text">username</label>
+									<input class="form-control" type="text" name="username" placeholder="username">
+								</div>
+								<div class="form-group">
+									<label for="password" class="header-text">Password</label>
+									<input class="form-control" type="password" name="password" placeholder="password">
+								</div>
+								<button class="btn btn-primary" type="submit" name="login">Login</button>
+								<a class="btn btn-default" href="/register">Create Account</a>
+							</form>
+						</div>
+						<% } else { %>
+							<div class="col-sm-4 col-sm-offset-1 opaque-box">
+								<h2 class="header-text">Quick Links</h2>
+								<a href="/observations" class="btn btn-primary btn-lg btn-block"><i class="fa fa-home fa-fw"></i>Observations Home</a>
+								<a href="/observations/new" class="btn btn-primary btn-lg btn-block"><i class="fa fa-plus fa-fw"></i>Enter New Observation</a>
+							</div>
+							<% } %>
+
+				</div>
+			</div>
+		</header>
+
 		<div class="container">
-		<div class="row">
-			<div class="col-sm-6">
-				<h2 class="header-text">NDOW Forms</h2>
-				<h3 class="header-text">The department's home for online data entry</h3>
-			</div>
+			<h2>Data Entry Portals</h2>
+			<p>
+				Each portal has pages for entering, viewing, editing and deleting entries.
+			</p>
 
-			<% if (!currentUser) { %>
-			<div class="col-sm-4 col-sm-offset-1 opaque-box">
-				<form action="/login" method="post">
-	                <h2 class="header-text">Login</h2>
-	                <div class="form-group">
-	                    <label for="username" class="header-text">username</label>
-	                    <input class="form-control" type="text" name="username" placeholder="username">
-	                </div>
-	                <div class="form-group">
-	                    <label for="password" class="header-text">Password</label>
-	                    <input class="form-control" type="password" name="password" placeholder="password">
-	                </div>
-	                <button class="btn btn-primary" type="submit" name="login">Login</button>
-	                <a class="btn btn-default" href="/register">Create Account</a>
-	            </form>
+			<div class="row">
+				<div class="col-sm-6 col-md-4">
+					<div class="thumbnail">
+						<img src="img/kestrel.jpg" />
+						<div class="caption">
+							<h3>Wildlife Observations</h3>
+							<p>
+								Enter, view, and edit Nevada Wildlife Observations. Similar to the NDOW Form 240. Users are required to sign in before using this form.
+							</p>
+							<a href="/observations" class="btn btn-primary btn-block">Launch</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-4">
+					<div class="thumbnail">
+						<img src="https://d2pz2jxkt8wezm.cloudfront.net/public/icons/dest/er-icons-dest-wildlife-dk-23.svg" />
+						<div class="caption">
+							<h3>Wildlife Health</h3>
+							<p>
+								Enter, view, and edit Nevada Wildlife Health Encounter. This form is used for any animal that will have samples sent to a lab.
+							</p>
+							<a href="#" class="btn btn-primary btn-block" disabled="disabled">In Progress</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-4">
+					<div class="thumbnail">
+						<img src="img/TanSheep.png" />
+						<div class="caption">
+							<h3>Bighorn Checkin</h3>
+							<p>
+								Enter, view, and edit hunter harvest bighorn sheep check-ins. Similar to the NDOW Form 336. Users are required to sign in before using this form.
+							</p>
+							<a href="#" class="btn btn-primary btn-block" disabled="disabled">In Progress</a>
+						</div>
+					</div>
+				</div>
 			</div>
-			<% } else { %>
-			<div class="col-sm-4 col-sm-offset-1 opaque-box">
-	            <h2 class="header-text">Quick Links</h2>
-				<a href="/observations" class="btn btn-primary btn-lg btn-block"><i class="fa fa-plus fa-fw"></i>Observations Home</a>
-	            <a href="/observations/new" class="btn btn-primary btn-lg btn-block"><i class="fa fa-home fa-fw"></i>Enter New Observation</a>
-			</div>
-			<% } %>
 
 		</div>
-		</div>
-	</header>
 
-    <div class="container">
-		<h2>Data Entry Portals</h2>
-		<p>
-			Each portal has pages for entering, viewing, editing and deleting entries.
-		</p>
-	  <div class="media">
-		  <div class="media-left">
-		  	<a href="/observations">
-				<img class="media-object"  src="https://d2pz2jxkt8wezm.cloudfront.net/public/icons/dest/er-icons-dest-wildlife-dk-23.svg" alt="" />
-			</a>
-			</div>
-			<div class="media-body">
-				<h3 class="media-heading">
-					<a href="/observations">Wildlife Observations</a>
-				</h3>
-				<p>
-					Enter, view, and edit Nevada Wildlife Observations. Similar to the NDOW Form 240. Users are required to sign in before using this form.
-				</p>
-			</div>
-	  </div>
-	  <div class="media">
-		  <div class="media-left">
-			<a href="/checkins">
-				<img class="media-object"  src="img/TanSheepSm.png" alt="" />
-			</a>
-			</div>
-			<div class="media-body">
-				<h3 class="media-heading">
-					<a href="/checkins">Bighorn Harvest Check-In</a>
-				</h3>
-				<p>
-					Enter, view, and edit hunter harvest bighorn sheep check-ins. Similar to the NDOW Form 336. Users are required to sign in before using this form.
-				</p>
-			</div>
-	  </div>
-    </div>
-
-	<% include ./partials/footer %>
+		<% include ./partials/footer %>
 
 </body>
