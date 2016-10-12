@@ -142,7 +142,7 @@ header {
     transform: scale(1.15);
 }*/
 
-.mark-row {
+.dynamic-row {
     padding-top: 15px;
     padding-bottom: 1px;
     border-radius: 5px;

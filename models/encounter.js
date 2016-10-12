@@ -38,6 +38,7 @@ module.exports = function(sequelize, DataTypes) {
                 Encounter.belongsTo(models.Animal);
                 Encounter.hasOne(models.Abundance);
                 Encounter.belongsTo(models.Location, {foreignKey: 'loc_id'});
+                Encounter.hasMany(models.Biometric);
             }
         }
     });

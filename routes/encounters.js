@@ -27,12 +27,13 @@ router.get('/new', function(req, res){
 
 // create, post, create a new encounter
 router.post('/', function(req, res){
-    // console.log(JSON.stringify(req.body.mark, null, '\t'));
+    // console.log(JSON.stringify(req.body, null, '\t'));
 
     var animal = req.body.animal;
     var encounter = req.body.enc;
     var location = req.body.loc;
     var marks = parseDynamicContent(req.body.mark);
+    var biometric = parseDynamicContent(req.body.biom);
 
     // if (encounter.marks == 'yes') {
     //     var marks = req.body.mark;
@@ -45,6 +46,7 @@ router.post('/', function(req, res){
     // };
 
     encounter.Location = location;
+    encounter.Biometrics = biometric;
     animal.Encounters = [ encounter ];
     animal.Marks = marks;
     console.log(JSON.stringify(animal, null, '\t'));
@@ -55,7 +57,8 @@ router.post('/', function(req, res){
             {
                 model: models.Encounter,
                 include: [
-                    { model: models.Location }
+                    { model: models.Location },
+                    { model: models.Biometric }
                 ]
             }
         ]

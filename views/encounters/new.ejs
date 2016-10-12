@@ -292,7 +292,7 @@
                                     </div>
                                     <hr>
                                     <div id="marks">
-                                        <div class="mark-row" id="markRow">
+                                        <div class="mark-row dynamic-row" id="markRow">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Mark Type</label>
                                                 <div class="col-sm-5">
@@ -349,22 +349,61 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary btn-add" type="button" name="addMark" onClick="addInput('marks');">Add Mark</button>
+                                    <button class="btn btn-primary btn-add" type="button" name="addMark" onClick="addInput('markRow', 'marks', 'mark-row');">Add Mark</button>
                                 </div>
                             </div>
                         </div> <!-- ./ end mark module -->
-                        <!-- ./ marks module -->
 
-                        <!-- mark module -->
+                        <!-- biometric module -->
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="headingOne">
                                 <h4 class="panel-title">
-                                    <a href="#collapseOne" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false">Mark Data</a>
+                                    <a href="#collapseOne" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false">Biometrics</a>
                                 </h4>
                             </div>
                             <div class="panel-collapse collapse" id="collapseOne" role="tabpanel">
                                 <div class="panel-body">
-                                    blah
+                                    <div id="biometrics">
+                                        <div class="biometric-row dynamic-row" id="biometricRow">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Biometric</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="biomBiometric" name="biom[biometric]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what biometric measurement was measured</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Measurement</label>
+                                                <div class="col-sm-5">
+                                                    <input type="number" min="0" step=".01" class="form-control" id="biomMeasurement" name="biom[measurement]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what is the value of the measurement</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Units</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="biomUnit" name="biom[unit]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what units was it measured in</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Biometric Notes</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="biomNotes" name="biom[notes]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>any notes associated with taking this measurement</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary btn-add" type="button" name="addMark" onClick="addInput('biometricRow', 'biometrics', 'biometric-row');">Add Mark</button>
                                 </div>
                             </div>
                         </div> <!-- ./ end mark module -->
@@ -400,22 +439,30 @@
     <% include ../partials/footer %>
 
     <script type="text/javascript">
+        var eo = 'odd';
         var counter = 1;
-        function addInput(divName) {
-            var $clone = $("#markRow").clone();
+        function addInput(divName, addDiv, countClass) {
+            console.log('start eo: ' + eo);
+            // var $clone = $("#markRow").clone();
+            var $clone = $("#" + divName).clone();
 
             $clone.find('[id]').each(function() {
                 var $th = $(this);
                 $th.attr('id', $th.attr('id') + counter)
             });
 
-            counter ++;
-
-            if (counter % 2 == 0) {
+            var divLength = $('.' + countClass).length;
+            console.log(divLength)
+            if (divLength % 2 != 0) {
                 $clone.addClass("row-shaded");
             }
 
-            $clone.appendTo("#marks");
+            // $clone.appendTo("#marks");
+            $clone.appendTo("#" + addDiv);
+
+
+            console.log('end eo: ' + eo);
+            counter ++;
         }
     </script>
     <script type="text/javascript">
