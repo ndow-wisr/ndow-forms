@@ -416,38 +416,218 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary btn-add" type="button" name="addMark" onClick="addInput('biometricRow', 'biometrics', 'biometric-row');">Add Mark</button>
+                                    <button class="btn btn-primary btn-add" type="button" name="addMark" onClick="addInput('biometricRow', 'biometrics', 'biometric-row');">Add Biometric</button>
                                 </div>
                             </div>
-                        </div> <!-- ./ end mark module -->
+                        </div> <!-- ./ end biometric module -->
 
-                        <!-- capture location module -->
+                        <!-- vitals location module -->
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="headingTwo">
                                 <h4 class="panel-title">
-                                    <a href="#collapseTwo" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false">Capture Information</a>
+                                    <a href="#collapseTwo" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false">Vitals</a>
                                 </h4>
                             </div>
                             <div class="panel-collapse collapse" id="collapseTwo" role="tabpanel">
                                 <div class="panel-body">
-                                    blah ...
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Vitals Data?</label>
+                                        <div class="col-sm-5">
+                                            <select class="form-control" name="enc[vitals]">
+                                                <option value="no">No</option>
+                                                <option value="yes">Yes</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <span class="help-block"><small>is there vitals data that needs to be entered</small></span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div id="vitals">
+                                        <div class="vital-row dynamic-row" id="vitalRow">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Vitals Time</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="vitalTime" name="vitals[time_taken]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what time was it measured</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Measurment</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="vitalMeasurement" name="vitals[measurement]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what vitals measurement was recorded</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Value</label>
+                                                <div class="col-sm-5">
+                                                    <input type="number" min="0" step=".01" class="form-control" id="vitalValue" name="vitals[value]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what is the value of the measurement</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary btn-add" type="button" name="addMark" onClick="addInput('vitalRow', 'vitals', 'vital-row');">Add Vitals</button>
                                 </div>
                             </div>
-                        </div> <!-- ./ end capture location module -->
+                        </div> <!-- ./ end vitals module -->
+
+                        <!-- injury module -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingInjury">
+                                <h4 class="panel-title">
+                                    <a href="#collapseInjury" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false">Injury</a>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse" id="collapseInjury" role="tabpanel">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Injury Data?</label>
+                                        <div class="col-sm-5">
+                                            <select class="form-control" name="enc[injury]">
+                                                <option value="no">No</option>
+                                                <option value="yes">Yes</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <span class="help-block"><small>is there injury data that needs to be entered</small></span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div id="injuries">
+                                        <div class="injury-row dynamic-row" id="injuryRow">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Injury Type</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="injuryType" name="injury[injury_type]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what type of injury did the animal have</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Injury Location</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="injuryLocation" name="injury[injury_location]"> <!-- TODO: select -->
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>where on the animal was this injury</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Injury Description</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="injuryDesciption" name="injury[injury_description]"> <!-- TODO: textarea -->
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>a short description of the injury</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Injury Treatment</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="injuryTreatment" name="injury[injury_treatment]"> <!-- TODO: textarea -->
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>a short description of the treatment for the injury</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary btn-add" type="button" name="addMark" onClick="addInput('injuryRow', 'injuries', 'injury-row');">Add Injury</button>
+                                </div>
+                            </div>
+                        </div> <!-- ./ end injury module -->
+                        <!-- meds module -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingMeds">
+                                <h4 class="panel-title">
+                                    <a href="#collapseMeds" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false">Medications</a>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse" id="collapseMeds" role="tabpanel">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Medication Data?</label>
+                                        <div class="col-sm-5">
+                                            <select class="form-control" name="enc[medications]">
+                                                <option value="no">No</option>
+                                                <option value="yes">Yes</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <span class="help-block"><small>is there medication data to enter</small></span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div id="meds">
+                                        <div class="med-row dynamic-row" id="medRow">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Medication</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="medication" name="meds[medication]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what medication was administered</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Dose</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="medDose" name="meds[med_dose]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what does was administered</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Units</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="medUnit" name="meds[med_unit]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what units was the dose</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Method</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="medMethod" name="meds[med_method]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>how was the medication administered</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Time Administered</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="medAdmin" name="meds[med_admin]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what time was the medication administered</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary btn-add" type="button" name="addMark" onClick="addInput('injuryRow', 'injuries', 'injury-row');">Add Injury</button>
+                                </div>
+                            </div>
+                        </div> <!-- ./ end meds module -->
+
                     </div>
 
             <button type="submit" name="button" class="btn btn-success">Save</button>
+        </form>
+    </div>
 
 
-<div class="form-group">
-    <label class="col-sm-2 control-label"></label>
-    <div class="col-sm-5">
-        <input type="text" class="form-control" id="" name="">
-    </div>
-    <div class="col-sm-5">
-        <span class="help-block"><small></small></span>
-    </div>
-</div>
 
     <% include ../partials/footer %>
 
