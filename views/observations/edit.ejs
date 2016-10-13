@@ -32,6 +32,7 @@
 							<select class="form-control species-select" type="text" name="observation[species]"></select>
 
 							<script type="text/javascript">
+							var listUrl = window.location.protocol + '//' + window.location.host + '/list-species';
 							var $select = $('.species-select').selectize({
 								placeholder: 'Select species...',
 								valueField: 'id',
@@ -47,7 +48,7 @@
 								},
 								load: function(query, callback){
 									$.ajax({
-										url: 'http://' + window.location.host + '/list-species',
+										url: listUrl,
 										type: 'GET',
 										dataType: 'json',
 										data: {

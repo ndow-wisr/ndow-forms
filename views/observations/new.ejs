@@ -181,6 +181,8 @@
 			});
 		</script>
 		<script type="text/javascript">
+			var listUrl = window.location.protocol + '//' + window.location.host + '/list-species';
+			console.log(listUrl);
 			$('.species-select').selectize({
 				placeholder: 'Select species...',
 				valueField: 'id',
@@ -190,13 +192,13 @@
 				options: [],
 				render: {
 					option: function(item, escape){
-						console.log(item);
+						// console.log(item);
 						return '<p><span>' + escape(item.common_name) + '</span> - <span>' + escape(item.species_name) + '</span></p>'
 					}
 				},
 				load: function(query, callback){
 					$.ajax({
-						url: 'http://' + window.location.host + '/list-species',
+						url: listUrl,
 						type: 'GET',
 						dataType: 'json',
 						data: {
