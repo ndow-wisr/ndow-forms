@@ -363,10 +363,23 @@
                             </div>
                             <div class="panel-collapse collapse" id="collapseOne" role="tabpanel">
                                 <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Biometric Data?</label>
+                                        <div class="col-sm-5">
+                                            <select class="form-control" name="enc[biometrics]">
+                                                <option value="no">No</option>
+                                                <option value="yes">Yes</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <span class="help-block"><small>is there biometric data that needs to be entered</small></span>
+                                        </div>
+                                    </div>
+                                    <hr>
                                     <div id="biometrics">
                                         <div class="biometric-row dynamic-row" id="biometricRow">
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label">Biometric</label>
+                                                <label class="col-sm-2 control-label">Measurment</label>
                                                 <div class="col-sm-5">
                                                     <input type="text" class="form-control" id="biomBiometric" name="biom[biometric]">
                                                 </div>
@@ -375,7 +388,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label">Measurement</label>
+                                                <label class="col-sm-2 control-label">Value</label>
                                                 <div class="col-sm-5">
                                                     <input type="number" min="0" step=".01" class="form-control" id="biomMeasurement" name="biom[measurement]">
                                                 </div>
@@ -446,6 +459,14 @@
             // var $clone = $("#markRow").clone();
             var $clone = $("#" + divName).clone();
 
+            $clone.attr('id', 'markRow' + counter);
+
+            var rmBtn = $('<button>Delete Mark</>').attr({
+                type: 'button',
+                class: 'btn btn-danger btn-add btn-del'
+            });
+            $clone.append(rmBtn);
+
             $clone.find('[id]').each(function() {
                 var $th = $(this);
                 $th.attr('id', $th.attr('id') + counter)
@@ -471,6 +492,9 @@
                 format: 'YYYY-MM-DD',
                 yearRange: [1990, 2020]
             });
+        });
+        $('body').on('click', '.btn-del', function() {
+            $(this).parent().remove();
         });
     </script>
     <script type="text/javascript">
