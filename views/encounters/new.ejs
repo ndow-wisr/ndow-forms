@@ -819,7 +819,7 @@
             },
             load: function(query, callback){
                 $.ajax({
-                    url: 'http://' + window.location.host + '/list-species',
+                    url: window.location.protocol + '//' + window.location.host + '/list-species',
                     type: 'GET',
                     dataType: 'json',
                     data: {
