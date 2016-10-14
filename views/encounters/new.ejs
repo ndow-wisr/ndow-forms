@@ -873,8 +873,8 @@
                 var marker = L.marker([latitude, longitude]).addTo(obmap);
             };
 
-            function error() {
-                alert("Unable to retrieve your location");
+            function error(e) {
+                alert("Unable to retrieve your location: " + e.message);
             };
             navigator.geolocation.getCurrentPosition(success, error, {
                 enableHighAccuracy: true
