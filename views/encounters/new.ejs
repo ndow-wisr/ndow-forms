@@ -9,7 +9,7 @@
         <% include ../partials/pikaday %> <!-- pikadayjs -->
         <link rel="stylesheet" href="/stylesheets/main.css">
     </head>
-    <body>
+    <body onload="geoFindMe();">
 
         <% include ../partials/navigation %>
 
@@ -148,7 +148,7 @@
 
             <!-- weather condition & handling time -->
             <fieldset>
-                <legend>Weather and Handling</legend>
+                <legend>Weather</legend>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Ambient Temp</label>
                     <div class="col-sm-5">
@@ -161,7 +161,12 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Weather</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="" name="env[weather]">
+                        <select name="env[weather]" id="encWeather" class="form-control">
+                            <option value=""></option>
+                            <option value="Clear">Clear</option>
+                            <option value="Partly Cloudy">Partly Cloudy</option>
+                            <option value="Overcast">Overcast</option>
+                        </select>
                     </div>
                     <div class="col-sm-5">
                         <span class="help-block"><small>weather while the animal is handled</small></span>
@@ -176,6 +181,7 @@
                         <span class="help-block"><small>how strongly is the wind blowing while the animal is handled</small></span>
                     </div>
                 </div>
+                <legend>Handling</legend>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Capture Time</label>
                     <div class="col-sm-5">
@@ -246,6 +252,15 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">Accuracy</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="" name="loc[loc_accuracy]">
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>accuracy of the coordinates</small></span>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-2 control-label">Mountain Range</label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control" id="" name="loc[loc_mtn_range]">
@@ -263,6 +278,21 @@
                         <span class="help-block"><small>hunt unit the animal was captured in</small></span>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Location Quality</label>
+                    <div class="col-sm-5">
+                        <select name="loc[loc_quality]" id="locType" class="form-control">
+                            <option value=""></option>
+                            <option value="Description">Description</option>
+                            <option value="Geography">Geogrpahy</option>
+                            <option value="">XY</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="help-block"><small>how good is the quality of the location</small></span>
+                    </div>
+                </div>
+                <div id="#encMap" style="height: 350px;"></div>
             </fieldset>
 
             <legend>Supplemental Data</legend>
@@ -296,7 +326,13 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Mark Type</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="markType" name="mark[mark_type]">
+                                                    <select name="mark[mark_type]" id="markType" class="form-control">
+                                                        <option value=""></option>
+                                                        <option value="Band">Band</option>
+                                                        <option value="Collar">Collar</option>
+                                                        <option value="Ear Tag">Ear Tag</option>
+                                                        <option value="PIT Tag">PIT Tag</option>
+                                                    </select>
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what type of mark was given to this animal</small></span>
@@ -314,7 +350,22 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Mark Color</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="markColor" name="mark[mark_color]">
+                                                    <select name="mark[mark_color]" id="markColor" class="form-control">
+                                                        <option value=""></option>
+                                                        <option value="Black">Black</option>
+                                                        <option value="Blue">Blue</option>
+                                                        <option value="Gray">Gray</option>
+                                                        <option value="Green">Green</option>
+                                                        <option value="Lavender">Lavender</option>
+                                                        <option value="Light Blue">Light Blue</option>
+                                                        <option value="Light Green">Light Green</option>
+                                                        <option value="Orange">Orange</option>
+                                                        <option value="Pink">Pink</option>
+                                                        <option value="Purple">Purple</option>
+                                                        <option value="Red">Red</option>
+                                                        <option value="White">White</option>
+                                                        <option value="Yellow">Yellow</option>
+                                                    </select>
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what color is the mark, NA is acceptable</small></span>
@@ -381,7 +432,22 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Measurment</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="biomBiometric" name="biom[biometric]">
+                                                    <select name="biom[biometric]" id="biomMeasurement" class="form-control"> <!-- TODO: change database field to measurement -->
+                                                        <option value=""></option>
+                                                        <option value="Age (integer)">Age (integer)</option>
+                                                        <option value="B. femoris">B. femoris</option>
+                                                        <option value="BCS (qual)">BCS (qual)</option>
+                                                        <option value="BCS (quant)">BCS (quant)</option>
+                                                        <option value="Body Length">Body Length</option>
+                                                        <option value="Chest Girht">Chest Girth</option>
+                                                        <option value="Fat Thickness">Fat Thickness</option>
+                                                        <option value="Incisors">Incisors</option>
+                                                        <option value="Jaw Length">Jaw Length</option>
+                                                        <option value="L. Dorsi">L. Dorsi</option>
+                                                        <option value="Leg Length">Leg Length</option>
+                                                        <option value="Neck Cric">Neck Circ</option>
+                                                        <option value="Weight">Weight</option>
+                                                    </select>
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what biometric measurement was measured</small></span>
@@ -390,7 +456,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Value</label>
                                                 <div class="col-sm-5">
-                                                    <input type="number" min="0" step=".01" class="form-control" id="biomMeasurement" name="biom[measurement]">
+                                                    <input type="number" min="0" step=".01" class="form-control" id="biomMeasurement" name="biom[measurement]"> <!-- TODO: change database field name to value -->
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what is the value of the measurement</small></span>
@@ -399,7 +465,18 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Units</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="biomUnit" name="biom[unit]">
+                                                    <select name="biom[unit]" id="biomUnit" class="form-control ">
+                                                        <option value=""></option>
+                                                        <option value="g">g</option>
+                                                        <option value="kg">kg</option>
+                                                        <option value="lbs">lbs</option>
+                                                        <option value="mm">mm</option>
+                                                        <option value="cm">cm</option>
+                                                        <option value="in">in</option>
+                                                        <option value="days">days</option>
+                                                        <option value="months">months</option>
+                                                        <option value="years">years</option>
+                                                    </select>
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what units was it measured in</small></span>
@@ -448,7 +525,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Vitals Time</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="vitalTime" name="vitals[time_taken]">
+                                                    <input type="time" class="form-control" id="vitalTime" name="vitals[time_taken]">
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what time was it measured</small></span>
@@ -457,7 +534,12 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Measurment</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="vitalMeasurement" name="vitals[measurement]">
+                                                    <select name="vitals[measurement]" id="vitalMeasurement" class="form-control">
+                                                        <option value=""></option>
+                                                        <option value="HR">Heart Rate</option>
+                                                        <option value="Temp">Temperature</option>
+                                                        <option value="RR">Respiratory Rate</option>
+                                                    </select>
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what vitals measurement was recorded</small></span>
@@ -506,7 +588,14 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Injury Type</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="injuryType" name="injury[injury_type]">
+                                                    <select name="injury[injury_type]" id="injuryType" class="form-control">
+                                                        <option value=""></option>
+                                                        <option value="Abrasion">Abrasion</option>
+                                                        <option value="Avulsion">Avulsion</option>
+                                                        <option value="Contusion">Contusion</option>
+                                                        <option value="Laceration">Laceration</option>
+                                                        <option value="Puncture">Puncture</option>
+                                                    </select>
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what type of injury did the animal have</small></span>
@@ -572,7 +661,38 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Medication</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="medication" name="meds[medication]">
+                                                    <select name="med[medication]" id="medication" class="form-control">
+                                                        <option value=""></option>
+                                                        <option value="Aluspray">Aluspray</option>
+                                                        <option value="Atipamezole">Atipamezole</option>
+                                                        <option value="Azaperone">Azaperone</option>
+                                                        <option value="BAM">BAM</option>
+                                                        <option value="Banamine">Banamine</option>
+                                                        <option value="BNP">BNP</option>
+                                                        <option value="BoSe">BoSe</option>
+                                                        <option value="Butorphanol">Butorphanol</option>
+                                                        <option value="Catron">Catron</option>
+                                                        <option value="Draxxin">Draxxin</option>
+                                                        <option value="E300">E300</option>
+                                                        <option value="Eprinectin">Eprinectin</option>
+                                                        <option value="Exede">Exede</option>
+                                                        <option value="Haloperidol">Haloperidol</option>
+                                                        <option value="Ivomec">Ivomec</option>
+                                                        <option value="Ketamine">Ketamine</option>
+                                                        <option value="Lidocaine 2%">Lidocaine 2%</option>
+                                                        <option value="Midazolam">Midazolam</option>
+                                                        <option value="Naltrexone">Naltrexone</option>
+                                                        <option value="Normasol pH 7">Normasol pH 7</option>
+                                                        <option value="NuFlor">NuFlor</option>
+                                                        <option value="Oxygen">Oxygen</option>
+                                                        <option value="Pentobarbitol">Pentobarbitol</option>
+                                                        <option value="Plasmalyte">Plasmalyte</option>
+                                                        <option value="Saline">Saline</option>
+                                                        <option value="Telazol">Telazol</option>
+                                                        <option value="Vitamin E300">Vitamin E300</option>
+                                                        <option value="Xylazine">Xylazine</option>
+                                                        <option value="Zactran">Zactran</option>
+                                                    </select>
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what medication was administered</small></span>
@@ -599,7 +719,12 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Method</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="medMethod" name="meds[med_method]">
+                                                    <select name="meds[med_method]" id="medMethod" class="form-control">
+                                                        <option value=""></option>
+                                                        <option value="IM">Intramuscular (IM)</option>
+                                                        <option value="IV">Intravenous (IV)</option>
+                                                        <option value="SQ">Subcutaneous</option>
+                                                    </select>
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>how was the medication administered</small></span>
@@ -614,9 +739,18 @@
                                                     <span class="help-block"><small>what time was the medication administered</small></span>
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Notes</label>
+                                                <div class="col-sm-5">
+                                                    <textarea name="meds[med_notes]" class="form-control" rows="2" id="medNote"></textarea>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>any notes associated with this medication, eg. vial-number</small></span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary btn-add" type="button" name="addMark" onClick="addInput('injuryRow', 'injuries', 'injury-row');">Add Injury</button>
+                                    <button class="btn btn-primary btn-add" type="button" name="addMark" onClick="addInput('medRow', 'meds', 'med-row');">Add Medication</button>
                                 </div>
                             </div>
                         </div> <!-- ./ end meds module -->
@@ -632,16 +766,13 @@
     <% include ../partials/footer %>
 
     <script type="text/javascript">
-        var eo = 'odd';
         var counter = 1;
         function addInput(divName, addDiv, countClass) {
-            console.log('start eo: ' + eo);
-            // var $clone = $("#markRow").clone();
             var $clone = $("#" + divName).clone();
 
             $clone.attr('id', 'markRow' + counter);
 
-            var rmBtn = $('<button>Delete Mark</>').attr({
+            var rmBtn = $('<button>Delete</>').attr({
                 type: 'button',
                 class: 'btn btn-danger btn-add btn-del'
             });
@@ -653,16 +784,11 @@
             });
 
             var divLength = $('.' + countClass).length;
-            console.log(divLength)
             if (divLength % 2 != 0) {
                 $clone.addClass("row-shaded");
             }
 
-            // $clone.appendTo("#marks");
             $clone.appendTo("#" + addDiv);
-
-
-            console.log('end eo: ' + eo);
             counter ++;
         }
     </script>
@@ -713,6 +839,47 @@
         var picker = new Pikaday({ field: document.getElementById('enc_date'),
                            yearRange: [1900, 2026]
                          });
+    </script>
+    <script type="text/javascript">
+        var obmap = L.map('#encMap').setView([39.38526, -116.87256], 7);
+        L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri'
+        }).addTo(obmap);
+
+        var popup = L.popup();
+        function onMapClick(e) {
+            document.forms["encForm"]["loc[loc_lon]"].value = e.latlng.lng.toFixed(4);
+            document.forms["encForm"]["loc[loc_lat]"].value = e.latlng.lat.toFixed(4);
+            popup
+                .setLatLng(e.latlng)
+                .setContent("Coords Set: " + e.latlng.toString())
+                .openOn(obmap);
+        }
+        obmap.on('click', onMapClick);
+
+        function geoFindMe() {
+            if (!navigator.geolocation) {
+                alert("<p>Geolocation is not supported by your browser</p>");
+                return;
+            }
+
+            function success(position) {
+                var latitude = position.coords.latitude.toFixed(4);
+                var longitude = position.coords.longitude.toFixed(4);
+                document.forms["encForm"]["loc[loc_lon]"].value = longitude;
+                document.forms["encForm"]["loc[loc_lat]"].value = latitude;
+                document.forms["encForm"]["loc[loc_accuracy]"].value = position.coords.accuracy;
+                obmap.setView([latitude, longitude], 11);
+                var marker = L.marker([latitude, longitude]).addTo(obmap);
+            };
+
+            function error() {
+                alert("Unable to retrieve your location");
+            };
+            navigator.geolocation.getCurrentPosition(success, error, {
+                enableHighAccuracy: true
+            });
+        }
     </script>
     </body>
 </html>
