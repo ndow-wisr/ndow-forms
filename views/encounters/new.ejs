@@ -755,6 +755,83 @@
                             </div>
                         </div> <!-- ./ end meds module -->
 
+                        <!-- samples module -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingSamples">
+                                <h4 class="panel-title">
+                                    <a href="#collapseSamples" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false">Samples</a>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse" id="collapseSamples" role="tabpanel">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Samples Data?</label>
+                                        <div class="col-sm-5">
+                                            <select class="form-control" name="enc[samples]">
+                                                <option value="no">No</option>
+                                                <option value="yes">Yes</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <span class="help-block"><small>were samples collected from this animal</small></span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div id="samples">
+                                        <div class="sample-row dynamic-row" id="sampleRow">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Sample</label>
+                                                <div class="col-sm-5">
+                                                    <select name="samples[sample]" id="sample" class="form-control">
+                                                        <option value=""></option>
+                                                        <option value="Blood">Blood</option>
+                                                        <option value="Carcass">Carcass</option>
+                                                        <option value="Swab">Swab</option>
+                                                        <option value="Tissue">Tissue</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what sample was collected</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Destination</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="sampleDestination" name="samples[destination]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what lab is the sample going to</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Test</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="samplesTest" name="samples[test]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what test will be run with this sample</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Results</label>
+                                                <div class="col-sm-5">
+                                                    <select name="samplesResult" id="samples[result]" class="form-control">
+                                                        <option value=""></option>
+                                                        <option value="No">No</option>
+                                                        <option value="Yes">Yes</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>have results been returned from the lab</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary btn-add" type="button" name="addMark" onClick="addInput('sampleRow', 'samples', 'sample-row');">Add Samples</button>
+                                </div>
+                            </div>
+                        </div> <!-- ./ end meds module -->
+
                     </div>
 
             <button type="submit" name="button" class="btn btn-success">Save</button>
