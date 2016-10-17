@@ -27,44 +27,61 @@ router.get('/new', function(req, res){
 
 // create, post, create a new encounter
 router.post('/', function(req, res){
-    console.log(JSON.stringify(req.body, null, '\t'));
+  console.log(JSON.stringify(req.body, null, '\t'));
 
-    // var animal = req.body.animal;
-    // var encounter = req.body.enc;
-    // var location = req.body.loc;
-    // var marks = parseDynamicContent(req.body.mark);
-    // var biometric = parseDynamicContent(req.body.biom);
-    //
-    // // if (encounter.marks == 'yes') {
-    // //     var marks = req.body.mark;
-    // //     Object.keys(marks).forEach(function(key) {
-    // //         if (marks[key] == '') {
-    // //             delete marks[key];
-    // //         }
-    // //     });
-    // //     animal.Marks = [ marks ];
-    // // };
-    //
-    // encounter.Location = location;
-    // encounter.Biometrics = biometric;
-    // animal.Encounters = [ encounter ];
-    // animal.Marks = marks;
-    // console.log(JSON.stringify(animal, null, '\t'));
-    //
-    // models.Animal.create(animal, {
-    //     include: [
-    //         { model: models.Mark },
-    //         {
-    //             model: models.Encounter,
-    //             include: [
-    //                 { model: models.Location },
-    //                 { model: models.Biometric }
-    //             ]
-    //         }
-    //     ]
-    // }).then(function(){
-        res.redirect('/encounters/new');
-    // });
+  var animal = req.body.animal;
+  var encounter = req.body.enc;
+  var location = req.body.loc;
+
+  if (encounter.marks == 'yes') {
+    var marks = parseDynamicContent(req.body.mark);
+    animal.Marks = marks;
+  }
+  if (encounter.biometrics == 'yes') {
+    var biometric = parseDynamicContent(req.body.biom);
+    encounter.Biometrics = biometric;
+  }
+  if (encounter.vitals == 'yes') {
+    var vitals = parseDynamicContent(req.body.vitals);
+    encounter.Vitals = vitals;
+  }
+  if (encounter.injury == 'yes') {
+    var injury = parseDynamicContent(req.body.injury);
+    encounter.Injuries = injury;
+  }
+  if (encounter.medications == 'yes') {
+    var meds = parseDynamicContent(req.body.meds);
+    encounter.Medications = meds;
+  }
+  if (encounter.samples == 'yes') {
+    var samples = parseDynamicContent(req.body.samples);
+    encounter.Samples = samples;
+  }
+
+  encounter.Location = location;
+  animal.Encounters = [ encounter ];
+  animal.Marks = marks;
+  console.log(JSON.stringify(animal, null, '\t'));
+
+  models.Animal.create(animal, {
+      include: [
+          { model: models.Mark },
+          {
+              model: models.Encounter,
+              include: [
+                  { model: models.Location },
+                  { model: models.Biometric },
+                  { model: models.Vital },
+                  { model: models.Injury },
+                  { model: models.Medication },
+                  { model: models.Sample }
+              ]
+          }
+      ]
+  }).then(function(){
+      console.log('New Encounter Added!');
+      res.redirect('/encounters/new');
+  });
 
     // var animal = req.body.animal;
     // var encounter = req.body.encounter;

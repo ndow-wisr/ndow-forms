@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     underscored: true,
     freezeTableName: true,
-    tableName: vitals,
+    tableName: 'vitals',
     classMethods: {
       associate: function(models) {
         Vital.belongsTo(models.Encounter);
