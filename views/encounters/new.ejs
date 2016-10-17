@@ -525,7 +525,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Vitals Time</label>
                                                 <div class="col-sm-5">
-                                                    <input type="time" class="form-control" id="vitalTime" name="vitals[time_taken]">
+                                                    <input type="time" class="form-control" id="vitalTime" name="vitals[vital_time_recorded]">
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what time was it measured</small></span>
@@ -534,7 +534,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Measurment</label>
                                                 <div class="col-sm-5">
-                                                    <select name="vitals[measurement]" id="vitalMeasurement" class="form-control">
+                                                    <select name="vitals[vital_measurement]" id="vitalMeasurement" class="form-control">
                                                         <option value=""></option>
                                                         <option value="HR">Heart Rate</option>
                                                         <option value="Temp">Temperature</option>
@@ -548,10 +548,19 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Value</label>
                                                 <div class="col-sm-5">
-                                                    <input type="number" min="0" step=".01" class="form-control" id="vitalValue" name="vitals[value]">
+                                                    <input type="number" min="0" step=".01" class="form-control" id="vitalValue" name="vitals[vital_value]">
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what is the value of the measurement</small></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Interval</label>
+                                                <div class="col-sm-5">
+                                                    <input type="number" min="0" step="1" class="form-control" id="vitalValue" name="vitals[vital_interval]">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <span class="help-block"><small>what inteval was this vital sign recorded</small></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -733,7 +742,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Time Administered</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="medAdmin" name="meds[med_admin]">
+                                                    <input type="text" class="form-control" id="medAdmin" name="meds[med_time_admin]">
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what time was the medication administered</small></span>
@@ -797,7 +806,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Destination</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="sampleDestination" name="samples[destination]">
+                                                    <input type="text" class="form-control" id="sampleDestination" name="samples[sample_destination]">
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what lab is the sample going to</small></span>
@@ -806,7 +815,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Test</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="samplesTest" name="samples[test]">
+                                                    <input type="text" class="form-control" id="samplesTest" name="samples[sample_test]">
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what test will be run with this sample</small></span>
@@ -815,7 +824,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Results</label>
                                                 <div class="col-sm-5">
-                                                    <select name="samples[result]" id="samplesResult" class="form-control">
+                                                    <select name="samples[sample_result]" id="samplesResult" class="form-control">
                                                         <option value=""></option>
                                                         <option value="No">No</option>
                                                         <option value="Yes">Yes</option>

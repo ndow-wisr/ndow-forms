@@ -29,6 +29,20 @@ sequelize model:create --name Location --underscored --attributes 'loc_name:stri
 CREATE BIOMETRIC SCHEMA
 sequelize model:create --name Biometric --underscored --attributes 'biometric:string, measurement:real, unit:string, biom_notes:string'
 
+CREATE VITALS SCHEMA
+sequelize model:create --name Vital --underscored --attributes 'vital_time_recorded:time, vital_measurement:string, vital_value:real, vital_interval:integer, encounter_id:integer'
+
+CREATE INJURY SCHEMA
+sequelize model:create --name Injury --underscored --attributes 'injury_type:string, injury_location:string, injury_description:text, injury_treatment:text, encounter_id:integer'
+
+CREATE MEDS SCHEMA
+sequelize model:create --name MEDICATION --underscored --attributes 'medication:string, med_dose:real, med_unit:string, med_method:string, med_time_admin:time, med_notes:string, encounter_id:integer'
+
+CREATE SAMPLES SCHEMA
+sequelize model:create --name SAMPLE --underscored --attributes 'sample:string, sample_destination:string, sample_test:string, sample_results:string, encounter_id:integer'
+
+
+
 ADDING CALIFORNIA BIGHORN SHEEP TO THE SPECIES TABLE
 insert into species (common_name, species_name, subspecies, eng_class, eng_subclass, species_code, state_status, sensitive, sensitive_rationale, created_at, updated_at) values ('California bighorn sheep', 'Ovis canadensis', 'californiana', 'Mammal', 'Big Game', 1311, 'Game', false, '', Now(), Now());
 

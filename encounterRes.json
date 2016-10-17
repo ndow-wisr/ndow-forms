@@ -1,0 +1,161 @@
+{
+	"enc": {
+		"enc_date": "2016-01-01",
+		"status": "alive",
+		"age": "Adult",
+		"enc_reason": "monitoring",
+		"enc_method": "Basecamp - Helicopter",
+		"reencounter": "No",
+		"relocated": "No",
+		"cap_time": "12:00",
+		"chase_time": "30",
+		"arr_time": "12:00",
+		"fin_time": "12:00",
+		"marks": "yes",
+		"biometrics": "yes",
+		"vitals": "yes",
+		"injury": "yes",
+		"medications": "yes",
+		"samples": "yes"
+	},
+	"animal": {
+		"species_id": "2",
+		"field_id": "1234",
+		"sex": "male"
+	},
+	"env": {
+		"amb_temp": "88",
+		"weather": "Clear",
+		"wind": "2"
+	},
+	"loc": {
+		"loc_name": "Slide Mountain",
+		"loc_lon": "-119.7764",
+		"loc_lat": "39.4628",
+		"loc_accuracy": "29",
+		"loc_mtn_range": "Carson Range",
+		"loc_hunt_unit": "194",
+		"loc_quality": ""
+	},
+	"mark": {
+		"mark_type": [
+			"Ear Tag",
+			"Ear Tag"
+		],
+		"mark_id": [
+			"11111",
+			"11111"
+		],
+		"mark_color": [
+			"Orange",
+			"Blue"
+		],
+		"mark_location": [
+			"left ear",
+			"right ear"
+		],
+		"date_given": [
+			"2016-10-17",
+			"2016-10-17"
+		],
+		"mark_removed": [
+			"2016-10-31",
+			"2016-10-31"
+		]
+	},
+	"biom": {
+		"biometric": [
+			"Age (integer)",
+			"Weight"
+		],
+		"measurement": [
+			"3",
+			"120"
+		],
+		"unit": [
+			"years",
+			"kg"
+		],
+		"notes": [
+			"blah blah",
+			"blah blah"
+		]
+	},
+	"vitals": {
+		"vital_time_recorded": [
+			"13:00",
+			"13:00"
+		],
+		"vital_measurement": [
+			"HR",
+			"Temp"
+		],
+		"vital_value": [
+			"100",
+			"104"
+		]
+	},
+	"injury": {
+		"injury_type": [
+			"Laceration",
+			"Laceration"
+		],
+		"injury_location": [
+			"chin",
+			"above left eye"
+		],
+		"injury_description": [
+			"1cm laceration below the mouth",
+			"1cm laceration below the mouth"
+		],
+		"injury_treatment": [
+			"stitches",
+			"stitches"
+		]
+	},
+	"meds": {
+		"medication": [
+			"Azaperone",
+			"Haloperidol"
+		],
+		"med_dose": [
+			"10",
+			"10"
+		],
+		"med_unit": [
+			"mg",
+			"mg"
+		],
+		"med_method": [
+			"IM",
+			"IV"
+		],
+		"med_admin": [
+			"12:00",
+			"12:00"
+		],
+		"med_notes": [
+			"blah blah",
+			"blah blah"
+		]
+	},
+	"samples": {
+		"sample": [
+			"Blood",
+			"Blood"
+		],
+		"destination": [
+			"waddl",
+			"waddl"
+		],
+		"test": [
+			"pcr",
+			"elisa"
+		],
+		"result": [
+			"No",
+			"No"
+		]
+	},
+	"button": ""
+}
