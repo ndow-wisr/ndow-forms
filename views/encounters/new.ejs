@@ -14,286 +14,329 @@
         <% include ../partials/navigation %>
 
         <div class="container">
+          <h2>Wildlife Health Data Entry Form</h2>
+
         <form class="form-horizontal" action="/encounters" method="POST" name="encForm">
-            <!-- animal and encounter module -->
-            <fieldset>
-                <legend>Entry Form</legend>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Encounter Date</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="encDate" name="enc[enc_date]">
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block pick-date"><small>pick a date from the dropdown</small></span>
-                    </div>
+            <div class="panel-group"> <!-- animal panel (module) -->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a href="#collapseAnimal" data-toggle="collapse">Animal Information</a>
+                  </h4>
                 </div>
-                <div class="form-group"> <!-- TODO: selectize -->
-                    <label class="col-sm-2 control-label">Species</label>
-                    <div class="col-sm-5">
-                        <select class="form-control species-select" id="encSpecies" name="animal[species_id]"></select>
+                <div class="panel-collapse collapse in" id="collapseAnimal">
+                  <div class="panel-body">
+                    <legend>Animal Information</legend>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label req-label">Encounter Date</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control pick-date req-input" id="encDate" name="enc[enc_date]">
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block pick-date"><small>pick a date from the dropdown</small></span>
+                        </div>
                     </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>start typing a common name, then select from the list</small></span>
+                    <div class="form-group"> <!-- TODO: selectize -->
+                        <label class="col-sm-2 control-label req-label">Species</label>
+                        <div class="col-sm-5">
+                            <select class="form-control species-select req-input" id="encSpecies" name="animal[species_id]"></select>
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>start typing a common name, then select from the list</small></span>
+                        </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">NDOW ID</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="ndowId" name="animal[field_id]">
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>enter the NDOW ID for this animal</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label req-label">Status</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" name="enc[status]">
+                                <option value=""></option>
+                                <option value="alive">Alive</option>
+                                <option value="mortality">Mortality</option>
+                                <option value="hunter harvest">Hunter Harvest</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>select the life status of the encounter</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Sex</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" name="animal[sex]">
+                                <option value=""></option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="unk">Unknown</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>select the sex of the species</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Age</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" name="enc[age]">
+                                <option value=""></option>
+                                <option value="yoy">young-of-year</option>
+                                <option value="Juvenile">Juvenile</option>
+                                <option value="Adult">Adult</option>
+                                <option value="unk">Unknown</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>select the age of the animal</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label req-label">Capture Reason</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" name="enc[enc_reason]">
+                                <option value=""></option>
+                                <option value="surveilance">Disease Surveilance</option>
+                                <option value="translocation">Translocation</option>
+                                <option value="monitoring">Monitoring</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>select a reason for the capture</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label req-label">Capture Method</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" name="enc[enc_method]">
+                                <option value=""></option>
+                                <option value="Capture Crew - Helicopter">Capture Crew - Helicopter</option>
+                                <option value="Basecamp - Helicopter">Basecamp - Helicopter</option>
+                                <option value="Marked - Dead">Marked - Dead</option>
+                                <option value="Marked - Observation">Marked - Observation</option>
+                                <option value="Unmarked - Dead">Unmarked - Dead</option>
+                                <option value="Collar Failure">Collar Failure</option>
+                                <option value="Collar Drop">Collar Drop</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>select the capture method used for this animal</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Re-Encounter?</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" name="enc[reencounter]">
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>was this animal previously encountered (capture)</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Relocated?</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" name="enc[relocated]">
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>is this animal being relocated to a new location</small></span>
+                        </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">NDOW ID</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="ndowId" name="animal[field_id]">
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>enter the NDOW ID for this animal</small></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Status</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="enc[status]">
-                            <option value=""></option>
-                            <option value="alive">Alive</option>
-                            <option value="mortality">Mortality</option>
-                            <option value="hunter harvest">Hunter Harvest</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>select the life status of the encounter</small></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Sex</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="animal[sex]">
-                            <option value=""></option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="unk">Unknown</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>select the sex of the species</small></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Age</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="enc[age]">
-                            <option value=""></option>
-                            <option value="yoy">young-of-year</option>
-                            <option value="Juvenile">Juvenile</option>
-                            <option value="Adult">Adult</option>
-                            <option value="unk">Unknown</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>select the age of the animal</small></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Capture Reason</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="enc[enc_reason]">
-                            <option value=""></option>
-                            <option value="surveilance">Disease Surveilance</option>
-                            <option value="translocation">Translocation</option>
-                            <option value="monitoring">Monitoring</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>select a reason for the capture</small></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Capture Method</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="enc[enc_method]">
-                            <option value=""></option>
-                            <option value="Capture Crew - Helicopter">Capture Crew - Helicopter</option>
-                            <option value="Basecamp - Helicopter">Basecamp - Helicopter</option>
-                            <option value="Marked - Dead">Marked - Dead</option>
-                            <option value="Marked - Observation">Marked - Observation</option>
-                            <option value="Unmarked - Dead">Unmarked - Dead</option>
-                            <option value="Collar Failure">Collar Failure</option>
-                            <option value="Collar Drop">Collar Drop</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>select the capture method used for this animal</small></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Re-Encounter?</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="enc[reencounter]">
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>was this animal previously encountered (capture)</small></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Relocated?</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="enc[relocated]">
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>is this animal being relocated to a new location</small></span>
-                    </div>
-                </div>
-            </fieldset>
+              </div>
+            </div> <!-- animal and encounter module -->
 
-            <!-- weather condition & handling time -->
-            <fieldset>
-                <legend>Weather</legend>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Ambient Temp</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="" name="env[amb_temp]">
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>ambient temperature while the animal is handled</small></span>
-                    </div>
+            <div class="panel-group"> <!-- weather condition & handling time -->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a href="#collapseWeather" data-toggle="collapse">Weather Data</a>
+                  </h4>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Weather</label>
-                    <div class="col-sm-5">
-                        <select name="env[weather]" id="encWeather" class="form-control">
-                            <option value=""></option>
-                            <option value="Clear">Clear</option>
-                            <option value="Partly Cloudy">Partly Cloudy</option>
-                            <option value="Overcast">Overcast</option>
-                        </select>
+                <div class="panel-collapse collapse" id="collapseWeather">
+                  <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Ambient Temp</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="" name="env[amb_temp]">
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>ambient temperature while the animal is handled</small></span>
+                        </div>
                     </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>weather while the animal is handled</small></span>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Weather</label>
+                        <div class="col-sm-5">
+                            <select name="env[weather]" id="encWeather" class="form-control">
+                                <option value=""></option>
+                                <option value="Clear">Clear</option>
+                                <option value="Partly Cloudy">Partly Cloudy</option>
+                                <option value="Overcast">Overcast</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>weather while the animal is handled</small></span>
+                        </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Wind</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="" name="env[wind]">
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>how strongly is the wind blowing while the animal is handled</small></span>
+                        </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Wind</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="" name="env[wind]">
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>how strongly is the wind blowing while the animal is handled</small></span>
-                    </div>
-                </div>
-                <legend>Handling</legend>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Capture Time</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="" name="enc[cap_time]">
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>what time was the animal captured or encountered</small></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Chase Time</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="" name="enc[chase_time]">
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>how long was the animal chased by the helicopter</small></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Arrival Time</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="" name="enc[arr_time]">
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>what time did the animal arrive at basecamp</small></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Finished Time</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="" name="enc[fin_time]">
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>what time was the animal no longer being handled</small></span>
-                    </div>
-                </div>
-            </fieldset>
+              </div>
+            </div>
+            <!-- ./ end weather module -->
 
-            <!-- capture location data -->
-            <fieldset>
-                <legend>Capture Location</legend>
-                <!-- TODO: add leaflet map -->
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Location Name</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="" name="loc[loc_name]">
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>enter a short name for the location</small></span>
-                    </div>
+            <div class="panel-group"> <!-- handling module -->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a href="#collapseHandling" data-toggle="collapse">Handling</a>
+                  </h4>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Longitude</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="" name="loc[loc_lon]">
+                <div class="panel-collapse collapse" id="collapseHandling">
+                  <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Capture Time</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="" name="enc[cap_time]">
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>what time was the animal captured or encountered</small></span>
+                        </div>
                     </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>longitude of the capture location</small></span>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Chase Time</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="" name="enc[chase_time]">
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>how long was the animal chased by the helicopter</small></span>
+                        </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Arrival Time</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="" name="enc[arr_time]">
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>what time did the animal arrive at basecamp</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Finished Time</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="" name="enc[fin_time]">
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>what time was the animal no longer being handled</small></span>
+                        </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Latitude</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="" name="loc[loc_lat]">
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>latitude of the capture location</small></span>
-                    </div>
+              </div>
+            </div> <!-- ./ end handling module -->
+
+            <div class="panel-group"> <!-- capture location module -->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a href="#collapseCapLocation" data-toggle="collapse">Capture Location</a>
+                  </h4>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Accuracy</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="" name="loc[loc_accuracy]">
+                <div class="panel-collapse collapse in" id="collapseCapLocation">
+                  <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label req-label">Location Name</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="" name="loc[loc_name]">
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>enter a short name for the location</small></span>
+                        </div>
                     </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>accuracy of the coordinates</small></span>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label req-label">Longitude</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="" name="loc[loc_lon]">
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>longitude of the capture location</small></span>
+                        </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label req-label">Latitude</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="" name="loc[loc_lat]">
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>latitude of the capture location</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Accuracy</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="" name="loc[loc_accuracy]">
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>accuracy of the coordinates</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Mountain Range</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="" name="loc[loc_mtn_range]">
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>name of the range the animal was captured</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label req-label">Hunt Unit</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="" name="loc[loc_hunt_unit]">
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>hunt unit the animal was captured in</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Location Quality</label>
+                        <div class="col-sm-5">
+                            <select name="loc[loc_quality]" id="locType" class="form-control">
+                                <option value=""></option>
+                                <option value="Description">Description</option>
+                                <option value="Geography">Geogrpahy</option>
+                                <option value="">XY</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>how good is the quality of the location</small></span>
+                        </div>
+                    </div>
+                    <div id="#encMap" style="height: 350px;"></div>
+                  </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Mountain Range</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="" name="loc[loc_mtn_range]">
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>name of the range the animal was captured</small></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Hunt Unit</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="" name="loc[loc_hunt_unit]">
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>hunt unit the animal was captured in</small></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Location Quality</label>
-                    <div class="col-sm-5">
-                        <select name="loc[loc_quality]" id="locType" class="form-control">
-                            <option value=""></option>
-                            <option value="Description">Description</option>
-                            <option value="Geography">Geogrpahy</option>
-                            <option value="">XY</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-5">
-                        <span class="help-block"><small>how good is the quality of the location</small></span>
-                    </div>
-                </div>
-                <div id="#encMap" style="height: 350px;"></div>
-            </fieldset>
+              </div>
+            </div> <!-- ./ end capture location module -->
 
             <legend>Supplemental Data</legend>
 

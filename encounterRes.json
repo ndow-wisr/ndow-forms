@@ -159,3 +159,132 @@
 	},
 	"button": ""
 }
+
+/*animal to append*/
+{
+	"species_id": "752",
+	"field_id": "111111",
+	"sex": "male",
+	"Marks": [
+		{
+			"mark_type": "Collar",
+			"mark_id": "123123",
+			"mark_color": "Gray",
+			"mark_location": "neck",
+			"date_given": "2016-10-17",
+			"mark_removed": "2016-10-17"
+		},
+		{
+			"mark_type": "Ear Tag",
+			"mark_id": "123123",
+			"mark_color": "Black",
+			"mark_location": "neck",
+			"date_given": "2016-10-17",
+			"mark_removed": "2016-10-17"
+		}
+	],
+	"Encounters": [
+		{
+			"enc_date": "2016-01-01",
+			"status": "alive",
+			"age": "Adult",
+			"enc_reason": "monitoring",
+			"enc_method": "Basecamp - Helicopter",
+			"reencounter": "No",
+			"relocated": "No",
+			"cap_time": "12:00",
+			"chase_time": "30",
+			"arr_time": "12:00",
+			"fin_time": "12:00",
+			"marks": "yes",
+			"biometrics": "yes",
+			"vitals": "yes",
+			"injury": "yes",
+			"medications": "yes",
+			"samples": "yes",
+			"Biometrics": [
+				{
+					"biometric": "Age (integer)",
+					"measurement": "2",
+					"unit": "years",
+					"notes": "blah"
+				},
+				{
+					"biometric": "Weight",
+					"measurement": "100",
+					"unit": "kg",
+					"notes": "blah"
+				}
+			],
+			"Vitals": [
+				{
+					"vital_time_recorded": "14:03",
+					"vital_measurement": "Temp",
+					"vital_value": "105.1",
+					"vital_interval": "1"
+				},
+				{
+					"vital_time_recorded": "14:03",
+					"vital_measurement": "RR",
+					"vital_value": "45",
+					"vital_interval": "1"
+				}
+			],
+			"Injuries": [
+				{
+					"injury_type": "Abrasion",
+					"injury_location": "nose",
+					"injury_description": "blah blah blah",
+					"injury_treatment": "blah blah blah blah"
+				},
+				{
+					"injury_type": "Laceration",
+					"injury_location": "ear",
+					"injury_description": "blah blah blah",
+					"injury_treatment": "blah blah blah blah"
+				}
+			],
+			"Medications": [
+				{
+					"medication": "Oxygen",
+					"med_dose": "4",
+					"med_unit": "L/m",
+					"med_method": "IM",
+					"med_time_admin": "12:00",
+					"med_notes": "aafafdasdfasdfa"
+				},
+				{
+					"medication": "Banamine",
+					"med_dose": "4",
+					"med_unit": "ug",
+					"med_method": "IM",
+					"med_time_admin": "12:00",
+					"med_notes": "sdbcbxcvbnn"
+				}
+			],
+			"Samples": [
+				{
+					"sample": "Blood",
+					"sample_destination": "waddl",
+					"sample_test": "elisa",
+					"sample_result": "No"
+				},
+				{
+					"sample": "Swab",
+					"sample_destination": "waddl",
+					"sample_test": "PCR",
+					"sample_result": "No"
+				}
+			],
+			"Location": {
+				"loc_name": "Boundary Peak",
+				"loc_lon": "-119.7764",
+				"loc_lat": "39.4628",
+				"loc_accuracy": "20",
+				"loc_mtn_range": "White Mountains",
+				"loc_hunt_unit": "211",
+				"loc_quality": ""
+			}
+		}
+	]
+}

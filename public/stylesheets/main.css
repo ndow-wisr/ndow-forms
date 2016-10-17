@@ -77,6 +77,15 @@ header {
     margin-bottom: 10px;
 }
 
+.req-input {
+  background-color: rgba(128, 0, 128, .1);
+  border-color: rgb(128, 0, 128);
+}
+
+.req-label {
+  color: rgb(128, 0, 128);
+}
+
 .btn-primary-inv {
     border-color: #337ab7;
     color: #337ab7;
