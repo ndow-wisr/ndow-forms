@@ -28,7 +28,14 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER,
         },
         animal_id: DataTypes.INTEGER,
-        rel_loc_id: DataTypes.INTEGER
+        rel_loc_id: DataTypes.INTEGER,
+        marks: DataTypes.STRING,
+        biometrics: DataTypes.STRING,
+        vitals: DataTypes.STRING,
+        injury: DataTypes.STRING,
+        medications: DataTypes.STRING,
+        samples: DataTypes.STRING,
+        source: DataTypes.STRING
     }, {
         underscored: true,
         freezeTableName: true,

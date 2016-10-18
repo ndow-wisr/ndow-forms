@@ -86,6 +86,10 @@ header {
   color: rgb(128, 0, 128);
 }
 
+.panel-group-smush {
+  margin-bottom: 5px;
+}
+
 .btn-primary-inv {
     border-color: #337ab7;
     color: #337ab7;
