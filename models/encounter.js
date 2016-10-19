@@ -32,7 +32,7 @@ module.exports = function(sequelize, DataTypes) {
         marks: DataTypes.STRING,
         biometrics: DataTypes.STRING,
         vitals: DataTypes.STRING,
-        injury: DataTypes.STRING,
+        injuries: DataTypes.STRING,
         medications: DataTypes.STRING,
         samples: DataTypes.STRING,
         source: DataTypes.STRING

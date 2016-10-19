@@ -36,7 +36,7 @@
                             <span class="help-block pick-date"><small>pick a date from the dropdown</small></span>
                         </div>
                     </div>
-                    <div class="form-group"> <!-- TODO: selectize -->
+                    <div class="form-group">
                         <label class="col-sm-2 control-label req-label">Species</label>
                         <div class="col-sm-5">
                             <select class="form-control species-select req-input" id="encSpecies" name="animal[species_id]"></select>
@@ -152,6 +152,15 @@
                         <div class="col-sm-5">
                             <span class="help-block"><small>is this animal being relocated to a new location</small></span>
                         </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">Comments</label>
+                      <div class="col-sm-5">
+                        <textarea name="enc[comments]" rows="6" class="form-control"></textarea>
+                      </div>
+                      <div class="col-sm-5">
+                        <span class="help-block"><small>any and all comments related to the capture of this animal</small></span>
+                      </div>
                     </div>
                   </div>
                 </div>

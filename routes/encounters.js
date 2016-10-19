@@ -11,13 +11,26 @@ router.get('/', function(req, res){
              attributes: ['username', 'first_name', 'last_name', 'id']},
             {model: models.Species,
              attributes: ['species_name', 'common_name', 'id']},
-             {model: models.Encounter}
+             {model: models.Encounter,
+             attributes: ['enc_date', 'status', 'source', 'id']}
         ],
         order: [ [ 'created_at', 'DESC' ] ]
     })
     .then(function(animals){
         res.status(200).json(animals);
     });
+});
+
+router.get('/wildlifehealth', function(req, res) {
+  models.Encounter.findAll(
+    {
+      // attributes: ['id', 'enc_date', 'status', 'animal_id', 'created_at', 'updated_at', 'loc_id'],
+      attributes: { exclude: 'location_id'},
+      include: [ {model: models.Location} ]
+    }
+  ).then(function(encs){
+    res.status(200).send(JSON.stringify(encs, null, '\t'));
+  });
 });
 
 // new, get, get page to add new observation
@@ -31,6 +44,7 @@ router.post('/', function(req, res){
 
   var animal = req.body.animal;
   var encounter = req.body.enc;
+  encounter.source = 'wildlife health form';
   var location = req.body.loc;
 
   if (encounter.marks == 'yes') {
@@ -64,23 +78,23 @@ router.post('/', function(req, res){
   console.log(JSON.stringify(animal, null, '\t'));
 
   models.Animal.create(animal, {
-      include: [
-          { model: models.Mark },
-          {
-              model: models.Encounter,
-              include: [
-                  { model: models.Location },
-                  { model: models.Biometric },
-                  { model: models.Vital },
-                  { model: models.Injury },
-                  { model: models.Medication },
-                  { model: models.Sample }
-              ]
-          }
-      ]
+    include: [
+      { model: models.Mark },
+      {
+        model: models.Encounter,
+          include: [
+            { model: models.Location },
+            { model: models.Biometric },
+            { model: models.Vital },
+            { model: models.Injury },
+            { model: models.Medication },
+            { model: models.Sample }
+          ]
+      }
+    ]
   }).then(function(){
-      console.log('New Encounter Added!');
-      res.redirect('/encounters/new');
+    console.log('New Encounter Added!');
+    res.redirect('/encounters/new');
   });
 
     // var animal = req.body.animal;
