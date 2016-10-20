@@ -86,25 +86,27 @@ router.post('/', function(req, res){
   });
 });
 
-// show individual encounters
+// show individual encounters, the find model is Encounter instead of animal. I can use Animal and show every encounter as tabs?
+// IDEA: Use Animal.findAll(), each encounter is a tab?
 router.get('/:id', function(req, res) {
   models.Encounter.findById(req.params.id, {
     attributes: {exclude: 'location_id'},
     include: [
-      {model: models.Animal,
-       include: [
-          {
-            model: models.Species,
-            attributes: ['id', 'common_name']
-          }, {
-            model: models.Mark
-          }
-       ]}
+      { model: models.Biometric },
+      { model: models.Vital },
+      {
+        model: models.Animal,
+        include: [{
+          model: models.Species,
+          attributes: ['id', 'common_name']
+        }, {
+          model: models.Mark
+        }]}
     ]
   })
   .then(function(encounter) {
-    // res.status(200).send(JSON.stringify(encounter));
-    res.render('encounters/show', {encounter:encounter})
+    res.status(200).send(JSON.stringify(encounter));
+    // res.render('encounters/show', {encounter:encounter})
   });
 });
 
