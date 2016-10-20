@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+		<meta charset = "utf-8" />
+		<title>Wildlife Health</title>
+		<% include ../partials/bootstrap %> <!-- bootstrap & jquery -->
+		<% include ../partials/leaflet %> <!-- leaflet -->
+    <link rel="stylesheet" href="/stylesheets/main.css">
+	</head>
+	<body>
+		<% include ../partials/navigation %>
+
+    <div class="container">
+      <div class="col-sm-12">
+        <div class="row">
+          <h2 class="col-sm-6 col-sm-offset-3">Wildlife Health Encounter Record</h2>
+        </div>
+
+        <div class="row">
+          <!-- main content panel -->
+          <div class="col-md-8">
+            <h3>#<%= encounter.Animal.field_id %> - <%= encounter.Animal.Species.common_name %></h3>
+            <hr>
+
+            <!-- marks and ids table -->
+            <div class="table-responsive" id="markTable">
+              <h4>Marks and IDs</h4>
+              <table class="table" id="marks">
+                <thead>
+                  <tr>
+                    <th>Mark Type</th>
+                    <th>Mark ID</th>
+                    <th>Mark Color</th>
+                    <th>Mark Location</th>
+                    <th>Date Applied</th>
+                    <th>Date Removed</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% encounter.Animal.Marks.forEach(function(mark) { %>
+                    <tr>
+                      <td><%= mark.mark_type %></td>
+                      <td><%= mark.mark_id %></td>
+                      <td><%= mark.mark_color %></td>
+                      <td><%= mark.mark_location %></td>
+                      <td><%= mark.date_given.toDateString() %></td>
+                      <td><%= mark.mark_removed %></td>
+                    </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+              <p class="text-muted">
+                <small>If there is a date in the Mark Removed field then the mark is no longer on this animal.</small>
+              </p>
+            </div> <!-- ./ end marks and ids table -->
+          </div>
+
+          <!-- side panel (metadata) -->
+          <div class="col-sm-4">
+            <div class="list-group">
+              <li class="list-group-item active">Encounter Metadata</li>
+              <li class="list-group-item"><%= encounter.enc_date.toDateString() %></li>
+              <li class="list-group-item"><%= encounter.status %></li>
+              <li class="list-group-item"><%= encounter.reencounter %></li>
+              <li class="list-group-item"><%= encounter.relocated %></li>
+              <li class="list-group-item"><%= encounter.enc_reason %></li>
+              <li class="list-group-item"><%= encounter.enc_method %></li>
+              <li class="list-group-item">Marks: <%= encounter.marks %></li>
+              <li class="list-group-item">Biometrics: <%= encounter.biometrics %></li>
+              <li class="list-group-item">Vitals: <%= encounter.vitals %></li>
+              <li class="list-group-item">Injuries: <%= encounter.injuries %></li>
+              <li class="list-group-item">Medications: <%= encounter.medications %></li>
+              <li class="list-group-item">Samples: <%= encounter.samples %></li>
+              <li class="list-group-item"><%= %></li>
+              <li class="list-group-item"><%= %></li>
+              <li class="list-group-item"><%= %></li>
+              <li class="list-group-item"><%= %></li>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </body>
+</html>

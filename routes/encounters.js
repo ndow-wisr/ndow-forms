@@ -4,33 +4,21 @@ var express = require('express'),
 
 // index, get, list all encounters
 router.get('/', function(req, res){
-    // res.send('http:/.../encounters');
-    models.Animal.findAll({
-        include: [
-            {model: models.User,
-             attributes: ['username', 'first_name', 'last_name', 'id']},
-            {model: models.Species,
-             attributes: ['species_name', 'common_name', 'id']},
-             {model: models.Encounter,
-             attributes: ['enc_date', 'status', 'source', 'id']}
-        ],
-        order: [ [ 'created_at', 'DESC' ] ]
+    models.Encounter.findAll({
+      attributes: ['enc_date', 'status', 'id'],
+      include: [
+        {model: models.Animal,
+         attributes: ['field_id'],
+         include: [
+           {model: models.Species,
+            attributes: ['id', 'common_name']}
+         ]}
+      ]
     })
-    .then(function(animals){
-        res.status(200).json(animals);
+    .then(function(encounters){
+      // res.status(200).json(encounters);
+      res.render('encounters/index', {encounters: encounters});
     });
-});
-
-router.get('/wildlifehealth', function(req, res) {
-  models.Encounter.findAll(
-    {
-      // attributes: ['id', 'enc_date', 'status', 'animal_id', 'created_at', 'updated_at', 'loc_id'],
-      attributes: { exclude: 'location_id'},
-      include: [ {model: models.Location} ]
-    }
-  ).then(function(encs){
-    res.status(200).send(JSON.stringify(encs, null, '\t'));
-  });
 });
 
 // new, get, get page to add new observation
@@ -96,38 +84,28 @@ router.post('/', function(req, res){
     console.log('New Encounter Added!');
     res.redirect('/encounters/new');
   });
+});
 
-    // var animal = req.body.animal;
-    // var encounter = req.body.encounter;
-    // var marks = req.body.markOne;
-    // var abundance = req.body.abundance;
-    // var location = req.body.loc;
-
-    // TODO: add dynamically created content without hardcoding 'rows'
-    // replace blank ("") date removed with null because "" doesn't default to null or the default value and Postgres can't accepts "" as a date input value
-
-    // buidling the model
-    // encounter.Abundance = abundance;
-    // encounter.Location = location;
-    // animal.Encounters = [ encounter ];
-    // animal.Marks = [ marks ];
-
-
-    // models.Animal.create(animal, {
-    //     include: [
-    //         {
-    //             model: models.Encounter,
-    //             include: [
-    //                 {model: models.Abundance},
-    //                 {model: models.Location}
-    //             ]
-    //         },
-    //         { model: models.Mark }
-    //     ]
-    // }).then(function(){
-    //     // console.log(JSON.stringify(animal, null, '\t'));
-    //     res.redirect('/encounters');
-    // });
+// show individual encounters
+router.get('/:id', function(req, res) {
+  models.Encounter.findById(req.params.id, {
+    attributes: {exclude: 'location_id'},
+    include: [
+      {model: models.Animal,
+       include: [
+          {
+            model: models.Species,
+            attributes: ['id', 'common_name']
+          }, {
+            model: models.Mark
+          }
+       ]}
+    ]
+  })
+  .then(function(encounter) {
+    // res.status(200).send(JSON.stringify(encounter));
+    res.render('encounters/show', {encounter:encounter})
+  });
 });
 
 function parseDynamicContent(rq) {

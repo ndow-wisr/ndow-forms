@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>NDOW 240</title>
+	<% include ../partials/bootstrap %> <!-- bootstrap & jquery -->
+	<% include ../partials/datatables %> <!-- datatables js -->
+	<% include ../partials/leaflet %> <!-- leaflet js -->
+	<link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+
+<body>
+
+	<% include ../partials/navigation %>
+
+		<div class="container">
+			<div class="pad-bottom">
+				<h1>Wildlife Health Encounters</h1>
+				<p>Enter and view wildlife health data.</p>
+				<p>
+					<% if(currentUser){ %>
+						<a class="btn btn-primary btn-large" href="/encounters/new">Add New Observation</a>
+					<% } %>
+				</p>
+			</div>
+
+
+			<div class="table-responsive pad-bottom">
+				<table id="encTable" class="display" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>Species</th>
+							<th>NDOW ID</th>
+							<th>Date</th>
+							<th>Status</th>
+              <th>Encounter ID</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% encounters.forEach(function(encounter){ %>
+							<tr>
+								<td>
+										<%= encounter.Animal.Species.common_name %><br>
+								</td>
+								<td>
+									<%= encounter.Animal.field_id %>
+								</td>
+								<td>
+									<%= encounter.enc_date %>
+								</td>
+								<td>
+									<%= encounter.status %>
+								</td>
+                <td>
+									<%= encounter.id %>
+								</td>
+								<td>
+									<a href="/encounters/<%= encounter.id %>" class="btn btn-primary btn-sm">View</a>
+								</td>
+							</tr>
+							<% }) %>
+					</tbody>
+				</table>
+			</div>
+
+			<br>
+			<div id="mapid" style="height: 400px;"></div>
+			<br>
+		</div>
+
+		<% include ../partials/footer %>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#encTable').dataTable();
+      });
+    </script>
+
+</body>
+
+</html>
