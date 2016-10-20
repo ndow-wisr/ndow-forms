@@ -113,21 +113,25 @@ router.get('/:id', function(req, res) {
 function parseDynamicContent(rq) {
     var n = 0;
     var dat = [];
-    while (n < rq[Object.keys(rq)[0]].length) {
-        var m = 0;
-        var obj = {};
-        while (m < Object.keys(rq).length) {
-            var val = rq[Object.keys(rq)[m]][n];
-            if (val == '') {
-                val = null
+    if (typeof rq[Object.keys(rq)[0]] !== 'object') {
+        return rq;
+    } else {
+        while (n < rq[Object.keys(rq)[0]].length) {
+            var m = 0;
+            var obj = {};
+            while (m < Object.keys(rq).length) {
+                var val = rq[Object.keys(rq)[m]][n];
+                if (val == '') {
+                    val = null
+                }
+                obj[Object.keys(rq)[m]] = val
+                m++;
             }
-            obj[Object.keys(rq)[m]] = val
-            m++;
+            dat.push(obj)
+            n++;
         }
-        dat.push(obj)
-        n++;
+        return dat;
     }
-    return dat;
 }
 
 module.exports = router;
