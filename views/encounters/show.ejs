@@ -18,7 +18,7 @@
 
         <div class="row">
           <!-- main content panel -->
-          <div class="col-md-8">
+          <div class="col-md-9">
             <h3>#<%= encounter.Animal.field_id %> - <%= encounter.Animal.Species.common_name %></h3>
             <hr>
 
@@ -30,7 +30,7 @@
                     <a href="#collapseMarks" data-toggle="collapse">Marks and ID's</a>
                   </h4>
                 </div>
-                <div id="collapseMarks" class="panel-collapse collapse">
+                <div id="collapseMarks" class="panel-collapse collapse in">
                   <div class="panel-body">
                     <table class="table" id="marks">
                       <thead>
@@ -72,7 +72,7 @@
                     <a data-toggle="collapse" href="#collapseLocation">Locations</a>
                   </h4>
                 </div>
-                <div id="collapseLocation" class="panel-collapse collapse">
+                <div id="collapseLocation" class="panel-collapse collapse in">
                   <div class="panel-body">
                     <div id="locMap"></div>
                   </div>
@@ -157,10 +157,125 @@
               </div>
             </div> <!-- ./ end vitals module -->
 
+            <!-- injury module -->
+            <div class="panel-group panel-group-smush">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapseInjury">Injury</a>
+                  </h4>
+                </div>
+                <div id="collapseInjury" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <table class="table" id="marks">
+                      <thead>
+                        <tr>
+                          <th>Measurement</th>
+                          <th>Value</th>
+                          <th>Time</th>
+                          <th>Interval</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% encounter.Injuries.forEach(function(injury) { %>
+                          <tr>
+                            <td><%= injury.injury_type %></td>
+                            <td><%= injury.injury_location %></td>
+                            <td><%= injury.injury_description %></td>
+                            <td><%= injury.injury_treatment %></td>
+                          </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="panel-footer text-muted">
+                  </div>
+                </div>
+              </div>
+            </div> <!-- ./ end injury module -->
+
+            <!-- medications module -->
+            <div class="panel-group panel-group-smush">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapseMeds">Medications</a>
+                  </h4>
+                </div>
+                <div id="collapseMeds" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <table class="table" id="marks">
+                      <thead>
+                        <tr>
+                          <th>Medication</th>
+                          <th>Dose</th>
+                          <th>Unit</th>
+                          <th>Method</th>
+                          <th>Time</th>
+                          <th>Notes</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% encounter.Medications.forEach(function(med) { %>
+                          <tr>
+                            <td><%= med.medication %></td>
+                            <td><%= med.med_dose %></td>
+                            <td><%= med.med_unit %></td>
+                            <td><%= med.med_method %></td>
+                            <td><%= med.med_time_admin %></td>
+                            <td><%= med.med_notes %></td>
+                          </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="panel-footer text-muted">
+                  </div>
+                </div>
+              </div>
+            </div> <!-- ./ end medications module -->
+
+            <!-- samples module -->
+            <div class="panel-group panel-group-smush">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapseSamples">Samples</a>
+                  </h4>
+                </div>
+                <div id="collapseSamples" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <table class="table" id="marks">
+                      <thead>
+                        <tr>
+                          <th>Sample</th>
+                          <th>Destination</th>
+                          <th>Test</th>
+                          <th>Results</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% encounter.Samples.forEach(function(sample) { %>
+                          <tr>
+                            <td><%= sample.sample %></td>
+                            <td><%= sample.sample_destination %></td>
+                            <td><%= sample.sample_test %></td>
+                            <td><%= sample.sample_results %></td>
+                          </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="panel-footer text-muted">
+                  </div>
+                </div>
+              </div>
+            </div> <!-- ./ end samples module -->
+
           </div> <!-- ./ main content panel -->
 
           <!-- side panel (metadata) -->
-          <div class="col-sm-4">
+          <div class="col-sm-3">
             <div class="list-group">
               <li class="list-group-item active">Encounter Metadata</li>
               <li class="list-group-item"><%= encounter.enc_date.toDateString() %></li>
