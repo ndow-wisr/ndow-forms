@@ -23,65 +23,169 @@
             <hr>
 
             <!-- marks and ids table -->
-            <div class="table-responsive" id="markTable">
-              <h4>Marks and IDs</h4>
-              <table class="table" id="marks">
-                <thead>
-                  <tr>
-                    <th>Mark Type</th>
-                    <th>Mark ID</th>
-                    <th>Mark Color</th>
-                    <th>Mark Location</th>
-                    <th>Date Applied</th>
-                    <th>Date Removed</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% encounter.Animal.Marks.forEach(function(mark) { %>
-                    <tr>
-                      <td><%= mark.mark_type %></td>
-                      <td><%= mark.mark_id %></td>
-                      <td><%= mark.mark_color %></td>
-                      <td><%= mark.mark_location %></td>
-                      <td><%= mark.date_given.toDateString() %></td>
-                      <td><%= mark.mark_removed %></td>
-                    </tr>
-                  <% }) %>
-                </tbody>
-              </table>
-              <p class="text-muted">
-                <small>If there is a date in the Mark Removed field then the mark is no longer on this animal.</small>
-              </p>
+            <div class="panel-group panel-group-smush">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a href="#collapseMarks" data-toggle="collapse">Marks and ID's</a>
+                  </h4>
+                </div>
+                <div id="collapseMarks" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <table class="table" id="marks">
+                      <thead>
+                        <tr>
+                          <th>Mark Type</th>
+                          <th>Mark ID</th>
+                          <th>Mark Color</th>
+                          <th>Mark Location</th>
+                          <th>Date Applied</th>
+                          <th>Date Removed</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% encounter.Animal.Marks.forEach(function(mark) { %>
+                          <tr>
+                            <td><%= mark.mark_type %></td>
+                            <td><%= mark.mark_id %></td>
+                            <td><%= mark.mark_color %></td>
+                            <td><%= mark.mark_location %></td>
+                            <td><%= mark.date_given.toDateString() %></td>
+                            <td><%= mark.mark_removed %></td>
+                          </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="panel-footer text-muted">
+                      If there is a date in the Mark Removed field then the mark is no longer on this animal.
+                  </div>
+                </div>
+              </div>
             </div> <!-- ./ end marks and ids table -->
-          </div>
+
+            <!-- locations module -->
+            <div class="panel-group panel-group-smush">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapseLocation">Locations</a>
+                  </h4>
+                </div>
+                <div id="collapseLocation" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <div id="locMap"></div>
+                  </div>
+                  <div class="panel-footer text-muted">
+                      Long, Lat (easting, northing)
+                  </div>
+                </div>
+              </div>
+            </div> <!-- ./ end location module -->
+
+            <!-- biometric module -->
+            <div class="panel-group panel-group-smush">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapseBiometric">Biometrics</a>
+                  </h4>
+                </div>
+                <div id="collapseBiometric" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <table class="table" id="marks">
+                      <thead>
+                        <tr>
+                          <th>Measurement</th>
+                          <th>Value</th>
+                          <th>Unit</th>
+                          <th>Notes</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% encounter.Biometrics.forEach(function(biometric) { %>
+                          <tr>
+                            <td><%= biometric.biometric %></td>
+                            <td><%= biometric.measurement %></td>
+                            <td><%= biometric.unit %></td>
+                            <td><%= biometric.biom_notes %></td>
+                          </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="panel-footer text-muted">
+                  </div>
+                </div>
+              </div>
+            </div> <!-- ./ end biometric module -->
+
+            <!-- vitals module -->
+            <div class="panel-group panel-group-smush">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapseVitals">Vitals</a>
+                  </h4>
+                </div>
+                <div id="collapseVitals" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <table class="table" id="marks">
+                      <thead>
+                        <tr>
+                          <th>Measurement</th>
+                          <th>Value</th>
+                          <th>Time</th>
+                          <th>Interval</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% encounter.Vitals.forEach(function(vital) { %>
+                          <tr>
+                            <td><%= vital.vital_measurement %></td>
+                            <td><%= vital.vital_value %></td>
+                            <td><%= vital.vital_time_recorded %></td>
+                            <td><%= vital.vital_interval %></td>
+                          </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="panel-footer text-muted">
+                  </div>
+                </div>
+              </div>
+            </div> <!-- ./ end vitals module -->
+
+          </div> <!-- ./ main content panel -->
 
           <!-- side panel (metadata) -->
           <div class="col-sm-4">
             <div class="list-group">
               <li class="list-group-item active">Encounter Metadata</li>
               <li class="list-group-item"><%= encounter.enc_date.toDateString() %></li>
-              <li class="list-group-item"><%= encounter.status %></li>
-              <li class="list-group-item"><%= encounter.reencounter %></li>
-              <li class="list-group-item"><%= encounter.relocated %></li>
-              <li class="list-group-item"><%= encounter.enc_reason %></li>
-              <li class="list-group-item"><%= encounter.enc_method %></li>
+              <li class="list-group-item">Status: <%= encounter.status %></li>
+              <li class="list-group-item">ReEncounter: <%= encounter.reencounter %></li>
+              <li class="list-group-item">Relocated: <%= encounter.relocated %></li>
+              <li class="list-group-item">Reason: <%= encounter.enc_reason %></li>
+              <li class="list-group-item">Method: <%= encounter.enc_method %></li>
               <li class="list-group-item">Marks: <%= encounter.marks %></li>
               <li class="list-group-item">Biometrics: <%= encounter.biometrics %></li>
               <li class="list-group-item">Vitals: <%= encounter.vitals %></li>
               <li class="list-group-item">Injuries: <%= encounter.injuries %></li>
               <li class="list-group-item">Medications: <%= encounter.medications %></li>
               <li class="list-group-item">Samples: <%= encounter.samples %></li>
+              <!-- <li class="list-group-item"><%= %></li>
               <li class="list-group-item"><%= %></li>
               <li class="list-group-item"><%= %></li>
-              <li class="list-group-item"><%= %></li>
-              <li class="list-group-item"><%= %></li>
+              <li class="list-group-item"><%= %></li> -->
             </div>
           </div>
         </div>
       </div>
     </div>
 
-
+    <% include ../partials/footer %>
 
   </body>
 </html>

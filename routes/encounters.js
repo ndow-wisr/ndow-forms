@@ -105,8 +105,8 @@ router.get('/:id', function(req, res) {
     ]
   })
   .then(function(encounter) {
-    res.status(200).send(JSON.stringify(encounter));
-    // res.render('encounters/show', {encounter:encounter})
+    // res.status(200).send(JSON.stringify(encounter));
+    res.render('encounters/show', {encounter:encounter})
   });
 });
 
