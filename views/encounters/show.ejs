@@ -5,6 +5,7 @@
 		<title>Wildlife Health</title>
 		<% include ../partials/bootstrap %> <!-- bootstrap & jquery -->
 		<% include ../partials/leaflet %> <!-- leaflet -->
+    <% include ../partials/datatables %> <!-- datatable -->
     <link rel="stylesheet" href="/stylesheets/main.css">
 	</head>
 	<body>
@@ -19,7 +20,7 @@
         <div class="row">
           <!-- main content panel -->
           <div class="col-md-9">
-            <h3>#<%= encounter.Animal.field_id %> - <%= encounter.Animal.Species.common_name %></h3>
+            <h3>NDOW ID: <%= encounter.Animal.field_id %>  <span class="pull-right text-muted"><%= encounter.Animal.Species.common_name %></span></h3>
             <hr>
 
             <!-- marks and ids table -->
@@ -74,7 +75,7 @@
                 </div>
                 <div id="collapseLocation" class="panel-collapse collapse in">
                   <div class="panel-body">
-                    <div id="locMap"></div>
+                    <div id="locMap" style="height: 350px;"></div>
                   </div>
                   <div class="panel-footer text-muted">
                       Long, Lat (easting, northing)
@@ -302,5 +303,18 @@
 
     <% include ../partials/footer %>
 
+    <script type="text/javascript">
+      var coords = [<%= encounter.Location.loc_lat %>, <%= encounter.Location.loc_lon %>];
+      var locMap = L.map('locMap').setView(coords, 11);
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri'
+      }).addTo(locMap);
+      var marker = L.marker(coords).addTo(locMap);
+
+      // datatables
+      $(document).ready(function() {
+        $('table').dataTable();
+      });
+    </script>
   </body>
 </html>

@@ -96,7 +96,8 @@ router.get('/:id', function(req, res) {
       { model: models.Vital },
       { model: models.Injury },
       { model: models.Medication },
-      { model: models.Sample},
+      { model: models.Sample },
+      { model: models.Location },
       {
         model: models.Animal,
         include: [{
