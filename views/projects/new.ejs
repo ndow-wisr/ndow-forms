@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>NDOW 240</title>
+	<% include ../partials/bootstrap %> <!-- bootstrap & jquery -->
+	<% include ../partials/selectizejs %> <!-- selectize js -->
+	<% include ../partials/leaflet %> <!-- leaflet js -->
+	<% include ../partials/pikaday %> <!-- pikaday js -->
+	<link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+
+<body>
+  <% include ../partials/navigation %>
+
+  <div class="container">
+    <div class="row">
+      <h2>Enter New Project</h2>
+      <hr>
+    </div>
+
+    <div>
+      <form class="form-horizontal" action="/projects" method="POST">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Project Name</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="projDesc" name="proj[proj_name]">
+            </div>
+            <div class="col-sm-4">
+                <span class="help-block"><small>enter a name for the project</small></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-6">
+                <textarea class="form-control" name="proj[proj_desc]" rows="4"></textarea>
+            </div>
+            <div class="col-sm-4">
+                <span class="help-block"><small>a brief description of the project</small></span>
+            </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Goals</label>
+          <div class="col-sm-6">
+            <textarea name="proj[proj_goals]" rows="4" class="form-control"></textarea>
+          </div>
+          <div class="col-sm-4">
+            <span class="help-block"><small>a brief description of the goals</small></span>
+          </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Project Status</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="proj[proj_status]">
+            </div>
+            <div class="col-sm-4">
+                <span class="help-block"><small>what is the status of the project</small></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Project Owner</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="proj[proj_owner]">
+            </div>
+            <div class="col-sm-4">
+                <span class="help-block"><small>whoe is the lead on the project</small></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Project Division</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="proj[proj_division]">
+            </div>
+            <div class="col-sm-4">
+                <span class="help-block"><small>what division does the project belong to</small></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Start Date</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control pick-date" name="proj[proj_start]">
+            </div>
+            <div class="col-sm-4">
+                <span class="help-block"><small>when does the project begin</small></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">End Date</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control pick-date" name="proj[proj_end]">
+            </div>
+            <div class="col-sm-4">
+                <span class="help-block"><small>when does the project end</small></span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Save Project</button>
+      </form>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $('body').on('focus',".pick-date", function(){
+        $(this).pikaday({
+            format: 'YYYY-MM-DD',
+            yearRange: [1990, 2020]
+        });
+    });
+  </script>
+</body>
+</html>

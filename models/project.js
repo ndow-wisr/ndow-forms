@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
     proj_start: DataTypes.DATEONLY,
     proj_end: DataTypes.DATEONLY
   }, {
-    uderscored: true,
+    underscored: true,
     freezeTableName: true,
     tableName: 'projects',
     classMethods: {

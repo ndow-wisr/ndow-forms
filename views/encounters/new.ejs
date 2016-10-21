@@ -33,7 +33,7 @@
                             <input type="text" class="form-control pick-date req-input" id="encDate" name="enc[enc_date]">
                         </div>
                         <div class="col-sm-5">
-                            <span class="help-block pick-date"><small>pick a date from the dropdown</small></span>
+                            <span class="help-block"><small>pick a date from the dropdown</small></span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -972,11 +972,6 @@
                 });
             }
         });
-    </script>
-    <script type="text/javascript">
-        var picker = new Pikaday({ field: document.getElementById('enc_date'),
-                           yearRange: [1900, 2026]
-                         });
     </script>
     <script type="text/javascript">
         var obmap = L.map('#encMap').setView([39.38526, -116.87256], 7);

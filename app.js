@@ -12,6 +12,7 @@ var indexRoutes = require('./routes/index');
 var observationRoutes = require('./routes/observations');
 var speciesRoutes = require('./routes/species');
 var encounterRoutes = require('./routes/encounters');
+var projectRoutes = require('./routes/projects');
 
 // APP CONFIG
 app.use(bodyParser.urlencoded({extended: true}));
@@ -65,6 +66,7 @@ app.use("/", indexRoutes);
 app.use("/observations", observationRoutes);
 app.use("/species", speciesRoutes);
 app.use('/encounters', encounterRoutes);
+app.use('/projects', projectRoutes);
 // app.use("/observations/:id/comments", commentRoutes);
 // app.use("/checkins", checkinRoutes);
 
