@@ -8,7 +8,7 @@ module.exports = {
         model: 'projects',
         key: 'id'
       }
-    })
+    });
   },
 
   down: function (queryInterface, Sequelize) {
