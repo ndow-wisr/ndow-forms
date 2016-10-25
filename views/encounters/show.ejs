@@ -33,30 +33,34 @@
                 </div>
                 <div id="collapseMarks" class="panel-collapse collapse in">
                   <div class="panel-body">
-                    <table class="table" id="marks">
-                      <thead>
-                        <tr>
-                          <th>Mark Type</th>
-                          <th>Mark ID</th>
-                          <th>Mark Color</th>
-                          <th>Mark Location</th>
-                          <th>Date Applied</th>
-                          <th>Date Removed</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% encounter.Animal.Marks.forEach(function(mark) { %>
-                          <tr>
-                            <td><%= mark.mark_type %></td>
-                            <td><%= mark.mark_id %></td>
-                            <td><%= mark.mark_color %></td>
-                            <td><%= mark.mark_location %></td>
-                            <td><%= mark.date_given.toDateString() %></td>
-                            <td><%= mark.mark_removed %></td>
-                          </tr>
-                        <% }) %>
-                      </tbody>
-                    </table>
+										<% if(encounter.marks == 'yes') { %>
+											<table class="table" id="marks">
+	                      <thead>
+	                        <tr>
+	                          <th>Mark Type</th>
+	                          <th>Mark ID</th>
+	                          <th>Mark Color</th>
+	                          <th>Mark Location</th>
+	                          <th>Date Applied</th>
+	                          <th>Date Removed</th>
+	                        </tr>
+	                      </thead>
+	                      <tbody>
+	                        <% encounter.Animal.Marks.forEach(function(mark) { %>
+	                          <tr>
+	                            <td><%= mark.mark_type %></td>
+	                            <td><%= mark.mark_id %></td>
+	                            <td><%= mark.mark_color %></td>
+	                            <td><%= mark.mark_location %></td>
+	                            <td><%= mark.date_given %></td>
+	                            <td><%= mark.mark_removed %></td>
+	                          </tr>
+	                        <% }) %>
+	                      </tbody>
+	                    </table>
+										<% } else { %>
+											<p>No mark data</p>
+										<% } %>
                   </div>
                   <div class="panel-footer text-muted">
                       If there is a date in the Mark Removed field then the mark is no longer on this animal.
@@ -279,6 +283,7 @@
           <div class="col-sm-3">
             <div class="list-group">
               <li class="list-group-item active">Encounter Metadata</li>
+							<li class="list-group-item">Project: <%= encounter.project_id %></li>
               <li class="list-group-item"><%= encounter.enc_date.toDateString() %></li>
               <li class="list-group-item">Status: <%= encounter.status %></li>
               <li class="list-group-item">ReEncounter: <%= encounter.reencounter %></li>

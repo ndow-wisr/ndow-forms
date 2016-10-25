@@ -55,6 +55,15 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-sm-2 control-label">Project</label>
+                        <div class="col-sm-5">
+                            <select class="form-control proj-select" name="enc[project_id]"></select>
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="help-block"><small>for which project was this animal encountered</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-2 control-label req-label">Status</label>
                         <div class="col-sm-5">
                             <select class="form-control" name="enc[status]">
@@ -972,6 +981,33 @@
                 });
             }
         });
+    </script>
+    <!-- selectize for project -->
+    <script type="text/javascript">
+      $('.proj-select').selectize({
+        placeholder: 'Select Project..',
+        valueField: 'id',
+        labelField: 'proj_name',
+        searchField: 'common_name',
+        preload: true,
+        options: [],
+        load: function(query, callback) {
+          $.ajax({
+            url: window.location.protocol + '//' + window.location.host + '/projects/list_projects',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+              name: query
+            },
+            error: function() {
+              callback();
+            },
+            success: function(res) {
+              callback(res)
+            }
+          });
+        }
+      });
     </script>
     <script type="text/javascript">
         var obmap = L.map('#encMap').setView([39.38526, -116.87256], 7);
