@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+		<meta charset = "utf-8" />
+		<title>Wildlife Health</title>
+		<% include ../partials/bootstrap %> <!-- bootstrap & jquery -->
+		<% include ../partials/leaflet %> <!-- leaflet -->
+    <% include ../partials/datatables %> <!-- datatable -->
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+	</head>
+	<body>
+		<% include ../partials/navigation %>
+
+    <div class="container">
+      <div class="jumbotron mgn-top-sm">
+        <h2>Projects</h2>
+        <p>
+          A list of NDOW projects. Each project is associated with wildlife data.
+        </p>
+        <p>
+          <a href="/projects/new" class="btn btn-primary">Add New Project</a>
+        </p>
+      </div>
+
+      <table class="table" id="projects">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Start Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% projects.forEach(function(project) { %>
+            <tr>
+              <td><%= project.id %></td>
+              <td><%= project.proj_name %></td>
+              <td><%= project.proj_desc %></td>
+              <td class="date-str"><%= project.proj_start.toISOString() %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('table').dataTable();
+
+        $('.date-str').each(function() {
+          var d = moment($(this).html()).format('YYYY-MM-DD');
+          $(this).html(d);
+        });
+      });
+    </script>
+  </body>
+</html>

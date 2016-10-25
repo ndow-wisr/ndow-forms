@@ -3,6 +3,14 @@ var express = require('express'),
     models = require('../models');
 
 // index, get, list all projects
+router.get('/', function(req, res) {
+  models.Project.findAll({
+    attributes: ['id', 'proj_name', 'proj_desc', 'proj_start']
+  })
+  .then(function(projects) {
+    res.render('projects/index', {projects: projects})
+  });
+});
 
 // new, get, show the page to enter new projects
 router.get('/new', function(req, res) {
