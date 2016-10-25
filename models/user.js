@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
             associate: function(models) {
                 User.hasMany(models.Observation);
                 User.hasMany(models.Animal);
-                User.hasMany(models.Comment)
+                User.hasMany(models.Comment);
             }
         }
     });

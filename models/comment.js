@@ -11,8 +11,8 @@ module.exports = function(sequelize, DataTypes) {
     tableName: 'comments',
     classMethods: {
       associate: function(models) {
-        comments.belongsTo(models.User);
-        comments.belongsTo(models.Encounter);
+        Comment.belongsTo(models.User);
+        Comment.belongsTo(models.Encounter);
       }
     }
   });
