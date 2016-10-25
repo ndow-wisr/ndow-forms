@@ -16,7 +16,7 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<h2 class="header-text">NDOW Forms</h2>
-						<h3 class="header-text">The department's home for online data entry</h3>
+						<h3 class="header-text">The Department's home for online data entry</h3>
 					</div>
 
 					<% if (!currentUser) { %>
@@ -38,8 +38,21 @@
 						<% } else { %>
 							<div class="col-sm-4 col-sm-offset-1 opaque-box">
 								<h2 class="header-text">Quick Links</h2>
-								<a href="/observations" class="btn btn-primary btn-lg btn-block"><i class="fa fa-home fa-fw"></i>Observations Home</a>
-								<a href="/observations/new" class="btn btn-primary btn-lg btn-block"><i class="fa fa-plus fa-fw"></i>Enter New Observation</a>
+
+								<div class="quick-link">
+									<h4 class="header-text">Observations</h4>
+									<a href="/observations" class="btn btn-primary btn-lg btn-block"><i class="fa fa-home fa-fw"></i>Observations Home</a>
+									<a href="/observations/new" class="btn btn-primary btn-lg btn-block"><i class="fa fa-plus fa-fw"></i>Enter New Observation</a>
+								</div>
+								<div class="quick-ling">
+									<h4 class="header-text">Wildlife Health</h4>
+									<a href="/encounters" class="btn btn-primary btn-lg btn-block"><i class="fa fa-home fa-fw"></i>Health Home</a>
+									<a href="/encounters/new" class="btn btn-primary btn-lg btn-block"><i class="fa fa-plus fa-fw"></i>Enter New Record</a>
+								</div>
+								<div class="quick-link">
+									<h4 class="header-text">Porjects</h4>
+									<a href="/projects" class="btn btn-primary btn-lg btn-block"><i class="fa fa-home fa-fw"></i>Projects</a>
+								</div>
 							</div>
 							<% } %>
 
@@ -69,13 +82,13 @@
 
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail">
-						<img src="https://d2pz2jxkt8wezm.cloudfront.net/public/icons/dest/er-icons-dest-wildlife-dk-23.svg" />
+						<img src="img/western_scrub_jay.jpg" />
 						<div class="caption">
 							<h3>Wildlife Health</h3>
 							<p>
 								Enter, view, and edit Nevada Wildlife Health Encounter. This form is used for any animal that will have samples sent to a lab.
 							</p>
-							<a href="#" class="btn btn-primary btn-block" disabled="disabled">In Progress</a>
+							<a href="/encounters" class="btn btn-primary btn-block">Launch</a>
 						</div>
 					</div>
 				</div>

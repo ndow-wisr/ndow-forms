@@ -51,6 +51,7 @@ module.exports = function(sequelize, DataTypes) {
                 Encounter.hasMany(models.Medication);
                 Encounter.hasMany(models.Sample);
                 Encounter.belongsTo(models.Project);
+                Encounter.hasMany(models.Comment);
             }
         }
     });

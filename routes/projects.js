@@ -30,7 +30,7 @@ router.get('/list_projects', function(req, res) {
 // create, post, send form data to the database
 router.post('/', function(req, res){
   models.Project.create(req.body.proj).then(function(){
-    res.redirect('projects/new');
+    res.redirect('projects');
   });
 });
 

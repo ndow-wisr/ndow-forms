@@ -44,19 +44,8 @@ sequelize model:create --name SAMPLE --underscored --attributes 'sample:string, 
 CREATE PROJECT SCHEMA
 sequelize model:create --name Project --underscored --attributes 'proj_name:string, proj_desc:text, proj_target:text, proj_goals:text, proj_status:string, proj_owner:string, proj_division:string, proj_start:dateonly, proj_end:dateonly'
 
-CREATE TABLE "Project" (
-  "id" serial,
-  "proj_name" string,
-  "proj_desc" text,
-  "proj_target" string,
-  "proj_goals" string,
-  "proj_status" string,
-  "proj_owner" string,
-  "proj_division" string,
-  "proj_start" date,
-  "proj_end" date,
-  PRIMARY KEY ("id")
-);
+CREATE COMMENTS SCHEMA
+sequelize model:create --name Comment --underscored --attributes 'content:text, action:string, user_id:integer, encounter_id:integer'
 
 ADDING CALIFORNIA BIGHORN SHEEP TO THE SPECIES TABLE
 insert into species (common_name, species_name, subspecies, eng_class, eng_subclass, species_code, state_status, sensitive, sensitive_rationale, created_at, updated_at) values ('California bighorn sheep', 'Ovis canadensis', 'californiana', 'Mammal', 'Big Game', 1311, 'Game', false, '', Now(), Now());
