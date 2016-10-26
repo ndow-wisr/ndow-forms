@@ -30,7 +30,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label req-label">Encounter Date</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control pick-date req-input" id="encDate" name="enc[enc_date]">
+                            <input type="text" class="form-control pick-date" id="encDate" name="enc[enc_date]">
                         </div>
                         <div class="col-sm-5">
                             <span class="help-block"><small>pick a date from the dropdown</small></span>
@@ -39,7 +39,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label req-label">Species</label>
                         <div class="col-sm-5">
-                            <select class="form-control species-select req-input" id="encSpecies" name="animal[species_id]"></select>
+                            <select class="form-control species-select" id="encSpecies" name="animal[species_id]"></select>
                         </div>
                         <div class="col-sm-5">
                             <span class="help-block"><small>start typing a common name, then select from the list</small></span>
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Project</label>
+                        <label class="col-sm-2 control-label req-label">Project</label>
                         <div class="col-sm-5">
                             <select class="form-control proj-select" name="enc[project_id]"></select>
                         </div>
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Sex</label>
+                        <label class="col-sm-2 control-label req-label">Sex</label>
                         <div class="col-sm-5">
                             <select class="form-control" name="animal[sex]">
                                 <option value=""></option>
@@ -92,7 +92,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Age</label>
+                        <label class="col-sm-2 control-label req-label">Age</label>
                         <div class="col-sm-5">
                             <select class="form-control" name="enc[age]">
                                 <option value=""></option>
@@ -235,13 +235,13 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Capture Time</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="" name="enc[cap_time]">
+                            <input type="time" class="form-control" id="" name="enc[capture_time]">
                         </div>
                         <div class="col-sm-5">
                             <span class="help-block"><small>what time was the animal captured or encountered</small></span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label class="col-sm-2 control-label">Chase Time</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" id="" name="enc[chase_time]">
@@ -249,11 +249,11 @@
                         <div class="col-sm-5">
                             <span class="help-block"><small>how long was the animal chased by the helicopter</small></span>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Arrival Time</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="" name="enc[arr_time]">
+                            <input type="time" class="form-control" id="" name="enc[arrival_time]">
                         </div>
                         <div class="col-sm-5">
                             <span class="help-block"><small>what time did the animal arrive at basecamp</small></span>
@@ -262,7 +262,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Finished Time</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="" name="enc[fin_time]">
+                            <input type="time" class="form-control" id="" name="enc[finish_time]">
                         </div>
                         <div class="col-sm-5">
                             <span class="help-block"><small>what time was the animal no longer being handled</small></span>
@@ -309,7 +309,7 @@
                             <span class="help-block"><small>latitude of the capture location</small></span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label class="col-sm-2 control-label">Accuracy</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" id="" name="loc[loc_accuracy]">
@@ -335,7 +335,7 @@
                         <div class="col-sm-5">
                             <span class="help-block"><small>hunt unit the animal was captured in</small></span>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Location Quality</label>
                         <div class="col-sm-5">
@@ -546,7 +546,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Biometric Notes</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="biomNotes" name="biom[notes]">
+                                                    <textarea name="biom[notes]" id="biomNotes" rows="3" class="form-control"></textarea>
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>any notes associated with taking this measurement</small></span>
@@ -660,11 +660,12 @@
                                                 <div class="col-sm-5">
                                                     <select name="injury[injury_type]" id="injuryType" class="form-control">
                                                         <option value=""></option>
-                                                        <option value="Abrasion">Abrasion</option>
-                                                        <option value="Avulsion">Avulsion</option>
-                                                        <option value="Contusion">Contusion</option>
-                                                        <option value="Laceration">Laceration</option>
-                                                        <option value="Puncture">Puncture</option>
+                                                        <option value="abrasion">abrasion</option>
+                                                        <option value="bruise">bruise</option>
+                                                        <option value="dislocation">dislocation</option>
+                                                        <option value="fracture">fracture</option>
+                                                        <option value="laceration">laceration</option>
+                                                        <option value="puncture">puncture</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-sm-5">
@@ -683,7 +684,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Injury Description</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="injuryDesciption" name="injury[injury_description]"> <!-- TODO: textarea -->
+                                                    <textarea name="injury[injury_description]" id="injuryDescription" rows="3" class="form-control"></textarea>
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>a short description of the injury</small></span>
@@ -692,7 +693,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Injury Treatment</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="injuryTreatment" name="injury[injury_treatment]"> <!-- TODO: textarea -->
+                                                    <textarea name="injury[injury_treatment]" id="injuryTreatment" rows="3" class="form-control"></textarea>
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>a short description of the treatment for the injury</small></span>
@@ -812,7 +813,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Notes</label>
                                                 <div class="col-sm-5">
-                                                    <textarea name="meds[med_notes]" class="form-control" rows="2" id="medNote"></textarea>
+                                                    <textarea name="meds[med_notes]" class="form-control" rows="3" id="medNote"></textarea>
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>any notes associated with this medication, eg. vial-number</small></span>
@@ -854,10 +855,40 @@
                                                 <div class="col-sm-5">
                                                     <select name="samples[sample]" id="sample" class="form-control">
                                                         <option value=""></option>
-                                                        <option value="Blood">Blood</option>
-                                                        <option value="Carcass">Carcass</option>
-                                                        <option value="Swab">Swab</option>
-                                                        <option value="Tissue">Tissue</option>
+                                                        <option value="bladder">bladder</option>
+                                                        <option value="blood - blue">blood - blue top</option>
+                                                        <option value="blood - purple top">blood - purple top</option>
+                                                        <option value="blood - tiger top">blood - tiger top</option>
+                                                        <option value="blood - other">blood - other</option>
+                                                        <option value="bones">bones</option>
+                                                        <option value="brain">brain</option>
+                                                        <option value="bullae">bullae</option>
+                                                        <option value="bullae swab">bullae swab</option>
+                                                        <option value="carcass">carcass</option>
+                                                        <option value="ear">ear</option>
+                                                        <option value="eye">eye</option>
+                                                        <option value="fecal">fecal</option>
+                                                        <option value="hair">hair</option>
+                                                        <option value="head">head</option>
+                                                        <option value="intestine">intestine</option>
+                                                        <option value="kidney">kidney</option>
+                                                        <option value="limbs">limbs</option>
+                                                        <option value="liver">liver</option>
+                                                        <option value="lungs">lungs</option>
+                                                        <option value="lymph node">lymph node</option>
+                                                        <option value="muscle">muscle</option>
+                                                        <option value="nasal swab">nasal swab</option>
+                                                        <option value="obex">obex</option>
+                                                        <option value="parasite">parasite</option>
+                                                        <option value="pharyngeal swab">pharyngeal swab</option>
+                                                        <option value="photo">photo</option>
+                                                        <option value="sinus">sinus</option>
+                                                        <option value="sinus swab">sinus swab</option>
+                                                        <option value="spleen">spleen</option>
+                                                        <option value="teeth">teeth</option>
+                                                        <option value="tonsil">tonsil</option>
+                                                        <option value="tonsil swab">tonsil swab</option>
+                                                        <option value="trachea">trachea</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-sm-5">
@@ -867,7 +898,15 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Destination</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="sampleDestination" name="samples[sample_destination]">
+                                                    <select name="samples[sample_destination]" id="sampleDestination" class="form-control">
+                                                      <option value=""></option>
+                                                      <option value="archive">archive</option>
+                                                      <option value="CAHFS">CAHFS</option>
+                                                      <option value="Colorado St">Colorado St</option>
+                                                      <option value="OSU">OSU</option>
+                                                      <option value="WADDL">WADDL</option>
+                                                      <option value="BioPryn">BioPryn</option>
+                                                    </select>
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>what lab is the sample going to</small></span>
@@ -876,10 +915,10 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Test</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="samplesTest" name="samples[sample_test]">
+                                                    <input type="text" class="form-control tags-samples" id="samplesTest" name="samples[sample_test]">
                                                 </div>
                                                 <div class="col-sm-5">
-                                                    <span class="help-block"><small>what test will be run with this sample</small></span>
+                                                    <span class="help-block"><small>what test will be run with this sample (comma separated)</small></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -894,6 +933,15 @@
                                                 <div class="col-sm-5">
                                                     <span class="help-block"><small>have results been returned from the lab</small></span>
                                                 </div>
+                                            </div>
+                                            <div class="form-group">
+                                              <label class="col-sm-2 control-label">Sample Notes</label>
+                                              <div class="col-sm-5">
+                                                <textarea name="samples[sample_notes]" id="samplesNotes" rows="3" class="form-control"></textarea>
+                                              </div>
+                                              <div class="col-sm-5">
+                                                <span class="help-block"><small>any notes associated with this sample</small></span>
+                                              </div>
                                             </div>
                                         </div>
                                     </div>
@@ -946,9 +994,26 @@
                 yearRange: [1990, 2020]
             });
         });
+
         $('body').on('click', '.btn-del', function() {
             $(this).parent().remove();
         });
+
+        // $(document).on('focus', '.tags-samples', function() {
+        //   var $sl = $(this);
+        //   $sl.selectize({
+        //     placeholder: 'Select Test ...',
+        //     valueField: 'test',
+        //     labelField: 'test',
+        //     searchField: 'test',
+        //     options: [
+        //       {test: 'Aerobic Culture'}, {test: 'Anaplasma by ELISA'}, {test: 'Bacterial isolation by MALDI'}, {test: 'Baermann Test'}, {test: 'Bluetonge Virus-Elisa'}, {test: 'Bovine Resp. Syncytial Virus'}, {test: 'Bovine Viral Diarrhea'}, {test: 'EHD (oth)'}, {test: 'Fecal Flotation'}, {test: 'Infect. Bovine Rhinotracheitis'}, {test: 'M. ovipnuemonia by ELISA'}, {test: 'Parainfluenza-3'}, {test: 'Pasteurella leukotoxin lktA by PCR'}, {test: 'PCR-Mycoplasma ovipneumoniae'}
+        //     ],
+        //     create: function(input) {
+        //       return {test: input}
+        //     }
+        //   });
+        // });
     </script>
     <script type="text/javascript">
         $('.species-select').selectize({
@@ -1037,7 +1102,8 @@
                 var longitude = position.coords.longitude.toFixed(4);
                 document.forms["encForm"]["loc[loc_lon]"].value = longitude;
                 document.forms["encForm"]["loc[loc_lat]"].value = latitude;
-                document.forms["encForm"]["loc[loc_accuracy]"].value = position.coords.accuracy;
+                console.log(position.coords.accuracy);
+                // document.forms["encForm"]["loc[loc_accuracy]"].value = position.coords.accuracy;
                 obmap.setView([latitude, longitude], 11);
                 var marker = L.marker([latitude, longitude]).addTo(obmap);
             };
