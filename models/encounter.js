@@ -35,7 +35,10 @@ module.exports = function(sequelize, DataTypes) {
         injuries: DataTypes.STRING,
         medications: DataTypes.STRING,
         samples: DataTypes.STRING,
-        source: DataTypes.STRING
+        source: DataTypes.STRING,
+        capture_time: DataTypes.TIME,
+        arrival_time: DataTypes.TIME,
+        finish_time: DataTypes.TIME
     }, {
         underscored: true,
         freezeTableName: true,

@@ -118,6 +118,7 @@ function parseDynamicContent(rq) {
     var n = 0;
     var dat = [];
     if (typeof rq[Object.keys(rq)[0]] !== 'object') {
+      // TODO: when an object lands here it is skipping the parsing therefore the if val == '' isn't being parsed
         return rq;
     } else {
         while (n < rq[Object.keys(rq)[0]].length) {

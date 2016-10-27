@@ -5,7 +5,8 @@ module.exports = function(sequelize, DataTypes) {
     sample_destination: DataTypes.STRING,
     sample_test: DataTypes.STRING,
     sample_results: DataTypes.STRING,
-    encounter_id: DataTypes.INTEGER
+    encounter_id: DataTypes.INTEGER,
+    sample_notes: DataTypes.TIME
   }, {
     underscored: true,
     freezeTableName: true,
