@@ -82,7 +82,7 @@
                     <div id="locMap" style="height: 350px;"></div>
                   </div>
                   <div class="panel-footer text-muted">
-                      Long, Lat (easting, northing)
+                    Location: (<%= encounter.Location.loc_lat %>, <%= encounter.Location.loc_lon %>)
                   </div>
                 </div>
               </div>
@@ -296,9 +296,9 @@
               <li class="list-group-item">Injuries: <%= encounter.injuries %></li>
               <li class="list-group-item">Medications: <%= encounter.medications %></li>
               <li class="list-group-item">Samples: <%= encounter.samples %></li>
+              <li class="list-group-item">Created: <small><%= encounter.created_at.toDateString() %></small></li>
+              <li class="list-group-item">Updated: <small><%= encounter.updated_at.toDateString() %></small></li>
               <!-- <li class="list-group-item"><%= %></li>
-              <li class="list-group-item"><%= %></li>
-              <li class="list-group-item"><%= %></li>
               <li class="list-group-item"><%= %></li> -->
             </div>
           </div>
