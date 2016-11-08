@@ -34,4 +34,27 @@ router.post('/', function(req, res){
   });
 });
 
+// show, get, get project data, include encounters, etc
+router.get('/:id', function(req, res) {
+  models.Project.findById(req.params.id, {
+    include: {
+      model: models.Encounter,
+      attributes: ['enc_date', 'status', 'id'],
+      // attributes: ['id', 'enc_date', 'animal_id', 'status'],
+      include: {
+        model: models.Animal,
+        attributes: ['field_id', 'sex'],
+        include: {
+          model: models.Species,
+          attributes: ['common_name']
+        }
+      }
+    }
+  })
+  .then(function(project) {
+    // res.status(200).json(project);
+    res.render('projects/show', {project:project});
+  });
+});
+
 module.exports = router;

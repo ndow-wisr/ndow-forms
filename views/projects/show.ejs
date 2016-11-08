@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+		<meta charset = "utf-8" />
+		<title>Wildlife Health</title>
+		<% include ../partials/bootstrap %> <!-- bootstrap & jquery -->
+		<% include ../partials/leaflet %> <!-- leaflet -->
+    <% include ../partials/datatables %> <!-- datatable -->
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+	</head>
+	<body>
+		<% include ../partials/navigation %>
+
+    <div class="container">
+      <h2>Project: <%= project.proj_name %></h2>
+      <p><%= project.proj_start.toDateString() %></p>
+      <p>
+        <%= project.Encounters.length %>
+      </p>
+
+      <table class="table" id="projects">
+        <thead>
+          <tr>
+            <th>NDOW ID</th>
+            <th>Species</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Sex</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% project.Encounters.forEach(function(encounter) { %>
+            <tr>
+              <td><%= encounter.Animal.field_id %></td>
+              <td><%= encounter.Animal.Species.common_name %></td>
+              <td><%= encounter.enc_date %></td>
+              <td><%= encounter.status %></td>
+              <td><%= encounter.Animal.sex %></td>
+              <td>
+                <a href="/encounters/<%= encounter.id %>" class="btn btn-primary">view</a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+
+      <div>
+        <h3>Project Map</h3>
+        <div class="proj_map" id="projMap"></div>
+      </div>
+
+    </div>
+  </body>
+</html>

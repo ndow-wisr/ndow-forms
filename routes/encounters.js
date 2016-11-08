@@ -31,7 +31,7 @@ router.post('/', function(req, res){
   console.log(JSON.stringify(req.body, null, '\t'));
 
   var animal = req.body.animal;
-  var encounter = req.body.enc;
+  var encounter = parseDynamicContent(req.body.enc);
   encounter.source = 'wildlife health form';
   var location = req.body.loc;
 

@@ -100,8 +100,9 @@
                             <select class="form-control" name="enc[age]">
                                 <option value=""></option>
                                 <option value="yoy">young-of-year</option>
-                                <option value="Juvenile">Juvenile</option>
-                                <option value="Adult">Adult</option>
+                                <option value="yearling">yearling</option>
+                                <option value="juvenile">Juvenile</option>
+                                <option value="adult">Adult</option>
                                 <option value="unk">Unknown</option>
                             </select>
                         </div>
@@ -179,7 +180,8 @@
               </div>
             </div> <!-- animal and encounter module -->
 
-            <div class="panel-group panel-group-smush"> <!-- weather condition & handling time -->
+            <!-- weather condition & handling time -->
+            <!-- <div class="panel-group panel-group-smush">
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
@@ -223,7 +225,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- ./ end weather module -->
 
             <div class="panel-group panel-group-smush"> <!-- handling module -->
@@ -395,6 +397,7 @@
                                                         <option value="Band">Band</option>
                                                         <option value="Collar">Collar</option>
                                                         <option value="Ear Tag">Ear Tag</option>
+                                                        <option value="Lab ID">Lab ID</option>
                                                         <option value="PIT Tag">PIT Tag</option>
                                                     </select>
                                                 </div>
@@ -416,6 +419,7 @@
                                                 <div class="col-sm-5">
                                                     <select name="mark[mark_color]" id="markColor" class="form-control">
                                                         <option value=""></option>
+                                                        <option value="na">NA</option>
                                                         <option value="Black">Black</option>
                                                         <option value="Blue">Blue</option>
                                                         <option value="Gray">Gray</option>
@@ -669,6 +673,7 @@
                                                         <option value="fracture">fracture</option>
                                                         <option value="laceration">laceration</option>
                                                         <option value="puncture">puncture</option>
+                                                        <option value="other">other</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-sm-5">
@@ -749,11 +754,12 @@
                                                         <option value="Draxxin">Draxxin</option>
                                                         <option value="E300">E300</option>
                                                         <option value="Eprinectin">Eprinectin</option>
-                                                        <option value="Exede">Exede</option>
+                                                        <option value="Excede">Exede</option>
                                                         <option value="Haloperidol">Haloperidol</option>
                                                         <option value="Ivomec">Ivomec</option>
                                                         <option value="Ketamine">Ketamine</option>
                                                         <option value="Lidocaine 2%">Lidocaine 2%</option>
+                                                        <option value="LongRange">LongRange</option>
                                                         <option value="Midazolam">Midazolam</option>
                                                         <option value="Naltrexone">Naltrexone</option>
                                                         <option value="Normasol pH 7">Normasol pH 7</option>
@@ -797,7 +803,8 @@
                                                         <option value=""></option>
                                                         <option value="IM">Intramuscular (IM)</option>
                                                         <option value="IV">Intravenous (IV)</option>
-                                                        <option value="SQ">Subcutaneous</option>
+                                                        <option value="SQ">Subcutaneous (SQ)</option>
+                                                        <option value="Topical">Topical</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-sm-5">

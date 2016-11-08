@@ -30,6 +30,7 @@
             <th>Name</th>
             <th>Description</th>
             <th>Start Date</th>
+						<th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -39,6 +40,7 @@
               <td><%= project.proj_name %></td>
               <td><%= project.proj_desc %></td>
               <td class="date-str"><%= project.proj_start.toISOString() %></td>
+							<td><a href="projects/<%= project.id %>" class="btn btn-primary">view</a></td>
             </tr>
           <% }) %>
         </tbody>
