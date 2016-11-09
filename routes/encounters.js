@@ -33,6 +33,7 @@ router.post('/', function(req, res){
   var animal = req.body.animal;
   var encounter = parseDynamicContent(req.body.enc);
   encounter.source = 'wildlife health form';
+  // encounter.user_id = req.user.id;
   var location = req.body.loc;
 
   if (encounter.marks == 'yes') {

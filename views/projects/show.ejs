@@ -48,9 +48,56 @@
 
       <div>
         <h3>Project Map</h3>
-        <div class="proj_map" id="projMap"></div>
+        <div class="proj_map" id="projMap" style="height: 350px;"></div>
       </div>
-
     </div>
+
+    <% include ../partials/footer %>
+
+  <script type="text/javascript">
+    var mymap = L.map('projMap').setView([39.38526, -116.87256], 7);
+    L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri'
+    }).addTo(mymap);
+
+    function onEachFeature(feature, layer) {
+      // does this feature have a property named popupContent?
+      if (feature.properties && feature.properties.popupContent) {
+        layer.bindPopup(feature.properties.popupContent);
+      }
+    }
+
+    var obs = [];
+    <% project.Encounters.forEach(function(encounter){ %>
+    var ob = {
+      "type": "Feature",
+      "properties": {
+        "name": "<%= encounter.enc_date %>",
+        "popupContent": "<%= encounter.Animal.field_id %>",
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [<%= encounter.Location.loc_lon %>, <%= encounter.Location.loc_lat %>]
+      }
+    };
+    obs.push(ob);
+    <% }) %>
+
+    var geojsonMarkerOptions = {
+      radius: 4,
+      fillColor: "#b30000",
+      color: "#fff",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 1
+    };
+
+    L.geoJson(obs, {
+      onEachFeature: onEachFeature,
+      pointToLayer: function(feature, latlng) {
+        return L.circleMarker(latlng, geojsonMarkerOptions);
+      }
+    }).addTo(mymap);
+  </script>
   </body>
 </html>

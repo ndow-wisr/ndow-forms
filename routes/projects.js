@@ -41,14 +41,17 @@ router.get('/:id', function(req, res) {
       model: models.Encounter,
       attributes: ['enc_date', 'status', 'id'],
       // attributes: ['id', 'enc_date', 'animal_id', 'status'],
-      include: {
+      include: [{
+        model: models.Location,
+        attributes: ['loc_lat', 'loc_lon']
+      }, {
         model: models.Animal,
         attributes: ['field_id', 'sex'],
         include: {
           model: models.Species,
           attributes: ['common_name']
         }
-      }
+      }]
     }
   })
   .then(function(project) {
