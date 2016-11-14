@@ -118,6 +118,11 @@
         return L.circleMarker(latlng, geojsonMarkerOptions);
       }
     }).addTo(mymap);
+
+    $(document).ready(function() {
+      $('#projects').dataTable();
+    });
+
   </script>
   </body>
 </html>
