@@ -14,11 +14,25 @@
 
     <div class="container">
       <h2>Project: <%= project.proj_name %></h2>
-      <p><%= project.proj_start.toDateString() %></p>
       <p>
-        <%= project.Encounters.length %>
+        <b>Project Dates:</b> <%= project.proj_start.toDateString() %> - <%= project.proj_end.toDateString() %></p>
+      <p>
+        <b>Number of Encounters:</b> <%= project.Encounters.length %>
       </p>
-
+      <p>
+        <a href="encounters/new" class="btn btn-primary">Add New Encounter</a>
+      </p>
+      <hr>
+      <h3>Project Description</h3>
+      <p>
+        <%= project.proj_desc %>
+      </p>
+      <h3>Project Goals</h3>
+      <p>
+        <%= project.proj_goals %>
+      </p>
+      <hr>
+      
       <table class="table" id="projects">
         <thead>
           <tr>
