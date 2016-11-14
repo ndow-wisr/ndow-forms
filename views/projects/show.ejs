@@ -32,7 +32,7 @@
         <%= project.proj_goals %>
       </p>
       <hr>
-      
+
       <table class="table" id="projects">
         <thead>
           <tr>
@@ -49,7 +49,7 @@
             <tr>
               <td><%= encounter.Animal.field_id %></td>
               <td><%= encounter.Animal.Species.common_name %></td>
-              <td><%= encounter.enc_date %></td>
+              <td><%= encounter.enc_date.toDateString() %></td>
               <td><%= encounter.status %></td>
               <td><%= encounter.Animal.sex %></td>
               <td>
@@ -64,12 +64,18 @@
         <h3>Project Map</h3>
         <div class="proj_map" id="projMap" style="height: 350px;"></div>
       </div>
+
+      <div>
+        <%= project.Encounters[1].Location.loc_lon %>
+      </div>
     </div>
 
     <% include ../partials/footer %>
 
   <script type="text/javascript">
-    var mymap = L.map('projMap').setView([39.38526, -116.87256], 7);
+    var initLon = <%= project.Encounters[1].Location.loc_lon %>
+    var initLat = <%= project.Encounters[1].Location.loc_lat %>
+    var mymap = L.map('projMap').setView([initLat, initLon], 10);
     L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       attribution: 'Tiles &copy; Esri'
     }).addTo(mymap);
