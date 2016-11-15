@@ -25,6 +25,7 @@ router.post('/', function(req, res){
     var obs = req.body.observation
     obs.user_id = req.user.id
     obs.source = 'incidental obs app'
+    obs = coerceZero(obs);
     console.log(obs);
     models.Observation.create(obs).then(function(){
         res.redirect('/observations');
@@ -77,6 +78,17 @@ function isLoggedIn(req, res, next){
         return next();
     }
     res.redirect('/login');
+}
+
+function coerceZero(rq) {
+  for(var i = 0; i < Object.keys(rq).length; i++) {
+    if(Object.keys(rq)[i] == 'female' || Object.keys(rq)[i] == 'male' || Object.keys(rq)[i] == 'sex_unk' || Object.keys(rq)[i] == 'adult' || Object.keys(rq)[i] == 'young' || Object.keys(rq)[i] == 'age_unk') {
+      if(rq[Object.keys(rq)[i]] == '') {
+        rq[Object.keys(rq)[i]] = 0;
+      }
+    }
+  }
+  return(rq);
 }
 
 module.exports = router;
