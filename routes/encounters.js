@@ -83,7 +83,11 @@ router.post('/', function(req, res){
     ]
   }).then(function(){
     console.log('New Encounter Added!');
-    res.redirect('/encounters/new');
+    if(encounter.project_id == null) {
+      res.redirect('/encounters/new');
+    } else {
+      res.redirect('/projects/' + encounter.project_id);
+    }
   });
 });
 
