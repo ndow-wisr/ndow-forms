@@ -39,8 +39,7 @@ router.get('/:id', function(req, res) {
   models.Project.findById(req.params.id, {
     include: {
       model: models.Encounter,
-      attributes: ['enc_date', 'status', 'id'],
-      // attributes: ['id', 'enc_date', 'animal_id', 'status'],
+      attributes: ['enc_date', 'status', 'id', 'age'],
       include: [{
         model: models.Location,
         attributes: ['loc_lat', 'loc_lon']

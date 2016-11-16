@@ -23,6 +23,7 @@ router.get('/new', isLoggedIn, function(req, res){
 router.post('/', function(req, res){
     // get all fields, then add user id to obs for create
     var obs = req.body.observation
+    // IDEA: can I add the following two values at the same time (as an object)?
     obs.user_id = req.user.id
     obs.source = 'incidental obs app'
     obs = coerceZero(obs);

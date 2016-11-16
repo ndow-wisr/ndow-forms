@@ -38,7 +38,8 @@ module.exports = function(sequelize, DataTypes) {
         source: DataTypes.STRING,
         capture_time: DataTypes.TIME,
         arrival_time: DataTypes.TIME,
-        finish_time: DataTypes.TIME
+        finish_time: DataTypes.TIME,
+        age: DataTypes.STRING
     }, {
         underscored: true,
         freezeTableName: true,

@@ -64,17 +64,13 @@
         <h3>Project Map</h3>
         <div class="proj_map" id="projMap" style="height: 350px;"></div>
       </div>
-
-      <div>
-        <%= project.Encounters[1].Location.loc_lon %>
-      </div>
     </div>
 
     <% include ../partials/footer %>
 
   <script type="text/javascript">
-    var initLon = <%= project.Encounters[1].Location.loc_lon %>
-    var initLat = <%= project.Encounters[1].Location.loc_lat %>
+    var initLon = <%= project.Encounters[0].Location.loc_lon %>
+    var initLat = <%= project.Encounters[0].Location.loc_lat %>
     var mymap = L.map('projMap').setView([initLat, initLon], 10);
     L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       attribution: 'Tiles &copy; Esri'

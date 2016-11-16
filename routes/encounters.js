@@ -30,42 +30,35 @@ router.get('/new', function(req, res){
 router.post('/', function(req, res){
   console.log(JSON.stringify(req.body, null, '\t'));
 
+  // parsing req.body and creating an animal object for inserting into database
   var animal = req.body.animal;
   var encounter = parseDynamicContent(req.body.enc);
   encounter.source = 'wildlife health form';
   encounter.user_id = req.user.id;
   var location = req.body.loc;
-
   if (encounter.marks == 'yes') {
-    var marks = parseDynamicContent(req.body.mark);
-    animal.Marks = marks;
+    animal.Marks = parseDynamicContent(req.body.mark);
   }
   if (encounter.biometrics == 'yes') {
-    var biometric = parseDynamicContent(req.body.biom);
-    encounter.Biometrics = biometric;
+    encounter.Biometrics = parseDynamicContent(req.body.biom);
   }
   if (encounter.vitals == 'yes') {
-    var vitals = parseDynamicContent(req.body.vitals);
-    encounter.Vitals = vitals;
+    encounter.Vitals = parseDynamicContent(req.body.vitals);
   }
-  if (encounter.injury == 'yes') {
-    var injury = parseDynamicContent(req.body.injury);
-    encounter.Injuries = injury;
+  if (encounter.injuries == 'yes') {
+    encounter.Injuries = parseDynamicContent(req.body.injury);
   }
   if (encounter.medications == 'yes') {
-    var meds = parseDynamicContent(req.body.meds);
-    encounter.Medications = meds;
+    encounter.Medications = parseDynamicContent(req.body.meds);
   }
   if (encounter.samples == 'yes') {
-    var samples = parseDynamicContent(req.body.samples);
-    encounter.Samples = samples;
+    encounter.Samples = parseDynamicContent(req.body.samples);
   }
-
   encounter.Location = location;
   animal.Encounters = [ encounter ];
-  animal.Marks = marks;
   console.log(JSON.stringify(animal, null, '\t'));
 
+  // insert data into database
   models.Animal.create(animal, {
     include: [
       { model: models.Mark },
@@ -83,6 +76,7 @@ router.post('/', function(req, res){
     ]
   }).then(function(){
     console.log('New Encounter Added!');
+    // redirect to encounters index, or project show pages, depends on project_id
     if(encounter.project_id == null) {
       res.redirect('/encounters/new');
     } else {
@@ -103,6 +97,7 @@ router.get('/:id', function(req, res) {
       { model: models.Medication },
       { model: models.Sample },
       { model: models.Location },
+      { model: models.Project },
       {
         model: models.Animal,
         include: [{
