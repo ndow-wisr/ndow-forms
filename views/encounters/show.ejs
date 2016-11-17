@@ -283,13 +283,15 @@
           <div class="col-sm-3">
             <div class="list-group">
               <li class="list-group-item active">Encounter Metadata</li>
-							<li class="list-group-item">Project: <%= encounter.project_id %></li>
+							<li class="list-group-item">Project: <%= encounter.Project.proj_name %></li>
               <li class="list-group-item"><%= encounter.enc_date.toDateString() %></li>
+							<li class="list-group-item">Age: <%= encounter.age %></li>
+							<li class="list-group-item">Sex: <%= encounter.Animal.sex %></li>
+							<li class="list-group-item">Status: <%= encounter.status %></li>
 							<li class="list-group-item">Capture Time: <%= encounter.capture_time %></li>
 							<li class="list-group-item">Arrival Time: <%= encounter.arrival_time %></li>
 							<li class="list-group-item">Finish Time: <%= encounter.finish_time %></li>
-              <li class="list-group-item">Status: <%= encounter.status %></li>
-              <li class="list-group-item">ReEncounter: <%= encounter.reencounter %></li>
+              <li class="list-group-item">Reencounter: <%= encounter.reencounter %></li>
               <li class="list-group-item">Relocated: <%= encounter.relocated %></li>
               <li class="list-group-item">Reason: <%= encounter.enc_reason %></li>
               <li class="list-group-item">Method: <%= encounter.enc_method %></li>

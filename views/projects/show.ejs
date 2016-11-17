@@ -41,6 +41,7 @@
             <th>Date</th>
             <th>Status</th>
             <th>Sex</th>
+						<th>Age</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -52,6 +53,7 @@
               <td><%= encounter.enc_date.toDateString() %></td>
               <td><%= encounter.status %></td>
               <td><%= encounter.Animal.sex %></td>
+							<td><%= encounter.age %>
               <td>
                 <a href="/encounters/<%= encounter.id %>" class="btn btn-primary">view</a>
               </td>
