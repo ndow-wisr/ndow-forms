@@ -109,6 +109,7 @@ router.get('/:id', function(req, res) {
     ]
   })
   .then(function(encounter) {
+    encounter.id = req.params.id;
     // res.status(200).send(JSON.stringify(encounter));
     res.render('encounters/show', {encounter:encounter})
   });
