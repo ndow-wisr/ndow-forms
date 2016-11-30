@@ -40,6 +40,7 @@ module.exports = function(sequelize, DataTypes) {
         arrival_time: DataTypes.TIME,
         finish_time: DataTypes.TIME,
         age: DataTypes.STRING
+        // user_id: DataTypes.INTEGER
     }, {
         underscored: true,
         freezeTableName: true,
