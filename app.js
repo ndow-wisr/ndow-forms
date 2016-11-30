@@ -13,6 +13,7 @@ var observationRoutes = require('./routes/observations');
 var speciesRoutes = require('./routes/species');
 var encounterRoutes = require('./routes/encounters');
 var projectRoutes = require('./routes/projects');
+var hwConflictsRoutes = require('./routes/hw-conflicts');
 
 // APP CONFIG
 app.use(bodyParser.urlencoded({extended: true}));
@@ -67,6 +68,7 @@ app.use("/observations", observationRoutes);
 app.use("/species", speciesRoutes);
 app.use('/encounters', encounterRoutes);
 app.use('/projects', projectRoutes);
+app.use('/hw-conflicts', hwConflictsRoutes);
 // app.use("/observations/:id/comments", commentRoutes);
 // app.use("/checkins", checkinRoutes);
 
