@@ -20,6 +20,7 @@ module.exports = function(sequelize, DataTypes) {
                 User.hasMany(models.Observation);
                 User.hasMany(models.Animal);
                 User.hasMany(models.Comment);
+                User.hasMany(models.Encounter)
             }
         }
     });
